@@ -41,7 +41,7 @@
           />
         </div>
         
-        <router-link :to="{ name: 'login' }">Have an account?</router-link>
+        <router-link class="nav-link" :to="{ name: 'login' }">Have an account?</router-link>
         <button id="submit" class="btn btn-lg btn-primary btn-block" type="submit">
           Create Account
         </button>

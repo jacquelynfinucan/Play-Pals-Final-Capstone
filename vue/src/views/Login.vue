@@ -40,7 +40,7 @@
           />
         </div>
         
-        <router-link :to="{ name: 'register' }">Need an account?</router-link>
+        <router-link class="nav-link" :to="{ name: 'register' }">Need an account?</router-link>
         <button id="submit" type="submit">Sign in</button>
         
       </div>

@@ -1,6 +1,6 @@
 <template>
   <div class="footer">
-    <p>© Tech Elevator Team Tilda</p>
+    <p>© 2021 Tech Elevator Team Tilde</p>
   </div>
 </template>
 
@@ -18,5 +18,6 @@ export default {
     padding-bottom: 10px;
 
     border-radius: 5px;
+    border: solid 1px darkgrey;
 }
 </style>

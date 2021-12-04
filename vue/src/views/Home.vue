@@ -1,22 +1,21 @@
 <template>
   <div class="home">
-    <h1>Pet Pals</h1>
-    <h2>Welcome to Pet Pals!</h2>
-    <div>
-      <h3>Pet Pals offers you the abilty to:</h3> 
-      <ul>
-        <li> Find other pets for play dates </li>
-        <li> Find other pets for play dates </li>
-        <li> Find other pets for play dates </li>
-      </ul>
-    </div>
-    <h3>New users register <router-link v-bind:to="{name: 'register'}">HERE</router-link> to get started with your new pet adventures!</h3>   
+    <home-welcome />
+    <home-news />   
   </div>
 </template>
 
 <script>
+import HomeWelcome from '@/components/HomeWelcome.vue'
+import HomeNews from '@/components/HomeNews.vue'
+
+
 export default {
-  name: "home"
+  name: "home",
+  components: {
+    HomeWelcome,
+    HomeNews
+  }
 };
 </script>
 

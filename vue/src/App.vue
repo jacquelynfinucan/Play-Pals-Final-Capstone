@@ -19,7 +19,7 @@ export default {
 </script>
 
 <style>
-body {
-  background-color: whitesmoke;
+.nav-link:hover {
+  color: red;
 }
 </style>
