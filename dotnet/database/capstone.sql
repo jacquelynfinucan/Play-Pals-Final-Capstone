@@ -98,6 +98,6 @@ CREATE TABLE play_dates (
 
 	CONSTRAINT [PK_play_dates] PRIMARY KEY (play_date_id), 
 	CONSTRAINT [FK_play_dates_users] FOREIGN KEY (host_user_id) REFERENCES [users] (user_id), 
-	CONSTRAINT [FK_play_dates_pet_profile] FOREIGN KEY (host_pet_id) REFERENCES [pet_profile] (pet_id),
-	CONSTRAINT [FK_play_dates_pet_profile] FOREIGN KEY (guest_pet_id) REFERENCES [pet_profile] (pet_id)
+	CONSTRAINT [FK_play_dates_pet_profile_host] FOREIGN KEY (host_pet_id) REFERENCES [pet_profile] (pet_id),
+	CONSTRAINT [FK_play_dates_pet_profile_guest] FOREIGN KEY (guest_pet_id) REFERENCES [pet_profile] (pet_id)
 )
