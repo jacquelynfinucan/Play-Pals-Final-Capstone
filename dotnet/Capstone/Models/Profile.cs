@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Capstone.Models
 {
-    public class UserProfile
+    public class Profile
     {
         public int UserId { get; set; }
 
