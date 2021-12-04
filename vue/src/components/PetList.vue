@@ -10,7 +10,7 @@
             </div>
             
             <div class="pet" v-for="pet in this.$store.state.pets" v-bind:key="pet.pet_id" v-else>
-
+                <pet-card v-bind:pet="pet" />
             </div>
       </div>
   </div>
@@ -18,9 +18,13 @@
 
 <script>
 import petService from '@/services/PetService.js';
+import PetCard from '@/components/PetCard.vue';
 
 export default {
   name: 'pet-list',
+  components: {
+      PetCard
+  },
   data() {
       return {
           isLoading: true,
