@@ -32,14 +32,14 @@ namespace Capstone.Controllers
             return Ok();
         }
 
-        [HttpDelete("/{userID}")]
+        [HttpDelete("{userID}")]
         public IActionResult DeleteProfile(int id)
         {
             profileDao.DeleteProfile(id);
             return NoContent();
         }
 
-        [HttpGet("/{userID}")]
+        [HttpGet("{userID}")]
         public ActionResult<Profile> GetProfile(int userID)
         {
             Profile profile = profileDao.GetProfile(userID);
