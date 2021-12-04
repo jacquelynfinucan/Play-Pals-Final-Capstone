@@ -1,12 +1,15 @@
 <template>
   <div class="profile">
-    <h1>Profile</h1>
-    <p>You must be authenticated to see this</p>
+    <user-profile/>
   </div>
 </template>
 
 <script>
+import UserProfile from '../components/UserProfile.vue';
+
+
 export default {
+  components: { UserProfile },
   name: "profile"
 };
 </script>

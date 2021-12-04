@@ -1,4 +1,7 @@
 
+
+
+
 DELETE user_profile
 
 INSERT INTO user_profile (user_id,first_name,last_name,zip_code)
