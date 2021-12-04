@@ -1,10 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '../views/Home.vue'
+import Profile from '../views/Profile.vue'
 import Login from '../views/Login.vue'
 import Logout from '../views/Logout.vue'
 import Register from '../views/Register.vue'
 import store from '../store/index'
+import Home from '@/views/Home.vue'
+import NotFound from '@/views/NotFound.vue'
 
 Vue.use(Router)
 
@@ -26,7 +28,7 @@ const router = new Router({
       name: 'home',
       component: Home,
       meta: {
-        requiresAuth: true
+        requiresAuth: false
       }
     },
     {
@@ -53,6 +55,22 @@ const router = new Router({
         requiresAuth: false
       }
     },
+    {
+      path: "/profile",
+      name: "profile",
+      component: Profile,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "*",
+      name: "not-found",
+      component: NotFound,
+      meta: {
+        requiresAuth: false
+      }
+    }
   ]
 })
 
