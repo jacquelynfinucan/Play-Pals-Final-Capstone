@@ -74,6 +74,35 @@ namespace Capstone.DAO
             return allPlayDates;
         }
 
+        public List<PlayDate> GetAllPlayDatesForHost(int hostUserId)
+        {
+            List<PlayDate> allPlayDates = new List<PlayDate>();
+            PlayDate currentPlayDate;
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand("SELECT host_user_id, host_pet_id, guest_pet_id, date_time, location" + //location is TBD**
+                        "FROM play_dates WHERE host_user_id = @hostUserId", conn); //might have to join to get location-TBD**
+                    cmd.Parameters.AddWithValue("@hostUserId", hostUserId);
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        currentPlayDate = GetPlayDateFromReader(reader);
+                        allPlayDates.Add(currentPlayDate);
+                    }
+                }
+            }
+            catch (SqlException)
+            {
+                throw;
+            }
+            return allPlayDates;
+        }
+
         public int AddAPlayDate(PlayDate newPlayDate)
         {
             int newPlayDateId = 0;

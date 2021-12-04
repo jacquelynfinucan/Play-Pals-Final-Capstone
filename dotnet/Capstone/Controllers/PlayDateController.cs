@@ -2,6 +2,7 @@
 using Capstone.DAO;
 using Capstone.Models;
 using Capstone.Security;
+using System.Collections.Generic;
 
 namespace Capstone.Controllers
 {
@@ -9,60 +10,54 @@ namespace Capstone.Controllers
     [ApiController]
     public class PlayDateController : ControllerBase
     {
-
         private readonly IPlayDateDao playDateDao;
 
-
-        /*
-        [HttpPost("/profile/{userID}/pets")]
-        IActionResult AddAPetToUser(int userID,petModel pet)
+        public PlayDateController(IPlayDateDao _playDateDao)
         {
-
-        }
-        [HttpGet("/pet/{petID}")]
-        IActionResult GetAPet(int petID)
-        {
-        }
-        [HttpGet("/profile/{userID}/pets")]
-        IActionResult GetUserPets(int userID)
-        {
-
+            playDateDao = _playDateDao;
         }
 
-        [HttpGet("/pets")]
-        IActionResult GetAllThePets()
+        [HttpGet("/playdates")]
+        public ActionResult<List<PlayDate>> GetAllPlayDates()
         {
+            List<PlayDate> playDates = playDateDao.GetAllPlayDates();
 
+            return Ok(playDates);
         }
 
-
-
-        [HttpPut("/pets/{petID}")]
-        IActionResult UpdateAPet(int petID,petModel pet)
+        [HttpGet("/playdates/{hostUserId}")]
+        public ActionResult<List<PlayDate>> GetAllPlayDatesForHost(int hostUserId)
         {
+            List<PlayDate> playDates = playDateDao.GetAllPlayDatesForHost(hostUserId);
 
+            return Ok(playDates);
         }
-        [HttpDelete("/pets/{petID}")]
-        IActionResult DeleteAPet(int userID, petModel pet)
+
+        [HttpGet("/playdates/{playDateId}")]
+        public ActionResult<PlayDate> GetAPlayDate(int playDateId)
         {
-
-        }*/
-
-
-
+            PlayDate playDate = playDateDao.GetAPlayDate(playDateId);
+            return Ok(playDate);
+        }
 
         [HttpPost("/playdates")]
-        public IActionResult AddAPlayDate(PlayDate playDate)
+        public IActionResult AddAPlayDate(PlayDate newPlayDate)
         {
-            
-            int newPlayDateId = playDateDao.AddAPlayDate(playDate);
+            int newPlayDateId = playDateDao.AddAPlayDate(newPlayDate);
             return Ok();
         }
-        [HttpGet("/playdates")]
-        public IActionResult GetAllPlayDates()
+     
+        [HttpPut("/playdates/{playDateId}")]
+        public IActionResult UpdateAPlayDate(int playDateId, PlayDate updatedPlayDate)
         {
+            bool isSuccessful = playDateDao.UpdateAPlayDate(updatedPlayDate);
+            return Ok();
+        }
 
-
+        [HttpDelete("/playdates/{playDateId}")]
+        public IActionResult DeleteAPlayDate(int playDateId)
+        {
+            bool isSuccessful = playDateDao.DeleteAPlayDate(playDateId);
             return Ok();
         }
     }
