@@ -8,6 +8,7 @@ using Capstone.Models;
 
 namespace Capstone.Controllers
 {
+    [ApiController]
     public class PetController : Controller
     {
         private readonly IPetDao petDao;
@@ -32,7 +33,7 @@ namespace Capstone.Controllers
         {
             petModel pet = petDao.GetPetByPetId(petID);
 
-            if(pet == null)
+            if (pet == null)
             {
                 return NotFound("No pet for that given ID");
             }
@@ -42,11 +43,11 @@ namespace Capstone.Controllers
             }
         }
 
-        [HttpGet("/profile/{userID}/pets")]
-        IActionResult GetUserPets(int userID)
+        [HttpGet("/profiles/{userID}/pets")]
+        public IActionResult GetUserPets(int userID)
         {
             List<petModel> pets = petDao.GetListOfUserPets(userID);
-            if(pets == null)
+            if (pets == null)
             {
                 return NotFound("This user does not have any registered pets.");
             }
@@ -56,19 +57,27 @@ namespace Capstone.Controllers
             }
         }
 
-        /*
+        [HttpGet("/pets")]
+        public IActionResult GetAllThePets()
+        {
+            List<petModel> pets = petDao.GetListOfAllPets();
+            if(pets == null)
+            {
+                return NotFound("There are no pets listed as this time.");
+            }
+            else
+            {
+                return Ok(pets);
+            }
+        }
 
-      [HttpGet("/pets")]
-      IActionResult GetAllThePets()
-      {
+       [HttpPut("/pets/{petID}")]
+       IActionResult UpdateAPet(int petID, petModel pet)
+       {
+            return null;
+       }
 
-      }
-
-      [HttpPut("/pets/{petID}")]
-      IActionResult UpdateAPet(int petID, petModel pet)
-      {
-
-      }
+       /*
 
       [HttpDelete("/pets/{petID}")]
       IActionResult DeleteAPet(int userID, petModel pet)
