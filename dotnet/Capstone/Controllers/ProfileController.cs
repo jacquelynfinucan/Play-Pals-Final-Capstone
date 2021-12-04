@@ -8,26 +8,29 @@ namespace Capstone.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class ProfileController : Controller //controller vs controllerbase
+    public class ProfileController : ControllerBase 
     {
         private readonly IProfileDao profileDao;
 
         [HttpPost("/")]
         IActionResult AddProfile(Profile profile)
         {
-            return null;
+            profileDao.AddProfile(profile);
+            return Ok();
         }
 
-        [HttpPut("/{userID}")]
-        IActionResult UpdateProfile(int userID, Profile profile)
+        [HttpPut("/")]
+        IActionResult UpdateProfile(Profile profile)
         {
-            return null;
+            profileDao.UpdateProfile(profile);
+            return Ok();
         }
 
         [HttpDelete("/{userID}")]
         IActionResult DeleteProfile(int id)
         {
-            return null;
+            profileDao.DeleteProfile(id);
+            return NoContent();
         }
 
         [HttpGet("/{userID}")]

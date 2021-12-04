@@ -17,7 +17,9 @@ namespace Capstone.DAO
             connectionString = dbConnectionString;
         }
 
-        private Profile GetProfileFromReader(SqlDataReader reader)
+        //Still need to add error handling
+
+        private Profile GetProfileFromReader(SqlDataReader reader) // No Email
         {
             Profile profile = new Profile()
             {
@@ -65,7 +67,7 @@ namespace Capstone.DAO
             return profiles;
         }
 
-        public Profile AddProfile(Profile profile) //Doesn't add email to profile yet ***
+        public Profile AddProfile(Profile profile) // No Email
         {
             int newProfileId = 0;
             using (SqlConnection conn = new SqlConnection(connectionString))
@@ -76,7 +78,7 @@ namespace Capstone.DAO
                                                 "VALUES (@firstName, @lastName, @zipCode)", conn);
                 cmd.Parameters.AddWithValue("@firstName", returnProfile.FirstName);
                 cmd.Parameters.AddWithValue("@lastName", returnProfile.LastName);
-                //cmd.Parameters.AddWithValue("@email", returnProfile.Email);   *** Not Implemented ***
+                //cmd.Parameters.AddWithValue("@email", returnProfile.Email);
                 cmd.Parameters.AddWithValue("@zipCode", returnProfile.Zip);
 
                 newProfileId = Convert.ToInt32(cmd.ExecuteScalar());
@@ -84,27 +86,38 @@ namespace Capstone.DAO
             return GetProfile(newProfileId);
         }
 
-        //public Profile UpdateProfile(int userID)
-        //{
-        //    using (SqlConnection conn = new SqlConnection(connectionString))
-        //    {
-        //        conn.Open();
-        //        SqlCommand cmd = new SqlCommand("INSERT INTO dbo.user_profile (first_name, last_name, zip_code) " +
-        //                                        "OUTPUT INSERTED.user_id " +
-        //                                        "VALUES (@firstName, @lastName, @zipCode)", conn);
-        //        cmd.Parameters.AddWithValue("@firstName", returnProfile.FirstName);
-        //        cmd.Parameters.AddWithValue("@lastName", returnProfile.LastName);
-        //        //cmd.Parameters.AddWithValue("@email", returnProfile.Email);   *** Not Implemented ***
-        //        cmd.Parameters.AddWithValue("@zipCode", returnProfile.Zip);
+        public Profile UpdateProfile(Profile profile) // No Email
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("UPDATE dbo.user_profile SET first_name = @firstName, last_name = @lastName, zip_code = @zipCode " +
+                                                "WHERE user_id = @userID", conn);
+                cmd.Parameters.AddWithValue("@userID", profile.UserId);
+                cmd.Parameters.AddWithValue("@firstName", profile.FirstName);
+                cmd.Parameters.AddWithValue("@lastName",  profile.LastName);
+                //cmd.Parameters.AddWithValue("@email", profile.Email);
+                cmd.Parameters.AddWithValue("@zipCode", profile.Zip);
 
-        //        newProfileId = Convert.ToInt32(cmd.ExecuteScalar());
-        //    }
-        //}
+                cmd.ExecuteNonQuery();
+            }
+            return GetProfile(profile.UserId);
+        }
 
-        //public Profile DeleteProfile(int userID)
-        //{
-        //    return profile;//remove later
-        //}
+        /// <summary>
+        /// May not need this method
+        /// </summary>
+        /// <param name="userID"></param>
+        public void DeleteProfile(int userID)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("DELETE FROM dbo.user_profile WHERE user_id = @userID", conn);
+                cmd.Parameters.AddWithValue("@userID", userID);
+                cmd.ExecuteNonQuery();
+            }
+        }
 
     }
 }
