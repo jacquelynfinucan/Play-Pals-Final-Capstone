@@ -34,7 +34,6 @@ CREATE TABLE user_profile (
 	user_id int NOT NULL,
 	first_name varchar(50) NOT NULL, 
 	last_name varchar(50) NOT NULL, 
-	description varchar(200) NULL, --option to leave empty
 	zip_code varchar(15) NOT NULL
 
 	CONSTRAINT [PK_user_profile] PRIMARY KEY (user_id, last_name),
@@ -44,11 +43,12 @@ CREATE TABLE user_profile (
 CREATE TABLE pet_profile (
 	pet_id int IDENTITY(1,1) NOT NULL,
 	pet_name varchar(50) NOT NULL, 
+	animal_type varchar(50) NOT NULL, --default to dog?
 	breed varchar(50) NOT NULL, 
 	age int NULL, --option to leave empty
 	size int NOT NULL, --small=1, medium=2, large=3 (extra large & extra small or good enough?)
 	is_male bit NOT NULL, 
-	is_spayed bit NOT NULL, 
+	is_spayed_neutered bit NOT NULL, 
 	descrption varchar(200) NULL --option to leave empty
 
 	CONSTRAINT [PK_pet_profile] PRIMARY KEY (pet_id)
@@ -64,7 +64,7 @@ CREATE TABLE users_pets (
 )
 
 CREATE TABLE personality_traits (
-	personality_id int IDENTITY(1,1) NOT NULL,
+	personality_id int NOT NULL,
 	personality_name varchar(75) NOT NULL
 
 	CONSTRAINT [PK_personality_traits] PRIMARY KEY (personality_id)
@@ -77,7 +77,7 @@ INSERT INTO personality_traits (personality_id, personality_name) VALUES (4, 'An
 INSERT INTO personality_traits (personality_id, personality_name) VALUES (5, 'Aggressive');
 INSERT INTO personality_traits (personality_id, personality_name) VALUES (6, 'Not good with kids');
 INSERT INTO personality_traits (personality_id, personality_name) VALUES (7, 'Not good with animals other than dogs');
-INSERT INTO personality_traits (personality_id, personality_name) VALUES (8, 'Potty Trained');
+INSERT INTO personality_traits (personality_id, personality_name) VALUES (8, 'House Trained');
 INSERT INTO personality_traits (personality_id, personality_name) VALUES (9, 'Command Trained');
 
 CREATE TABLE pets_personality_traits (
@@ -87,4 +87,17 @@ CREATE TABLE pets_personality_traits (
 CONSTRAINT [PK_pets_personality_traits] PRIMARY KEY (pet_id, personality_id),
 CONSTRAINT [FK_pets_personality_traits_pet_profile] FOREIGN KEY (pet_id) REFERENCES [pet_profile] (pet_id),
 CONSTRAINT [FK_pets_personality_traits_personality_traits] FOREIGN KEY (personality_id) REFERENCES [personality_traits] (personality_id),
+)
+
+CREATE TABLE play_dates (
+	play_date_id int IDENTITY(1,1) NOT NULL,
+	host_user_id int NOT NULL, 
+	host_pet_id int NOT NULL, 
+	guest_pet_id int NOT NULL, 
+	date_time datetime NOT NULL
+
+	CONSTRAINT [PK_play_dates] PRIMARY KEY (play_date_id), 
+	CONSTRAINT [FK_play_dates_users] FOREIGN KEY (host_user_id) REFERENCES [users] (user_id), 
+	CONSTRAINT [FK_play_dates_pet_profile] FOREIGN KEY (host_pet_id) REFERENCES [pet_profile] (pet_id),
+	CONSTRAINT [FK_play_dates_pet_profile] FOREIGN KEY (guest_pet_id) REFERENCES [pet_profile] (pet_id)
 )
