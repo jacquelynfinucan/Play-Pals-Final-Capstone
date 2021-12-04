@@ -11,7 +11,7 @@ namespace Capstone.Models
 
         public string Name { get; set; }
         public int Age { get; set; }
-
+        public string AnimalType { get; set; }
         public bool IsMale { get; set; }
         public bool IsSpayed { get; set; }
         public int Size { get; set; }
