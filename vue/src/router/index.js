@@ -41,7 +41,7 @@ const router = new Router({
     },
     {
       path: "/logout",
-      name: "np",
+      name: "logout",
       component: Logout,
       meta: {
         requiresAuth: false
