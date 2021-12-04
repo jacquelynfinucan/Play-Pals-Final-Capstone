@@ -6,10 +6,12 @@ using Capstone.Models;
 
 namespace Capstone.DAO
 {
-    public interface IProfileDao //don't forget to add dependency injection in startup.cs
+    public interface IProfileDao
     {
         Profile GetProfile(int userID);
         List<Profile> GetAllProfiles();
         Profile AddProfile(Profile profile);
+        Profile UpdateProfile(Profile profile);
+        void DeleteProfile(int userID);
     }
 }

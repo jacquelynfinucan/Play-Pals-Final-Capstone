@@ -2,43 +2,49 @@
 using Capstone.DAO;
 using Capstone.Models;
 using Capstone.Security;
+using System.Collections.Generic;
 
 namespace Capstone.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class ProfileController : Controller //controller vs controllerbase
+    public class ProfileController : ControllerBase 
     {
-        private readonly IProfileDao profilesDao;
+        private readonly IProfileDao profileDao;
 
         [HttpPost("/")]
         IActionResult AddProfile(Profile profile)
         {
-            return null;
+            profileDao.AddProfile(profile);
+            return Ok();
         }
 
-        [HttpPut("/{userID}")]
-        IActionResult UpdateProfile(int userID, Profile profile)
+        [HttpPut("/")]
+        IActionResult UpdateProfile(Profile profile)
         {
-            return null;
+            profileDao.UpdateProfile(profile);
+            return Ok();
         }
 
         [HttpDelete("/{userID}")]
         IActionResult DeleteProfile(int id)
         {
-            return null;
+            profileDao.DeleteProfile(id);
+            return NoContent();
         }
 
         [HttpGet("/{userID}")]
-        IActionResult GetProfile(int userID)
+        ActionResult<Profile> GetProfile(int userID)
         {
-            return null;
+            Profile profile = profileDao.GetProfile(userID);
+            return profile;
         }
 
         [HttpGet("/")]
-        IActionResult GetAllProfiles()
+        ActionResult<List<Profile>> GetAllProfiles()
         {
-            return null;
+            List<Profile> profiles = profileDao.GetAllProfiles();
+            return profiles;
         }
 
     }
