@@ -36,7 +36,7 @@ CREATE TABLE user_profile (
 	last_name varchar(50) NOT NULL, 
 	zip_code varchar(15) NOT NULL
 
-	CONSTRAINT [PK_user_profile] PRIMARY KEY (user_id, last_name),
+	CONSTRAINT [PK_user_profile] PRIMARY KEY (user_id),
     CONSTRAINT [FK_user_profile_users] FOREIGN KEY (user_id) REFERENCES [users] (user_id)
 )
 
@@ -49,7 +49,7 @@ CREATE TABLE pet_profile (
 	size int NOT NULL, --small=1, medium=2, large=3 (extra large & extra small or good enough?)
 	is_male bit NOT NULL, 
 	is_spayed_neutered bit NOT NULL, 
-	descrption varchar(200) NULL --option to leave empty
+	description varchar(200) NULL --option to leave empty
 
 	CONSTRAINT [PK_pet_profile] PRIMARY KEY (pet_id)
 )
@@ -92,12 +92,12 @@ CONSTRAINT [FK_pets_personality_traits_personality_traits] FOREIGN KEY (personal
 CREATE TABLE play_dates (
 	play_date_id int IDENTITY(1,1) NOT NULL,
 	host_user_id int NOT NULL, 
-	host_pet_id int NOT NULL, 
+    host_pet_id int NOT NULL, 
 	guest_pet_id int NOT NULL, 
 	date_time datetime NOT NULL
 
 	CONSTRAINT [PK_play_dates] PRIMARY KEY (play_date_id), 
 	CONSTRAINT [FK_play_dates_users] FOREIGN KEY (host_user_id) REFERENCES [users] (user_id), 
-	CONSTRAINT [FK_play_dates_pet_profile_host] FOREIGN KEY (host_pet_id) REFERENCES [pet_profile] (pet_id),
-	CONSTRAINT [FK_play_dates_pet_profile_guest] FOREIGN KEY (guest_pet_id) REFERENCES [pet_profile] (pet_id)
+	CONSTRAINT [FK_play_dates_pet_host] FOREIGN KEY (host_pet_id) REFERENCES [pet_profile] (pet_id),
+	CONSTRAINT [FK_play_dates_pet_guest] FOREIGN KEY (guest_pet_id) REFERENCES [pet_profile] (pet_id)
 )
