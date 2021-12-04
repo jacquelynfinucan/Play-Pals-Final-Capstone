@@ -1,12 +1,24 @@
 <template>
   <div class="home">
-    <h1>Home</h1>
-    <p>You must be authenticated to see this</p>
+    <home-welcome />
+    <home-news />   
   </div>
 </template>
 
 <script>
+import HomeWelcome from '@/components/HomeWelcome.vue'
+import HomeNews from '@/components/HomeNews.vue'
+
+
 export default {
-  name: "home"
+  name: "home",
+  components: {
+    HomeWelcome,
+    HomeNews
+  }
 };
 </script>
+
+<style scoped>
+
+</style>
