@@ -10,6 +10,7 @@ namespace Capstone.Controllers
     [ApiController]
     public class ProfileController : ControllerBase 
     {
+   
         private readonly IProfileDao profileDao;
 
         public ProfileController(IProfileDao _profileDao)
