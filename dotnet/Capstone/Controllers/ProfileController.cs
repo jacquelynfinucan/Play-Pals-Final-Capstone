@@ -10,38 +10,44 @@ namespace Capstone.Controllers
     [ApiController]
     public class ProfileController : ControllerBase 
     {
+   
         private readonly IProfileDao profileDao;
 
-        [HttpPost("/")]
-        IActionResult AddProfile(Profile profile)
+        public ProfileController(IProfileDao _profileDao)
+        {
+            profileDao = _profileDao;
+        }
+
+        [HttpPost()]
+        public IActionResult AddProfile(Profile profile)
         {
             profileDao.AddProfile(profile);
             return Ok();
         }
 
-        [HttpPut("/")]
-        IActionResult UpdateProfile(Profile profile)
+        [HttpPut()]
+        public IActionResult UpdateProfile(Profile profile)
         {
             profileDao.UpdateProfile(profile);
             return Ok();
         }
 
-        [HttpDelete("/{userID}")]
-        IActionResult DeleteProfile(int id)
+        [HttpDelete("{userID}")]
+        public IActionResult DeleteProfile(int id)
         {
             profileDao.DeleteProfile(id);
             return NoContent();
         }
 
-        [HttpGet("/{userID}")]
-        ActionResult<Profile> GetProfile(int userID)
+        [HttpGet("{userID}")]
+        public ActionResult<Profile> GetProfile(int userID)
         {
             Profile profile = profileDao.GetProfile(userID);
             return profile;
         }
 
-        [HttpGet("/")]
-        ActionResult<List<Profile>> GetAllProfiles()
+        [HttpGet()]
+        public ActionResult<List<Profile>> GetAllProfiles()
         {
             List<Profile> profiles = profileDao.GetAllProfiles();
             return profiles;
