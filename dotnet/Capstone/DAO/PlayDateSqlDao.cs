@@ -74,9 +74,9 @@ namespace Capstone.DAO
             return allPlayDates;
         }
 
-        public PlayDate AddAPlayDate(PlayDate newPlayDate)
+        public int AddAPlayDate(PlayDate newPlayDate)
         {
-
+            int newPlayDateId = 0;
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
@@ -91,7 +91,7 @@ namespace Capstone.DAO
                     cmd.Parameters.AddWithValue("@guestPetId", newPlayDate.GuestPetID);
                     cmd.Parameters.AddWithValue("@location", newPlayDate.Location); //tbd-might not be in this table-have to join?-TBD**
                     cmd.Parameters.AddWithValue("@dateTime", newPlayDate.DateOfPlayDate);
-                    newPlayDate.PlayDateID = (int)cmd.ExecuteScalar();
+                    newPlayDateId = (int)cmd.ExecuteScalar();
                 }
             }
             catch (SqlException)
@@ -99,7 +99,7 @@ namespace Capstone.DAO
                 throw;
             }
 
-            return newPlayDate;
+            return newPlayDateId;
         }
 
         public bool UpdateAPlayDate(PlayDate updatedPlayDate)
@@ -112,9 +112,8 @@ namespace Capstone.DAO
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new SqlCommand("UPDATE play_dates SET host_user_id = @hostUserId, host_pet_id = @hostPetId," +
+                    SqlCommand cmd = new SqlCommand("UPDATE play_dates SET host_pet_id = @hostPetId," +
                         "guest_pet_id = @guestPetId, date_time = @dateTime, location = @location)", conn); //location is TBD**
-                    cmd.Parameters.AddWithValue("@hostUserId", updatedPlayDate.HostUserID);
                     cmd.Parameters.AddWithValue("@hostPetId", updatedPlayDate.HostPetID);
                     cmd.Parameters.AddWithValue("@guestPetId", updatedPlayDate.GuestPetID);
                     cmd.Parameters.AddWithValue("@location", updatedPlayDate.Location); //tbd-might not be in this table-have to join?-TBD**

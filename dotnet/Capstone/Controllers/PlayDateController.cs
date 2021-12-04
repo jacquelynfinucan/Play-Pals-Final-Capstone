@@ -10,9 +10,9 @@ namespace Capstone.Controllers
     public class PlayDateController : ControllerBase
     {
 
-        private readonly IUserDao userDao;
+        private readonly IPlayDateDao playDateDao;
 
- 
+
         /*
         [HttpPost("/profile/{userID}/pets")]
         IActionResult AddAPetToUser(int userID,petModel pet)
@@ -46,17 +46,24 @@ namespace Capstone.Controllers
         IActionResult DeleteAPet(int userID, petModel pet)
         {
 
-        }
-        
-        [HttpPost("/playdates")]
-        IActionResult AddAPlayDate(PlayDate playDate)
-        {
+        }*/
 
+
+
+
+        [HttpPost("/playdates")]
+        public IActionResult AddAPlayDate(PlayDate playDate)
+        {
+            
+            int newPlayDateId = playDateDao.AddAPlayDate(playDate);
+            return Ok();
         }
         [HttpGet("/playdates")]
-        IActionResult GetAllPlayDates()
+        public IActionResult GetAllPlayDates()
         {
 
-        }*/
+
+            return Ok();
+        }
     }
 }

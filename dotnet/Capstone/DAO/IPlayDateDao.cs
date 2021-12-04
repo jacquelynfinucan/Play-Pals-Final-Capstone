@@ -8,7 +8,7 @@ namespace Capstone.DAO
     {
         PlayDate GetAPlayDate(int playDateId);
         List<PlayDate> GetAllPlayDates();
-        PlayDate AddAPlayDate(PlayDate newPlayDate);
+        int AddAPlayDate(PlayDate newPlayDate);
         bool UpdateAPlayDate(PlayDate updatedPlayDate);
         bool DeleteAPlayDate(int playDateId);
     }
