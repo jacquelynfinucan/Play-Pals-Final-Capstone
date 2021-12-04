@@ -18,15 +18,22 @@ namespace Capstone.Controllers
             petDao = _petDao;
         }
 
-        /*
+
         [HttpPost("/profile/{userID}/pets")]
         public IActionResult AddAPetToUser(int userID, petModel pet)
         {
-            petModel newPet = petDao.AddPet(userID, pet);
-            return Ok(newPet);
+            int newPetID = petDao.AddPet(userID, pet);
+            if(newPetID != -1)
+            {
+                //petDao.AddPetToUser(petId, userId);
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
+      
         }
-       
-        */
 
         [HttpGet("/pet/{petID}")]
         public ActionResult<petModel> GetAPet(int petID)
@@ -61,7 +68,7 @@ namespace Capstone.Controllers
         public IActionResult GetAllThePets()
         {
             List<petModel> pets = petDao.GetListOfAllPets();
-            if(pets == null)
+            if (pets == null)
             {
                 return NotFound("There are no pets listed as this time.");
             }
@@ -71,20 +78,40 @@ namespace Capstone.Controllers
             }
         }
 
-       [HttpPut("/pets/{petID}")]
-       IActionResult UpdateAPet(int petID, petModel pet)
-       {
-            return null;
-       }
+        [HttpPut("/pets/{petID}")]
+        public IActionResult UpdateAPet(int petID, petModel pet)
+        {
+            if (petDao.UpdatePetInfo(petID, pet))
+            {
+                return Ok(true);
+            }
+            else
+            {
+                return NotFound("Pet info could not be updated");
+            }
+        }
 
-       /*
+        [HttpDelete("/pets/{petID}")]
+        public ActionResult<bool> DeleteAPet(int petID)
+        {
+            //petModel deletedPet = petDao.GetPetByPetId(petID);
 
-      [HttpDelete("/pets/{petID}")]
-      IActionResult DeleteAPet(int userID, petModel pet)
-      {
+            //if (deletedPet == null)
+            //{
+            //    return NotFound("Pet does not exist");
+            //}
 
-      }
-      */
+            bool result = petDao.DeleteUserPet(petID);
+
+            if (!result)
+            {
+                return NoContent();
+            }
+            else
+            {
+                return StatusCode(500);
+            }
+        }
     }
 }
 

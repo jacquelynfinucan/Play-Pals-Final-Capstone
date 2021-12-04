@@ -1,10 +1,12 @@
 <template>
 
 <div class="main">
-  <h1>{{this.user.FirstName}}</h1>
-  <h1>{{this.user.LastName}}</h1>
-  <h2>Zip: {{this.user.ZipCode}}</h2>
-  <h3>Check out my pets!</h3>
+  <h1>{{this.user.firstName}}</h1>
+  <h1>{{this.user.lastName}}</h1>
+  <h2>Zip: {{this.user.zip}}</h2>
+  <h2>Email: {{this.user.email}}</h2>
+  <h3>My Pets</h3>
+  <h3>My Playdates</h3>
   <br/>
  
 

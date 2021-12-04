@@ -16,21 +16,48 @@ namespace Capstone.DAO
             connectionString = dbConnectionString;
         }
 
-        public petModel AddPet(int userID, petModel pet)
+        public int AddPet(int userId, petModel pet)
         {
+            int newId = 0;
+
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand("", conn);
+                    SqlCommand cmd = new SqlCommand(@"insert into pet_profile(pet_name, breed, age, size, is_male, is_spayed_neutered, description, animal_type)
+                                                    output inserted.pet_id values(@petName, @breed, @age, @size, @isMale, @isSpayedNeutered, @description, @animalType)", conn);
+                    cmd.Parameters.AddWithValue("@petName", pet.Name);
+                    cmd.Parameters.AddWithValue("@breed", pet.Breed);
+                    cmd.Parameters.AddWithValue("@age", pet.Age);
+                    cmd.Parameters.AddWithValue("@size", pet.Size);
+                    cmd.Parameters.AddWithValue("@isMale", pet.IsMale);
+                    cmd.Parameters.AddWithValue("@isSpayedNeutered", pet.IsSpayed);
+                    cmd.Parameters.AddWithValue("@description", pet.Description);
+                    cmd.Parameters.AddWithValue("@animalType", pet.AnimalType);
+
+                    newId = (int)cmd.ExecuteScalar();
+                    if (newId == 0)
+                    {
+                        throw new Exception();
+                    }
+                    cmd = new SqlCommand(@"insert into users_pets(user_id, pet_id)
+                                         values (@userId, @newId)", conn);
+                    cmd.Parameters.AddWithValue("@userId", userId);
+                    cmd.Parameters.AddWithValue("@newId", newId);
+
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    if(rowsAffected != 1)
+                    {
+                        throw new Exception();
+                    }
                 }
             }
-            catch
+            catch (SqlException ex)
             {
-
+                Console.WriteLine(ex.Message);
             }
-            return null;
+            return newId;
         }
 
         public petModel GetPetByPetId(int petId)
@@ -53,7 +80,7 @@ namespace Capstone.DAO
                     }
                 }
             }
-            catch(SqlException ex)
+            catch (SqlException ex)
             {
                 Console.WriteLine(ex.Message);
             }
@@ -67,10 +94,10 @@ namespace Capstone.DAO
 
             try
             {
-                using(SqlConnection conn = new SqlConnection(connectionString))
+                using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand(@"select * from users_pets join pet_profile on users_pets.pet_id = pet_profile.pet_id
+                    SqlCommand cmd = new SqlCommand(@"select * from pet_profile join users_pets on users_pets.pet_id = pet_profile.pet_id
                                                      where user_id = @userID", conn);
                     cmd.Parameters.AddWithValue("@userId", userID);
 
@@ -117,22 +144,79 @@ namespace Capstone.DAO
             return pets;
         }
 
-        public petModel UpdatePetInfo(int petID)
+        public bool UpdatePetInfo(int petID, petModel pet)
         {
             try
             {
-                using(SqlConnection conn = new SqlConnection(connectionString))
+                using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand("", conn);
+                    SqlCommand cmd = new SqlCommand(@"update pet_profile 
+                                                    set 
+                                                    pet_name = @petName,
+                                                    breed = @breed,
+                                                    age = @age,
+                                                    size = @size,
+                                                    is_male = @isMale,
+                                                    is_spayed_neutered = @isSpayedNeutered,
+                                                    description = @description
+                                                    where pet_id = @petID", conn);
+                    cmd.Parameters.AddWithValue("@petName", pet.Name);
+                    cmd.Parameters.AddWithValue("@breed", pet.Breed);
+                    cmd.Parameters.AddWithValue("@age", pet.Age);
+                    cmd.Parameters.AddWithValue("@size", pet.Size);
+                    cmd.Parameters.AddWithValue("@isMale", pet.IsMale);
+                    cmd.Parameters.AddWithValue("@isSpayedNeutered", pet.IsSpayed);
+                    cmd.Parameters.AddWithValue("@description", pet.Description);
+                    cmd.Parameters.AddWithValue("@petID", petID);
+
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    if (rowsAffected > 0)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
             }
-            catch
+            catch (SqlException ex)
             {
-
+                Console.WriteLine(ex.Message);
+                return false;
             }
+        }
 
-            return null;
+        public bool DeleteUserPet(int petID)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand(@"delete from users_pets
+                                                    where pet_id = @petID
+                                                    delete from pet_profile
+                                                    where pet_id = @petID", conn);
+                    cmd.Parameters.AddWithValue("@petID", petID);
+
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    if (rowsAffected != 2)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
         }
 
         private petModel GetPetModelFromReader(SqlDataReader reader)
@@ -145,18 +229,10 @@ namespace Capstone.DAO
             pet.Description = Convert.ToString(reader["description"]);
             pet.IsMale = Convert.ToBoolean(reader["is_Male"]);
             pet.IsSpayed = Convert.ToBoolean(reader["is_Spayed_neutered"]);
+            pet.PetId = Convert.ToInt32(reader["pet_id"]);
 
             return pet;
         }
-
     }
 }
 
-//public string Name { get; set; }
-//public int Age { get; set; }
-//public bool IsMale { get; set; }
-//public bool IsSpayed { get; set; }
-//public int Size { get; set; }
-//public string Breed { get; set; }
-//public List<int> Traits;
-//public string Description { get; set; }
