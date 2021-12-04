@@ -47,31 +47,7 @@ namespace Capstone.Controllers
         {
 
         }
-        [HttpPost("/profiles")]
-        IActionResult MakeAUserProfile(UserProfile profile)
-        {
-
-        } 
-        [HttpPut("/profiles")]
-        IActionResult UpdateUserProfile(int userID,UserProfile profile)
-        {
-
-        }
-        [HttpGet("/profiles/{userID}")]
-        IActionResult GetAUser(int userID)
-        {
-
-        }
-        [HttpGet("/profiles")]
-        IActionResult GetAllUsers()
-        {
-
-        }
-        [HttpDelete("/profiles/{id}")]
-        IActionResult DeleteUserProfile(int id)
-        {
-
-        }
+        
         [HttpPost("/playdates")]
         IActionResult AddAPlayDate(PlayDate playDate)
         {
