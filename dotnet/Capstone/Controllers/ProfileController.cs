@@ -2,6 +2,7 @@
 using Capstone.DAO;
 using Capstone.Models;
 using Capstone.Security;
+using System.Collections.Generic;
 
 namespace Capstone.Controllers
 {
@@ -9,7 +10,7 @@ namespace Capstone.Controllers
     [ApiController]
     public class ProfileController : Controller //controller vs controllerbase
     {
-        private readonly IProfileDao profilesDao;
+        private readonly IProfileDao profileDao;
 
         [HttpPost("/")]
         IActionResult AddProfile(Profile profile)
@@ -30,15 +31,17 @@ namespace Capstone.Controllers
         }
 
         [HttpGet("/{userID}")]
-        IActionResult GetProfile(int userID)
+        ActionResult<Profile> GetProfile(int userID)
         {
-            return null;
+            Profile profile = profileDao.GetProfile(userID);
+            return profile;
         }
 
         [HttpGet("/")]
-        IActionResult GetAllProfiles()
+        ActionResult<List<Profile>> GetAllProfiles()
         {
-            return null;
+            List<Profile> profiles = profileDao.GetAllProfiles();
+            return profiles;
         }
 
     }
