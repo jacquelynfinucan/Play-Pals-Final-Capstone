@@ -26,14 +26,14 @@
       />
     </div>
 
-    <div>
-      <label for="newUser">ZIP Code</label>
+     <div>
+    <label for="newUser">Email Adress</label>
       <input
         type="text"
-        id="zipCode"
+        id="email"
         class="form-control"
-        placeHolder="ZIP Code"
-        v-model="newUserProfile.zipCode"
+        placeHolder="Email Address"
+        v-model="newUserProfile.email"
         required
       />
     </div>
@@ -42,10 +42,10 @@
       <label for="newUser">ZIP Code</label>
       <input
         type="text"
-        id="email"
+        id="zipCode"
         class="form-control"
-        placeHolder="Email Address"
-        v-model="newUserProfile.email"
+        placeHolder="ZIP Code"
+        v-model="newUserProfile.zipCode"
         required
       />
     </div>
@@ -65,8 +65,8 @@ export default {
         userId: this.$store.state.user.userId,
         firstName: "",
         lastName: "",
-        zipCode: "",
         email: "",
+         zipCode: ""
       },
     };
   },

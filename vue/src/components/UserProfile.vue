@@ -14,7 +14,8 @@
 </template>
 
 <script>
- import UserService from "../services/UserService";
+import ProfileService from '../services/ProfileService';
+//import UserService from "../services/UserService";
 
 
 
@@ -33,7 +34,7 @@ export default {
         }
     },
     created(){
- UserService.GetUserByID(this.$store.state.user.userId).then((response)=>{
+    ProfileService.GetProfile(this.$store.state.user.userId).then((response)=>{
      if(response.data.userId == 0){
          this.$router.push({ name: "register-profile" }); //should kick you to RegisterProfile view if profile doesn't exist
      }

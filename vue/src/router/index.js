@@ -7,7 +7,7 @@ import Register from '../views/Register.vue'
 import store from '../store/index'
 import Home from '@/views/Home.vue'
 import NotFound from '@/views/NotFound.vue'
-import RegisterProfile from '@/views/RegisterProfile.vue'
+import RegisterProfile from '../views/RegisterProfile.vue'
 
 Vue.use(Router)
 
@@ -74,7 +74,7 @@ const router = new Router({
     },
 
     {
-      path:"/RegisterProfile",
+      path:"/register-profile",
       name: "register-profile",
       component: RegisterProfile,
       meta: {
