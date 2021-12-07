@@ -88,7 +88,7 @@ namespace Capstone.DAO
                     cmd.Parameters.AddWithValue("@hostUserId", hostUserId);
                     SqlDataReader reader = cmd.ExecuteReader();
 
-                    if (reader.Read())
+                    while (reader.Read())
                     {
                         currentPlayDate = GetPlayDateFromReader(reader);
                         allPlayDates.Add(currentPlayDate);
@@ -119,7 +119,7 @@ WHERE host_user_id = @host_user_id", conn);
                     cmd.Parameters.AddWithValue("@host_User_Id", hostUserId);
                     SqlDataReader reader = cmd.ExecuteReader();
 
-                    if (reader.Read())
+                    while (reader.Read())
                     {
                         allPlayDates.Add(GetFrontEndPlayDateFromReader(reader));
                     }
