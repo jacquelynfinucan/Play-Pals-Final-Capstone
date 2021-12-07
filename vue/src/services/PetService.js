@@ -8,5 +8,8 @@ export default {
 
   getPetsForUser(userID) {
       return http.get(`/profiles/${userID}/pets`);
+  },
+  getPetByID(petID){
+      return http.get(`/pets/${petID}`);
   }
 }
