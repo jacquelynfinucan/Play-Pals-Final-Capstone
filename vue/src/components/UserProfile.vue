@@ -35,7 +35,12 @@ export default {
     },
     created(){
  UserService.GetUserByID(this.$store.state.user.userId).then((response)=>{
-     this.user = response.data;
+     if(response.data.userId == 0){
+         this.$router.push({ name: "register-profile" }); //should kick you to RegisterProfile view if profile doesn't exist
+     }
+     else{
+         this.user = response.data;
+     }
  })
      }
 }
