@@ -66,32 +66,32 @@ export default {
         firstName: "",
         lastName: "",
         zip: "",
-        email: ""
+        email: "",
       },
       registrationErrors: false,
-      registrationErrorMsg: ''
-    }
+      registrationErrorMsg: "",
+    };
   },
   methods: {
     RegisterProfile(newUserProfile) {
       ProfileService.AddProfile(newUserProfile)
-      .then((response) => {
-            if (response.status == 201) {
-              this.$router.push({
-                path: "/profile",
-                query: { registration: "success" },
-              });
-            }
-          })
-          .catch((error) => {
-            const response = error.response;
-            this.registrationErrors = true;
-            if (response.status === 400) {
-              this.registrationErrorMsg = "Bad Request: Validation Errors";
-            }
-          });
-    }
-  }
+        .then((response) => {
+          if (response.status == 201) {
+            this.$router.push({
+              path: "/profile",
+              query: { registration: "success" },
+            });
+          }
+        })
+        .catch((error) => {
+          const response = error.response;
+          this.registrationErrors = true;
+          if (response.status === 400) {
+            this.registrationErrorMsg = "Bad Request: Validation Errors";
+          }
+        });
+    },
+  },
 };
 </script>
 
