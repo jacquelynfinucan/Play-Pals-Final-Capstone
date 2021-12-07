@@ -17,8 +17,6 @@ namespace Capstone.DAO
             connectionString = dbConnectionString;
         }
 
-        //Still need to add error handling
-
         private Profile GetProfileFromReader(SqlDataReader reader)
         {
             Profile profile = new Profile()
@@ -34,18 +32,25 @@ namespace Capstone.DAO
 
         public Profile GetProfile(int userID)
         {
-            using(SqlConnection conn = new SqlConnection(connectionString))
+            try
             {
-                conn.Open();
-                SqlCommand cmd = new SqlCommand("SELECT user_id, first_name, last_name, email, zip_code " +
-                    "FROM dbo.user_profile WHERE user_id = @userID", conn);
-                cmd.Parameters.AddWithValue("@userID", userID);
-
-                SqlDataReader reader = cmd.ExecuteReader();
-                if (reader.Read())
+                using (SqlConnection conn = new SqlConnection(connectionString))
                 {
-                    returnProfile = GetProfileFromReader(reader);
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand("SELECT user_id, first_name, last_name, email, zip_code " +
+                        "FROM dbo.user_profile WHERE user_id = @userID", conn);
+                    cmd.Parameters.AddWithValue("@userID", userID);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        returnProfile = GetProfileFromReader(reader);
+                    }
                 }
+            }
+            catch(SqlException)
+            {
+                throw;
             }
             return returnProfile;
         }
@@ -53,17 +58,24 @@ namespace Capstone.DAO
         public List<Profile> GetAllProfiles()
         {
             List<Profile> profiles = new List<Profile>();
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            try
             {
-                conn.Open();
-                SqlCommand cmd = new SqlCommand("SELECT user_id, first_name, last_name, email, zip_code FROM dbo.user_profile", conn);
-
-                SqlDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
+                using (SqlConnection conn = new SqlConnection(connectionString))
                 {
-                    returnProfile = GetProfileFromReader(reader);
-                    profiles.Add(returnProfile);
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand("SELECT user_id, first_name, last_name, email, zip_code FROM dbo.user_profile", conn);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        returnProfile = GetProfileFromReader(reader);
+                        profiles.Add(returnProfile);
+                    }
                 }
+            }
+            catch (SqlException)
+            {
+                throw;
             }
             return profiles;
         }
@@ -71,36 +83,51 @@ namespace Capstone.DAO
         public Profile AddProfile(Profile profile)
         {
             int newProfileId = 0;
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            try
             {
-                conn.Open();
-                SqlCommand cmd = new SqlCommand("INSERT INTO dbo.user_profile (first_name, last_name, email, zip_code) " +
-                                                "OUTPUT INSERTED.user_id " +
-                                                "VALUES (@firstName, @lastName, @email, @zipCode)", conn);
-                cmd.Parameters.AddWithValue("@firstName", returnProfile.FirstName);
-                cmd.Parameters.AddWithValue("@lastName", returnProfile.LastName);
-                cmd.Parameters.AddWithValue("@email", returnProfile.Email);
-                cmd.Parameters.AddWithValue("@zipCode", returnProfile.Zip);
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand("INSERT INTO dbo.user_profile (first_name, last_name, email, zip_code, user_id) " +
+                                                    "OUTPUT INSERTED.user_id " +
+                                                    "VALUES (@firstName, @lastName, @email, @zipCode, @userId)", conn);
+                    cmd.Parameters.AddWithValue("@firstName", profile.FirstName);
+                    cmd.Parameters.AddWithValue("@lastName",profile.LastName);
+                    cmd.Parameters.AddWithValue("@email", profile.Email);
+                    cmd.Parameters.AddWithValue("@zipCode", profile.Zip);
+                    cmd.Parameters.AddWithValue("@userId", profile.UserId);
 
-                newProfileId = Convert.ToInt32(cmd.ExecuteScalar());
+                    newProfileId = Convert.ToInt32(cmd.ExecuteScalar());
+                }
+            }
+            catch(SqlException)
+            {
+                throw;
             }
             return GetProfile(newProfileId);
         }
 
         public Profile UpdateProfile(Profile profile)
         {
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            try
             {
-                conn.Open();
-                SqlCommand cmd = new SqlCommand("UPDATE dbo.user_profile SET first_name = @firstName, last_name = @lastName, email = @email, zip_code = @zipCode " +
-                                                "WHERE user_id = @userID", conn);
-                cmd.Parameters.AddWithValue("@userID", profile.UserId);
-                cmd.Parameters.AddWithValue("@firstName", profile.FirstName);
-                cmd.Parameters.AddWithValue("@lastName",  profile.LastName);
-                cmd.Parameters.AddWithValue("@email", profile.Email);
-                cmd.Parameters.AddWithValue("@zipCode", profile.Zip);
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand("UPDATE dbo.user_profile SET first_name = @firstName, last_name = @lastName, email = @email, zip_code = @zipCode " +
+                                                    "WHERE user_id = @userID", conn);
+                    cmd.Parameters.AddWithValue("@userID", profile.UserId);
+                    cmd.Parameters.AddWithValue("@firstName", profile.FirstName);
+                    cmd.Parameters.AddWithValue("@lastName", profile.LastName);
+                    cmd.Parameters.AddWithValue("@email", profile.Email);
+                    cmd.Parameters.AddWithValue("@zipCode", profile.Zip);
 
-                cmd.ExecuteNonQuery();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (SqlException)
+            {
+                throw;
             }
             return GetProfile(profile.UserId);
         }
@@ -111,12 +138,19 @@ namespace Capstone.DAO
         /// <param name="userID"></param>
         public void DeleteProfile(int userID)
         {
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            try
             {
-                conn.Open();
-                SqlCommand cmd = new SqlCommand("DELETE FROM dbo.user_profile WHERE user_id = @userID", conn);
-                cmd.Parameters.AddWithValue("@userID", userID);
-                cmd.ExecuteNonQuery();
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand("DELETE FROM dbo.user_profile WHERE user_id = @userID", conn);
+                    cmd.Parameters.AddWithValue("@userID", userID);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (SqlException)
+            {
+                throw;
             }
         }
 
