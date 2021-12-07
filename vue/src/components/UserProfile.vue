@@ -9,7 +9,6 @@
   <h3>My Playdates</h3>
   <br/>
  
-
 </div>
 
 </template>
