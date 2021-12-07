@@ -73,7 +73,6 @@ namespace Capstone.DAO
 
             return allPlayDates;
         }
-
         public List<PlayDate> GetAllPlayDatesForHost(int hostUserId)
         {
             List<PlayDate> allPlayDates = new List<PlayDate>();
@@ -89,10 +88,40 @@ namespace Capstone.DAO
                     cmd.Parameters.AddWithValue("@hostUserId", hostUserId);
                     SqlDataReader reader = cmd.ExecuteReader();
 
-                    if (reader.Read())
+                    while (reader.Read())
                     {
                         currentPlayDate = GetPlayDateFromReader(reader);
                         allPlayDates.Add(currentPlayDate);
+                    }
+                }
+            }
+            catch (SqlException)
+            {
+                throw;
+            }
+            return allPlayDates;
+        }
+        public List<FrontEndPlayDate> GetFrontEndPlayDatesForHost(int hostUserId)
+        {
+            var allPlayDates = new List<FrontEndPlayDate>();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand(@"SELECT user_profile.first_name as hostName, GuestPet.pet_name as guestPet, HostPet.pet_name as hostPet,date_time
+FROM play_dates 
+JOIN pet_profile as GuestPet ON GuestPet.pet_id = play_dates.guest_pet_id
+JOIN pet_profile as HostPet ON HostPet.pet_id = play_dates.host_pet_id
+JOIN user_profile ON play_dates.host_user_id = user_profile.user_id
+WHERE host_user_id = @host_user_id", conn);
+                    cmd.Parameters.AddWithValue("@host_User_Id", hostUserId);
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        allPlayDates.Add(GetFrontEndPlayDateFromReader(reader));
                     }
                 }
             }
@@ -191,10 +220,20 @@ namespace Capstone.DAO
                 HostUserID = Convert.ToInt32(reader["host_user_id"]),
                 HostPetID = Convert.ToInt32(reader["host_pet_id"]),
                 GuestPetID = Convert.ToInt32(reader["guest_pet_id"]),
-                Location = Convert.ToInt32(reader["location_id"]), //convert to dynamic??-TBD
+                //Location = Convert.ToInt32(reader["location_id"]), //convert to dynamic??-TBD
                 DateOfPlayDate = Convert.ToDateTime(reader["date_time"]),
             };
 
+            return p;
+        }
+
+        private FrontEndPlayDate GetFrontEndPlayDateFromReader(SqlDataReader reader)
+        {
+            var p = new FrontEndPlayDate();
+            p.HostPet = (String)reader["hostPet"];
+            p.GuestPet = (String)reader["guestPet"];
+            p.HostName = (String)reader["hostName"];
+            p.DateOfPlayDate = (DateTime)reader["date_time"];
             return p;
         }
     }
