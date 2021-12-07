@@ -1,7 +1,24 @@
 <template>
   <div class="pet-card">
-    <img class="pet-img" src="" alt="pet" />
-    <h3>{{ pet.name }}</h3>
+    <div class="pet-header">
+      <img class="pet-img" src="https://randomuser.me/api/portraits/lego/1.jpg" alt="pet picture" />
+      <p class="pet-name">{{ pet.name }}</p>
+    </div>
+    <div class="pet-body">
+      <p>Animal Type: {{ pet.animal_type }}</p>
+      <p>Breed: {{ pet.breed }}</p>
+      <p>Age: {{ pet.age }}</p>
+      
+      <p v-if="this.pet.size == 1">Size: Small</p>
+      <p v-if="this.pet.size == 2">Size: Medium</p>
+      <p v-if="this.pet.size == 3">Size: Large</p>
+      
+      <p v-if="this.pet.is_male">Gender: Male</p>
+      <p v-if="!this.pet.is_male">Gender: Female</p>
+      
+      <p v-if="this.pet.is_spayed_neutered">Sprayed/Neutered: True</p>
+      <p v-if="!this.pet.is_spayed_neutered">Sprayed/Neutered: False</p>
+    </div>  
   </div>
 </template>
 
@@ -13,4 +30,41 @@ export default {
 </script>
 
 <style scoped>
+.pet-card {
+  border: solid 1px darkgrey;
+  border-radius: 5px;
+
+  background-color: white;
+
+  margin-bottom: 10px;
+}
+
+.pet-header {
+  border-radius: 5px;
+  
+  background-color: lightblue;
+
+  display: flex;
+  flex-direction: row;
+}
+
+.pet-img {
+  border: solid 5px darkgrey;
+  border-radius: 9999px;
+  
+  width: 75px;
+  margin: 10px;
+  
+  align-self: flex-start;
+  justify-self: center;
+}
+
+.pet-name{
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+.pet-body {
+  padding: 10px;
+}
 </style>
