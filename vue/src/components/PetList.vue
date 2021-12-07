@@ -1,6 +1,6 @@
 <template>
   <div class="pet-list">
-      <h1>My Pets</h1>
+      <h1 class="pets-title">My Pets</h1>
       <div class="pets">
             
             <div class="status-message error" v-show="errorMsg !== ''">{{errorMsg}}</div>
@@ -68,9 +68,15 @@ export default {
     padding: 10px;
 
     margin-bottom: 10px;
+
+    background-color: lightgrey;
 }
 
 .status-message.error {
     color: red;
+}
+
+.pets-title {
+    text-align: left;
 }
 </style>
