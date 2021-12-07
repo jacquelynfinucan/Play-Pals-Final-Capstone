@@ -16,8 +16,10 @@
       <p v-if="this.pet.is_male">Gender: Male</p>
       <p v-if="!this.pet.is_male">Gender: Female</p>
       
-      <p v-if="this.pet.is_spayed_neutered">Sprayed/Neutered: True</p>
-      <p v-if="!this.pet.is_spayed_neutered">Sprayed/Neutered: False</p>
+      <p v-if="this.pet.is_spayed_neutered">Spayed/Neutered: True</p>
+      <p v-if="!this.pet.is_spayed_neutered">Spayed/Neutered: False</p>
+
+      <p>Description: {{ pet.description }}</p>
     </div>  
   </div>
 </template>

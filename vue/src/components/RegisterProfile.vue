@@ -3,6 +3,8 @@
     <h1>Welcome. Please enter your profile information.</h1>
 
     <div>
+      <div class="status-message error" v-show="errorMsg !== ''">{{errorMsg}}</div>
+
       <label for="newUser">First Name</label>
       <input
         type="text"
@@ -33,7 +35,7 @@
         id="zipCode"
         class="form-control"
         placeHolder="ZIP Code"
-        v-model="newUserProfile.zip"
+        v-model.number="newUserProfile.zip"
         required
       />
     </div>
@@ -50,7 +52,7 @@
       />
     </div>
 
-    <button v-on:click="RegisterProfile(this.newUserProfile)">Submit</button>
+    <button v-on:click="RegisterProfile">Submit</button>
   </div>
 </template>
 
@@ -66,34 +68,40 @@ export default {
         firstName: "",
         lastName: "",
         zip: "",
-        email: ""
+        email: "",
       },
-      registrationErrors: false,
-      registrationErrorMsg: ''
-    }
+      errorMsg: ''
+    };
   },
   methods: {
-    RegisterProfile(newUserProfile) {
-      ProfileService.AddProfile(newUserProfile)
-      .then((response) => {
-            if (response.status == 201) {
-              this.$router.push({
-                path: "/profile",
-                query: { registration: "success" },
-              });
-            }
-          })
-          .catch((error) => {
-            const response = error.response;
-            this.registrationErrors = true;
-            if (response.status === 400) {
-              this.registrationErrorMsg = "Bad Request: Validation Errors";
-            }
-          });
-    }
-  }
+    RegisterProfile() {
+      ProfileService.AddProfile(this.newUserProfile)
+        .then((response) => {
+          if (response.status == 200) {
+            this.$router.push({ name: "profile" });
+          }
+        })
+        .catch((error) => {
+          if (error.response) {
+            this.errorMsg =
+              "Error creating profile. Response received was '" +
+              error.response.statusText +
+              "'.";
+          } else if (error.request) {
+            this.errorMsg =
+              "Error creating profile. Server could not be reached.";
+          } else {
+            this.errorMsg =
+              "Error rcreating profile. Request could not be created.";
+          }
+        });
+    },
+  },
 };
 </script>
 
-<style>
+<style scoped>
+.status-message.error {
+    color: red;
+}
 </style>
