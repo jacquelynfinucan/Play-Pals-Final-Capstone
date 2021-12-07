@@ -18,6 +18,8 @@
       
       <p v-if="this.pet.is_spayed_neutered">Spayed/Neutered: True</p>
       <p v-if="!this.pet.is_spayed_neutered">Spayed/Neutered: False</p>
+
+      <p>Description: {{ pet.description }}</p>
     </div>  
   </div>
 </template>

@@ -8,6 +8,7 @@
             <div class="loading" v-if="isLoading">
                 <img src="@/assets/loading-dog.gif" alt="loading gif"/>
             </div>
+
             
             <div class="pet" v-for="pet in this.$store.state.pets" v-bind:key="pet.pet_id" v-else>
                 <pet-card v-bind:pet="pet" />
@@ -79,4 +80,5 @@ export default {
 .pets-title {
     text-align: left;
 }
+
 </style>
