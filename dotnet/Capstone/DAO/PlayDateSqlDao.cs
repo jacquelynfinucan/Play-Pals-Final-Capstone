@@ -26,7 +26,7 @@ namespace Capstone.DAO
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new SqlCommand("SELECT host_user_id, host_pet_id, guest_pet_id, date_time, location" + //location is TBD**
+                    SqlCommand cmd = new SqlCommand("SELECT host_user_id, host_pet_id, guest_pet_id, date_time, location_id " + //location is TBD**
                         "FROM play_dates WHERE play_date_id = @playDateId", conn); //might have to join to get location-TBD**
                     cmd.Parameters.AddWithValue("@playDateId", playDateId);
                     SqlDataReader reader = cmd.ExecuteReader();
@@ -55,7 +55,7 @@ namespace Capstone.DAO
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new SqlCommand("SELECT host_user_id, host_pet_id, guest_pet_id, date_time, location" + //location is TBD**
+                    SqlCommand cmd = new SqlCommand("SELECT host_user_id, host_pet_id, guest_pet_id, date_time, location_id" + //location is TBD**
                         "FROM play_dates", conn); //might have to join to get location-TBD**
                     SqlDataReader reader = cmd.ExecuteReader();
 
@@ -84,7 +84,7 @@ namespace Capstone.DAO
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new SqlCommand("SELECT host_user_id, host_pet_id, guest_pet_id, date_time, location" + //location is TBD**
+                    SqlCommand cmd = new SqlCommand("SELECT host_user_id, host_pet_id, guest_pet_id, date_time, location_id " + //location is TBD**
                         "FROM play_dates WHERE host_user_id = @hostUserId", conn); //might have to join to get location-TBD**
                     cmd.Parameters.AddWithValue("@hostUserId", hostUserId);
                     SqlDataReader reader = cmd.ExecuteReader();
@@ -191,7 +191,7 @@ namespace Capstone.DAO
                 HostUserID = Convert.ToInt32(reader["host_user_id"]),
                 HostPetID = Convert.ToInt32(reader["host_pet_id"]),
                 GuestPetID = Convert.ToInt32(reader["guest_pet_id"]),
-                Location = Convert.ToString(reader["location"]), //convert to dynamic??-TBD
+                Location = Convert.ToString(reader["location_id"]), //convert to dynamic??-TBD
                 DateOfPlayDate = Convert.ToDateTime(reader["date_time"]),
             };
 
