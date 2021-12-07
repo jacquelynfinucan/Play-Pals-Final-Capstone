@@ -37,7 +37,8 @@ namespace Capstone.DAO
             using(SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("SELECT user_id, first_name, last_name, zip_code FROM dbo.user_profile WHERE user_id = @userID", conn);
+                SqlCommand cmd = new SqlCommand("SELECT user_id, first_name, last_name, email, zip_code " +
+                    "FROM dbo.user_profile WHERE user_id = @userID", conn);
                 cmd.Parameters.AddWithValue("@userID", userID);
 
                 SqlDataReader reader = cmd.ExecuteReader();
@@ -55,7 +56,7 @@ namespace Capstone.DAO
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("SELECT user_id, first_name, last_name, zip_code FROM dbo.user_profile", conn);
+                SqlCommand cmd = new SqlCommand("SELECT user_id, first_name, last_name, email, zip_code FROM dbo.user_profile", conn);
 
                 SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
