@@ -1,13 +1,14 @@
 <template>
 
 <div class="main">
-  <h1>{{this.user.firstName}}</h1>
-  <h1>{{this.user.lastName}}</h1>
-  <h2>Zip: {{this.user.zip}}</h2>
-  <h2>Email: {{this.user.email}}</h2>
-
-  <h3>My Playdates</h3>
+  <h1>User Profile</h1>
+  <h2>First Name: {{this.user.firstName}}</h2>
+  <h2>Last Name: {{this.user.lastName}}</h2>
+  <h2>Zipcode: {{this.user.zip}}</h2>
+  <h2>Email Address: {{this.user.email}}</h2>
   <br/>
+
+  <h1>My Playdates</h1>
     <play-date-card v-for="playdate in this.playdates" v-bind:key="playdate.PlayDateID" v-bind:playdate="playdate"/>
 
 </div>
@@ -17,7 +18,7 @@
 <script>
  import UserService from "../services/UserService";
  import DateService from "../services/DateService";
-import PlayDateCard from './PlayDateCard.vue';
+ import PlayDateCard from './PlayDateCard.vue';
 
 
 
@@ -57,6 +58,6 @@ export default {
 
 <style>
 h1, h2, h3{
-    text-align: center;
+    text-align: left;
 }
 </style>
