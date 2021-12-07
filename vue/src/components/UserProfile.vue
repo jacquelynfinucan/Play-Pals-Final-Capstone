@@ -5,6 +5,7 @@
   <h1>{{this.user.lastName}}</h1>
   <h2>Zip: {{this.user.zip}}</h2>
   <h2>Email: {{this.user.email}}</h2>
+  <h3>My Pets</h3>
   <h3>My Playdates</h3>
   <br/>
     <play-date-card v-for="playdate in this.playdates" v-bind:key="playdate.PlayDateID" v-bind:playdate="playdate"/>

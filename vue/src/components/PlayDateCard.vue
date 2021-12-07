@@ -28,20 +28,17 @@ export default {
     // },
     props: ['playdate'],
     watch:{
-        playdate: function (val) {
-            console.log("ASDSA")
-            PetService.getPetByID(val.guestPetID).then((response)=>{
-                this.GuestPet = response.data;
-            });
+        playdate: function () {
+        
         }
-    },
+    ,
 
 
 
     created(){
-        // PetService.getPetByID(this.playdate.GuestPetID).then((response)=>{
-        //     this.GuestPet = response.data;
-        // }),
+        PetService.getPetByID(this.playdate.GuestPetID).then((response)=>{
+            this.GuestPet = response.data;
+        })
         //    PetService.getPetByID(this.playdate.HostPetID).then((response)=>{
         //     this.HostPet = response.data;
         // }),
