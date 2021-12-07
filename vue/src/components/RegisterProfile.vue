@@ -3,7 +3,7 @@
     <h1>Welcome. Please enter your profile information.</h1>
 
     <div>
-      <lable for="newUser">First Name</lable>
+      <label for="newUser">First Name</label>
       <input
         type="text"
         id="fistName"
@@ -15,7 +15,7 @@
     </div>
 
     <div>
-      <lable for="newUser">Last Name</lable>
+      <label for="newUser">Last Name</label>
       <input
         type="text"
         id="lastName"
@@ -27,7 +27,7 @@
     </div>
 
     <div>
-      <lable for="newUser">ZIP Code</lable>
+      <label for="newUser">ZIP Code</label>
       <input
         type="text"
         id="zipCode"
@@ -39,7 +39,7 @@
     </div>
 
     <div>
-      <lable for="newUser">ZIP Code</lable>
+      <label for="newUser">ZIP Code</label>
       <input
         type="text"
         id="email"
