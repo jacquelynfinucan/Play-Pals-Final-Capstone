@@ -66,15 +66,15 @@ export default {
         firstName: "",
         lastName: "",
         zipCode: "",
-        email: "",
-      },
-    };
+        email: ""
+      }
+    }
   },
   methods: {
     ResgisterProfile(newUserProfile) {
       ProfileService.AddProfile(newUserProfile);
-    },
-  },
+    }
+  }
 };
 </script>
 
