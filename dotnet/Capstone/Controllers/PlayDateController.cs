@@ -26,9 +26,9 @@ namespace Capstone.Controllers
         }
 
         [HttpGet("/playdates/user/{hostUserId}")]
-        public ActionResult<List<PlayDate>> GetAllPlayDatesForHost(int hostUserId)
+        public ActionResult<List<FrontEndPlayDate>> GetAllPlayDatesForHost(int hostUserId)
         {
-            List<PlayDate> playDates = playDateDao.GetAllPlayDatesForHost(hostUserId);
+            var playDates = playDateDao.GetFrontEndPlayDatesForHost(hostUserId);
 
             return Ok(playDates);
         }

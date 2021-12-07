@@ -12,7 +12,9 @@ namespace Capstone.DAO
         bool UpdateAPlayDate(PlayDate updatedPlayDate);
         bool DeleteAPlayDate(int playDateId);
         List<PlayDate> GetAllPlayDatesForHost(int hostUserId);
+        List<FrontEndPlayDate> GetFrontEndPlayDatesForHost(int hostUserId);
 
-     //if we want to get play dates by id to include if they're a guest, we'd have to add guest_user_id to PlayDate model & database
+
+        //if we want to get play dates by id to include if they're a guest, we'd have to add guest_user_id to PlayDate model & database
     }
 }
