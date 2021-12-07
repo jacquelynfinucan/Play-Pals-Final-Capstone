@@ -191,7 +191,7 @@ namespace Capstone.DAO
                 HostUserID = Convert.ToInt32(reader["host_user_id"]),
                 HostPetID = Convert.ToInt32(reader["host_pet_id"]),
                 GuestPetID = Convert.ToInt32(reader["guest_pet_id"]),
-                Location = Convert.ToInt32(reader["location_id"]), //convert to dynamic??-TBD
+                //Location = Convert.ToInt32(reader["location_id"]), //convert to dynamic??-TBD
                 DateOfPlayDate = Convert.ToDateTime(reader["date_time"]),
             };
 

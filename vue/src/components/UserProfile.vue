@@ -8,7 +8,7 @@
   <h3>My Pets</h3>
   <h3>My Playdates</h3>
   <br/>
- 
+    <play-date-card v-for="playdate in this.playdates" v-bind:key="playdate.PlayDateID" v-bind:playdate="playdate"/>
 
 </div>
 
@@ -16,15 +16,21 @@
 
 <script>
  import UserService from "../services/UserService";
+ import DateService from "../services/DateService";
+import PlayDateCard from './PlayDateCard.vue';
 
 
 
 export default {
+  components: { PlayDateCard },
     name:'UserProfile',
     data() {
         return {
             user:{
               
+            },
+            playdates:{
+
             }
         }
     },
@@ -36,6 +42,9 @@ export default {
     created(){
  UserService.GetUserByID(this.$store.state.user.userId).then((response)=>{
      this.user = response.data;
+ })
+ DateService.GetPlayDatesForUser(this.$store.state.user.userId).then((response)=>{
+     this.playdates = response.data;
  })
      }
 }
