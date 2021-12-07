@@ -3,9 +3,9 @@ USE final_capstone
 GO
 
 DELETE user_profile
-INSERT INTO user_profile (user_id,first_name,last_name,zip_code)
-VALUES (1,'test','testerson',41000),
-(2,'admin','adminson',41000)
+INSERT INTO user_profile (user_id,first_name,last_name,email,zip_code)
+VALUES (1,'test','testerson', 'test123@gmail.com', 41000),
+(2,'admin','adminson','admin123@gmail.com', 41000)
 
 DELETE pet_profile
 INSERT INTO pet_profile (pet_name,animal_type,breed,age,size,is_male,is_spayed_neutered,description)

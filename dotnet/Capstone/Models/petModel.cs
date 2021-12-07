@@ -19,7 +19,6 @@ namespace Capstone.Models
         public List<int> Traits;
         public string Description { get; set; }
         public int PetId { get; set; }
-        public string AnimalType { get; set; }
 
 
     }

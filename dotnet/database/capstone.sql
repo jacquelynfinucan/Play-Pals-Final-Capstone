@@ -34,6 +34,7 @@ CREATE TABLE user_profile (
 	user_id int NOT NULL,
 	first_name varchar(50) NOT NULL, 
 	last_name varchar(50) NOT NULL, 
+	email varchar(50) NOT NULL,
 	zip_code varchar(15) NOT NULL
 
 	CONSTRAINT [PK_user_profile] PRIMARY KEY (user_id),
@@ -70,6 +71,7 @@ CREATE TABLE personality_traits (
 	CONSTRAINT [PK_personality_traits] PRIMARY KEY (personality_id)
 )
 
+--populate default data into personality_traits
 INSERT INTO personality_traits (personality_id, personality_name) VALUES (1, 'Energetic');
 INSERT INTO personality_traits (personality_id, personality_name) VALUES (2, 'Calm');
 INSERT INTO personality_traits (personality_id, personality_name) VALUES (3, 'Shy');
