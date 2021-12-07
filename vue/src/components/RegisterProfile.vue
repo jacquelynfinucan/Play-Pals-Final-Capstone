@@ -21,7 +21,7 @@
         id="lastName"
         class="form-control"
         placeHolder="Last Name"
-        v-model="newUserProfilelastName"
+        v-model="newUserProfile.lastName"
         required
       />
     </div>
@@ -33,16 +33,16 @@
         id="zipCode"
         class="form-control"
         placeHolder="ZIP Code"
-        v-model="newUserProfile.zipCode"
+        v-model="newUserProfile.zip"
         required
       />
     </div>
 
     <div>
-      <label for="newUser">ZIP Code</label>
+      <label for="newUser">Email Address</label>
       <input
         type="text"
-        id="email"
+        id="emailAddress"
         class="form-control"
         placeHolder="Email Address"
         v-model="newUserProfile.email"
@@ -50,7 +50,7 @@
       />
     </div>
 
-    <button v-on:click="ResgisterProfile">Submit</button>
+    <button v-on:click="RegisterProfile(this.newUserProfile)">Submit</button>
   </div>
 </template>
 
@@ -65,14 +65,31 @@ export default {
         userId: this.$store.state.user.userId,
         firstName: "",
         lastName: "",
-        zipCode: "",
+        zip: "",
         email: ""
-      }
+      },
+      registrationErrors: false,
+      registrationErrorMsg: ''
     }
   },
   methods: {
-    ResgisterProfile(newUserProfile) {
-      ProfileService.AddProfile(newUserProfile);
+    RegisterProfile(newUserProfile) {
+      ProfileService.AddProfile(newUserProfile)
+      .then((response) => {
+            if (response.status == 201) {
+              this.$router.push({
+                path: "/profile",
+                query: { registration: "success" },
+              });
+            }
+          })
+          .catch((error) => {
+            const response = error.response;
+            this.registrationErrors = true;
+            if (response.status === 400) {
+              this.registrationErrorMsg = "Bad Request: Validation Errors";
+            }
+          });
     }
   }
 };

@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import RegisterProfile from './RegisterProfile.vue'
+import RegisterProfile from '../components/RegisterProfile.vue'
 export default {
   components: { RegisterProfile },
 
