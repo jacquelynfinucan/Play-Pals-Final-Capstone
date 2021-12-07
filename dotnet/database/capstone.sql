@@ -91,15 +91,26 @@ CONSTRAINT [FK_pets_personality_traits_pet_profile] FOREIGN KEY (pet_id) REFEREN
 CONSTRAINT [FK_pets_personality_traits_personality_traits] FOREIGN KEY (personality_id) REFERENCES [personality_traits] (personality_id),
 )
 
+CREATE TABLE location (
+	location_id int IDENTITY(1,1) NOT NULL,
+
+	CONSTRAINT [PK_location] PRIMARY KEY (location_id), 
+)
+
+
 CREATE TABLE play_dates (
 	play_date_id int IDENTITY(1,1) NOT NULL,
 	host_user_id int NOT NULL, 
     host_pet_id int NOT NULL, 
 	guest_pet_id int NOT NULL, 
-	date_time datetime NOT NULL
+	date_time datetime NOT NULL,
+	location_id int --NOT NULL
 
 	CONSTRAINT [PK_play_dates] PRIMARY KEY (play_date_id), 
 	CONSTRAINT [FK_play_dates_users] FOREIGN KEY (host_user_id) REFERENCES [users] (user_id), 
 	CONSTRAINT [FK_play_dates_pet_host] FOREIGN KEY (host_pet_id) REFERENCES [pet_profile] (pet_id),
-	CONSTRAINT [FK_play_dates_pet_guest] FOREIGN KEY (guest_pet_id) REFERENCES [pet_profile] (pet_id)
+	CONSTRAINT [FK_play_dates_pet_guest] FOREIGN KEY (guest_pet_id) REFERENCES [pet_profile] (pet_id),
+	CONSTRAINT [FK_play_dates_location_id] FOREIGN KEY (location_id) REFERENCES [location] (location_id)
+
 )
+
