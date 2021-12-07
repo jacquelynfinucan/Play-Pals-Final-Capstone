@@ -5,10 +5,9 @@
       <div class="alert alert-danger" role="alert" v-if="registrationErrors">
         {{ registrationErrorMsg }}
       </div>
-      
+
       <div class="input-controls">
-        
-        <div class="username-control"> 
+        <div class="username-control">
           <label for="username" class="sr-only">Username</label>
           <input
             type="text"
@@ -20,7 +19,7 @@
             autofocus
           />
         </div>
-        
+
         <div class="password-control">
           <label for="password" class="sr-only">Password</label>
           <input
@@ -40,48 +39,57 @@
             required
           />
         </div>
-        
-        <router-link class="nav-link" :to="{ name: 'login' }">Have an account?</router-link>
-        <button id="submit" class="btn btn-lg btn-primary btn-block" type="submit">
+
+        <router-link class="nav-link" :to="{ name: 'login' }"
+          >Have an account?</router-link
+        >
+        <button
+          id="submit"
+          class="btn btn-lg btn-primary btn-block"
+          type="submit"
+        >
           Create Account
         </button>
-
       </div>
-      
     </form>
   </div>
 </template>
 
 <script>
-import authService from '../services/AuthService';
+import authService from "../services/AuthService";
 
 export default {
-  name: 'register',
+  name: "register",
   data() {
     return {
       user: {
-        username: '',
-        password: '',
-        confirmPassword: '',
-        role: 'user',
+        username: "",
+        password: "",
+        confirmPassword: "",
+        role: "user",
+      },
+      newUserProfile: {
+        firstName: "",
+        lastName: "",
+        zipCode: "",
       },
       registrationErrors: false,
-      registrationErrorMsg: 'There were problems registering this user.',
+      registrationErrorMsg: "There were problems registering this user.",
     };
   },
   methods: {
     register() {
       if (this.user.password != this.user.confirmPassword) {
         this.registrationErrors = true;
-        this.registrationErrorMsg = 'Password & Confirm Password do not match.';
+        this.registrationErrorMsg = "Password & Confirm Password do not match.";
       } else {
         authService
           .register(this.user)
           .then((response) => {
             if (response.status == 201) {
               this.$router.push({
-                path: '/login',
-                query: { registration: 'success' },
+                path: "/login",
+                query: { registration: "success" },
               });
             }
           })
@@ -89,14 +97,14 @@ export default {
             const response = error.response;
             this.registrationErrors = true;
             if (response.status === 400) {
-              this.registrationErrorMsg = 'Bad Request: Validation Errors';
+              this.registrationErrorMsg = "Bad Request: Validation Errors";
             }
           });
       }
     },
     clearErrors() {
       this.registrationErrors = false;
-      this.registrationErrorMsg = 'There were problems registering this user.';
+      this.registrationErrorMsg = "There were problems registering this user.";
     },
   },
 };
