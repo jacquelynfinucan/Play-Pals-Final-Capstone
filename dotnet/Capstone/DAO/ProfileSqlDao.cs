@@ -19,14 +19,14 @@ namespace Capstone.DAO
 
         //Still need to add error handling
 
-        private Profile GetProfileFromReader(SqlDataReader reader) // No Email
+        private Profile GetProfileFromReader(SqlDataReader reader)
         {
             Profile profile = new Profile()
             {
                 UserId = Convert.ToInt32(reader["user_id"]),
                 FirstName = Convert.ToString(reader["first_name"]),
                 LastName = Convert.ToString(reader["last_name"]),
-                //Email = Convert.ToString(reader[/* not in database yet */]),
+                Email = Convert.ToString(reader["email"]),
                 Zip = Convert.ToInt32(reader["zip_code"])
             };
             return profile;
@@ -67,18 +67,18 @@ namespace Capstone.DAO
             return profiles;
         }
 
-        public Profile AddProfile(Profile profile) // No Email
+        public Profile AddProfile(Profile profile)
         {
             int newProfileId = 0;
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("INSERT INTO dbo.user_profile (first_name, last_name, zip_code) " +
+                SqlCommand cmd = new SqlCommand("INSERT INTO dbo.user_profile (first_name, last_name, email, zip_code) " +
                                                 "OUTPUT INSERTED.user_id " +
-                                                "VALUES (@firstName, @lastName, @zipCode)", conn);
+                                                "VALUES (@firstName, @lastName, @email, @zipCode)", conn);
                 cmd.Parameters.AddWithValue("@firstName", returnProfile.FirstName);
                 cmd.Parameters.AddWithValue("@lastName", returnProfile.LastName);
-                //cmd.Parameters.AddWithValue("@email", returnProfile.Email);
+                cmd.Parameters.AddWithValue("@email", returnProfile.Email);
                 cmd.Parameters.AddWithValue("@zipCode", returnProfile.Zip);
 
                 newProfileId = Convert.ToInt32(cmd.ExecuteScalar());
@@ -86,17 +86,17 @@ namespace Capstone.DAO
             return GetProfile(newProfileId);
         }
 
-        public Profile UpdateProfile(Profile profile) // No Email
+        public Profile UpdateProfile(Profile profile)
         {
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("UPDATE dbo.user_profile SET first_name = @firstName, last_name = @lastName, zip_code = @zipCode " +
+                SqlCommand cmd = new SqlCommand("UPDATE dbo.user_profile SET first_name = @firstName, last_name = @lastName, email = @email, zip_code = @zipCode " +
                                                 "WHERE user_id = @userID", conn);
                 cmd.Parameters.AddWithValue("@userID", profile.UserId);
                 cmd.Parameters.AddWithValue("@firstName", profile.FirstName);
                 cmd.Parameters.AddWithValue("@lastName",  profile.LastName);
-                //cmd.Parameters.AddWithValue("@email", profile.Email);
+                cmd.Parameters.AddWithValue("@email", profile.Email);
                 cmd.Parameters.AddWithValue("@zipCode", profile.Zip);
 
                 cmd.ExecuteNonQuery();
