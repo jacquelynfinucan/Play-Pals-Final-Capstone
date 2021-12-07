@@ -31,6 +31,7 @@ export default {
         playdate: function () {
         
         }
+    }
     ,
 
 
