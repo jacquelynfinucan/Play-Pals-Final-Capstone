@@ -20,7 +20,14 @@ export default new Vuex.Store({
   state: {
     token: currentToken || '',
     user: currentUser || {},
-    pets: []
+    pets: [],
+    profile: {       
+      userId: "",
+      firstName: "",
+      lastName: "",
+      zip: "",
+      email: "",
+    }
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
@@ -38,10 +45,21 @@ export default new Vuex.Store({
       localStorage.removeItem('user');
       state.token = '';
       state.user = {};
+      state.pets = [];
+      state.profile = {       
+        userId: "",
+        firstName: "",
+        lastName: "",
+        zip: "",
+        email: "",
+      };
       axios.defaults.headers.common = {};
     },
     SET_PETS(state, pets) {
       state.pets = pets;
+    },
+    SET_PROFILE(state, profile) {
+      state.profile = profile;
     }
   }
 })
