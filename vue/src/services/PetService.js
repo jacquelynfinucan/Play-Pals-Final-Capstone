@@ -10,6 +10,9 @@ export default {
       return http.get(`/profiles/${userID}/pets`);
   },
   getPetByID(petID){
-      return http.get(`/pet/${petID}`);
+      return http.get(`/pets/${petID}`);
+  }, 
+  addPetForUser(userID, pet){
+    return http.post(`/profiles/${userID}/pets`, pet)
   }
 }

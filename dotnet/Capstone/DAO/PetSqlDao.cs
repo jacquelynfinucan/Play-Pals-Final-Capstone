@@ -18,7 +18,7 @@ namespace Capstone.DAO
 
         public int AddPet(int userId, petModel pet)
         {
-            int newId = 0;
+            int newPetId = 0;
 
             try
             {
@@ -36,15 +36,15 @@ namespace Capstone.DAO
                     cmd.Parameters.AddWithValue("@description", pet.Description);
                     cmd.Parameters.AddWithValue("@animalType", pet.AnimalType);
 
-                    newId = (int)cmd.ExecuteScalar();
-                    if (newId == 0)
+                    newPetId = (int)cmd.ExecuteScalar();
+                    if (newPetId == 0)
                     {
                         throw new Exception();
                     }
                     cmd = new SqlCommand(@"insert into users_pets(user_id, pet_id)
                                          values (@userId, @newId)", conn);
                     cmd.Parameters.AddWithValue("@userId", userId);
-                    cmd.Parameters.AddWithValue("@newId", newId);
+                    cmd.Parameters.AddWithValue("@newId", newPetId);
 
                     int rowsAffected = cmd.ExecuteNonQuery();
                     if(rowsAffected != 1)
@@ -57,7 +57,7 @@ namespace Capstone.DAO
             {
                 Console.WriteLine(ex.Message);
             }
-            return newId;
+            return newPetId;
         }
 
         public petModel GetPetByPetId(int petId)
