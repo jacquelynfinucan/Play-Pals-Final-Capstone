@@ -1,30 +1,37 @@
 <template>
 
 <div class="main">
-  <h1>{{this.user.firstName}}</h1>
-  <h1>{{this.user.lastName}}</h1>
-  <h2>Zip: {{this.user.zip}}</h2>
-  <h2>Email: {{this.user.email}}</h2>
-  <h3>My Pets</h3>
-  <h3>My Playdates</h3>
+  <h1>User Profile</h1>
+  <h2>First Name: {{this.user.firstName}}</h2>
+  <h2>Last Name: {{this.user.lastName}}</h2>
+  <h2>Zipcode: {{this.user.zip}}</h2>
+  <h2>Email Address: {{this.user.email}}</h2>
   <br/>
- 
+
+  <h1>My Playdates</h1>
+    <play-date-card v-for="playdate in this.playdates" v-bind:key="playdate.PlayDateID" v-bind:playdate="playdate"/>
+
 </div>
 
 </template>
 
 <script>
-import ProfileService from '../services/ProfileService';
-//import UserService from "../services/UserService";
+ import UserService from "../services/UserService";
+ import DateService from "../services/DateService";
+ import PlayDateCard from './PlayDateCard.vue';
 
 
 
 export default {
+  components: { PlayDateCard },
     name:'UserProfile',
     data() {
         return {
             user:{
               
+            },
+            playdates:{
+
             }
         }
     },
@@ -42,12 +49,15 @@ export default {
          this.user = response.data;
      }
  })
+ DateService.GetPlayDatesForUser(this.$store.state.user.userId).then((response)=>{
+     this.playdates = response.data;
+ })
      }
 }
 </script>
 
 <style>
 h1, h2, h3{
-    text-align: center;
+    text-align: left;
 }
 </style>

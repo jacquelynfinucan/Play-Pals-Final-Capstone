@@ -88,13 +88,14 @@ namespace Capstone.DAO
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand("INSERT INTO dbo.user_profile (first_name, last_name, email, zip_code) " +
+                    SqlCommand cmd = new SqlCommand("INSERT INTO dbo.user_profile (first_name, last_name, email, zip_code, user_id) " +
                                                     "OUTPUT INSERTED.user_id " +
-                                                    "VALUES (@firstName, @lastName, @email, @zipCode)", conn);
-                    cmd.Parameters.AddWithValue("@firstName", returnProfile.FirstName);
-                    cmd.Parameters.AddWithValue("@lastName", returnProfile.LastName);
-                    cmd.Parameters.AddWithValue("@email", returnProfile.Email);
-                    cmd.Parameters.AddWithValue("@zipCode", returnProfile.Zip);
+                                                    "VALUES (@firstName, @lastName, @email, @zipCode, @userId)", conn);
+                    cmd.Parameters.AddWithValue("@firstName", profile.FirstName);
+                    cmd.Parameters.AddWithValue("@lastName",profile.LastName);
+                    cmd.Parameters.AddWithValue("@email", profile.Email);
+                    cmd.Parameters.AddWithValue("@zipCode", profile.Zip);
+                    cmd.Parameters.AddWithValue("@userId", profile.UserId);
 
                     newProfileId = Convert.ToInt32(cmd.ExecuteScalar());
                 }

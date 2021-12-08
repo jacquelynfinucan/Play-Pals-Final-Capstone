@@ -1,6 +1,6 @@
 <template>
   <div class="pet-list">
-      <h1>My Pets</h1>
+      <h1 class="pets-title">My Pets</h1>
       <div class="pets">
             
             <div class="status-message error" v-show="errorMsg !== ''">{{errorMsg}}</div>
@@ -8,6 +8,7 @@
             <div class="loading" v-if="isLoading">
                 <img src="@/assets/loading-dog.gif" alt="loading gif"/>
             </div>
+
             
             <div class="pet" v-for="pet in this.$store.state.pets" v-bind:key="pet.pet_id" v-else>
                 <pet-card v-bind:pet="pet" />
@@ -68,9 +69,16 @@ export default {
     padding: 10px;
 
     margin-bottom: 10px;
+
+    background-color: lightgrey;
 }
 
 .status-message.error {
     color: red;
 }
+
+.pets-title {
+    text-align: left;
+}
+
 </style>
