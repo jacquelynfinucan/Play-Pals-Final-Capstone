@@ -68,8 +68,7 @@ export default {
         firstName: "",
         lastName: "",
         zip: "",
-        email: "",
-         zipCode: ""
+        email: ""
       },
       errorMsg: ''
     };
