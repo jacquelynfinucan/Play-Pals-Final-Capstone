@@ -8,6 +8,7 @@ import store from '../store/index'
 import Home from '@/views/Home.vue'
 import NotFound from '@/views/NotFound.vue'
 import RegisterProfile from '@/views/RegisterProfile.vue'
+import RegisterPet from '@/views/RegisterPet.vue'
 
 Vue.use(Router)
 
@@ -77,6 +78,14 @@ const router = new Router({
       path:"/RegisterProfile",
       name: "register-profile",
       component: RegisterProfile,
+      meta: {
+        requiresAuth: true
+      }
+    }, 
+    {
+      path:"/RegisterPet",
+      name: "register-pet",
+      component: RegisterPet,
       meta: {
         requiresAuth: true
       }
