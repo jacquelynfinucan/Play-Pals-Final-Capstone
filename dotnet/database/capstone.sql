@@ -114,3 +114,17 @@ CREATE TABLE play_dates (
 
 )
 
+--individual messages
+CREATE TABLE play_date_messages (
+	message_id int IDENTITY(1,1) NOT NULL,
+	play_date_id int NOT NULL,
+	from_user_id int NOT NULL,
+	from_pet_id int NOT NULL,
+	date_time datetime NOT NULL,
+	message_text varchar(200) NOT NULL
+
+	CONSTRAINT [PK_play_date_messages] PRIMARY KEY (message_id),
+	CONSTRAINT [FK_play_date_messages_play_dates] FOREIGN KEY (play_date_id) REFERENCES [play_dates] (play_date_id),
+	CONSTRAINT [FK_play_date_messages_users] FOREIGN KEY (from_user_id) REFERENCES [users] (user_id),
+	CONSTRAINT [FK_play_date_messages_pet_profile] FOREIGN KEY (from_pet_id) REFERENCES [pet_profile] (pet_id)
+)
