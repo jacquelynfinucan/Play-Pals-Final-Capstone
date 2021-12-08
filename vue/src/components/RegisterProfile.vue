@@ -1,107 +1,142 @@
 <template>
   <div>
-    <h1>Welcome. Please enter your profile information.</h1>
+    <h1 v-if="!this.isEdit">Welcome. Please enter your profile information.</h1>
+    <h1 v-if="this.isEdit">Update your profile information.</h1>
 
-    <div>
-      <div class="status-message error" v-show="errorMsg !== ''">{{errorMsg}}</div>
+    <form v-on:submit.prevent="registerProfile">
+      <div class="status-message error" v-show="errorMsg !== ''">
+        {{ errorMsg }}
+      </div>
+      
+      <div>
+        <label for="fistName">First Name</label>
+        <input
+          type="text"
+          id="fistName"
+          class="form-control"
+          placeHolder="First Name"
+          v-model="profile.firstName"
+          required
+        />
+      </div>
 
-      <label for="newUser">First Name</label>
-      <input
-        type="text"
-        id="fistName"
-        class="form-control"
-        placeHolder="First Name"
-        v-model="newUserProfile.firstName"
-        required
-      />
-    </div>
+      <div>
+        <label for="lastName">Last Name</label>
+        <input
+          type="text"
+          id="lastName"
+          class="form-control"
+          placeHolder="Last Name"
+          v-model="profile.lastName"
+          required
+        />
+      </div>
 
-    <div>
-      <label for="newUser">Last Name</label>
-      <input
-        type="text"
-        id="lastName"
-        class="form-control"
-        placeHolder="Last Name"
-        v-model="newUserProfile.lastName"
-        required
-      />
-    </div>
+      <div>
+        <label for="zipCode">ZIP Code</label>
+        <input
+          type="number"
+          id="zipCode"
+          class="form-control"
+          placeHolder="ZIP Code"
+          v-model.number="profile.zip"
+          required
+        />
+      </div>
 
-     <div>
-    <label for="newUser">Email Adress</label>
-      <input
-        type="text"
-        id="email"
-        class="form-control"
-        placeHolder="ZIP Code"
-        v-model.number="newUserProfile.zip"
-        required
-      />
-    </div>
+      <div>
+        <label for="emailAddress">Email Address</label>
+        <input
+          type="email"
+          id="emailAddress"
+          class="form-control"
+          placeHolder="Email Address"
+          pattern=".+@.+\.com"
+          v-model="profile.email"
+          required
+        />
+      </div>
 
-    <div>
-      <label for="newUser">Email Address</label>
-      <input
-        type="text"
-        id="emailAddress"
-        class="form-control"
-        placeHolder="ZIP Code"
-        v-model="newUserProfile.zipCode"
-        required
-      />
-    </div>
-
-    <button v-on:click="RegisterProfile">Submit</button>
+      <input type="submit" />
+    </form>
   </div>
 </template>
 
 <script>
-import ProfileService from "../services/ProfileService";
+import profileService from "../services/ProfileService";
 
 export default {
   name: "register-profile",
   data() {
     return {
-      newUserProfile: {
-        userId: this.$store.state.user.userId,
-        firstName: "",
-        lastName: "",
-        zip: "",
-        email: ""
-      },
-      errorMsg: ''
+      profile: {},
+      errorMsg: "",
+      isEdit: false,
     };
   },
   methods: {
-    RegisterProfile() {
-      ProfileService.AddProfile(this.newUserProfile)
-        .then((response) => {
-          if (response.status == 200) {
-            this.$router.push({ name: "profile" });
-          }
-        })
-        .catch((error) => {
-          if (error.response) {
-            this.errorMsg =
-              "Error creating profile. Response received was '" +
-              error.response.statusText +
-              "'.";
-          } else if (error.request) {
-            this.errorMsg =
-              "Error creating profile. Server could not be reached.";
-          } else {
-            this.errorMsg =
-              "Error rcreating profile. Request could not be created.";
-          }
-        });
+    registerProfile() {
+      if (this.isEdit == false) {
+        profileService
+          .AddProfile(this.profile)
+          .then((response) => {
+            if (response.status == 200) {
+              this.$router.push({ name: "profile" });
+            }
+          })
+          .catch((error) => {
+            if (error.response) {
+              this.errorMsg =
+                "Error creating profile. Response received was '" +
+                error.response.statusText +
+                "'.";
+            } else if (error.request) {
+              this.errorMsg =
+                "Error creating profile. Server could not be reached.";
+            } else {
+              this.errorMsg =
+                "Error creating profile. Request could not be created.";
+            }
+          });
+      } else {
+        profileService
+          .UpdateProfile(this.profile)
+          .then((response) => {
+            if (response.status == 200) {
+              this.$router.push({ name: "profile" });
+            }
+          })
+          .catch((error) => {
+            if (error.response) {
+              this.errorMsg =
+                "Error creating profile. Response received was '" +
+                error.response.statusText +
+                "'.";
+            } else if (error.request) {
+              this.errorMsg =
+                "Error creating profile. Server could not be reached.";
+            } else {
+              this.errorMsg =
+                "Error creating profile. Request could not be created.";
+            }
+          });
+      }
     },
+  },
+  created() {
+    this.profile = this.$store.state.profile;
+
+    if (this.profile.userId == "") {
+      this.profile.userId = this.$store.state.user.userId;
+    } else {
+      this.isEdit = true;
+    }
   },
 };
 </script>
 
 <style scoped>
 .status-message.error {
-    color: red;
+  color: red;
 }
 </style>
