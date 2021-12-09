@@ -25,7 +25,7 @@
           id="animalType"
           v-model="pet.animalType"
           required> <!--class="form-control"  -->
-        <option value="dog">Dog</option>
+        <option value="dog" selected>Dog</option>
         <option value="cat">Cat</option>
         <option value="fish">Fish</option>
         <option value="other">Other</option>
@@ -101,6 +101,7 @@
           v-model="pet.description"
           required> 
       </div>
+      <!-- Come back & add pet personality traits as checkboxes -->
 
       <input type="submit">
     </form>
