@@ -19,7 +19,7 @@ namespace Capstone.Controllers
         }
 
 
-        [HttpPost("/profiles/{userID}/pets")]
+        [HttpPost("profiles/{userID}/pets")]
         public IActionResult AddAPetToUser(int userID, petModel pet)
         {
             int newPetID = petDao.AddPet(userID, pet);

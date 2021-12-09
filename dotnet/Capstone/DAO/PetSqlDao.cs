@@ -227,9 +227,10 @@ namespace Capstone.DAO
             pet.Size = Convert.ToInt32(reader["size"]);
             pet.Breed = Convert.ToString(reader["breed"]);
             pet.Description = Convert.ToString(reader["description"]);
-            pet.IsMale = Convert.ToBoolean(reader["is_Male"]);
-            pet.IsSpayed = Convert.ToBoolean(reader["is_Spayed_neutered"]);
+            pet.IsMale = Convert.ToBoolean(reader["is_male"]);
+            pet.IsSpayed = Convert.ToBoolean(reader["is_spayed_neutered"]);
             pet.PetId = Convert.ToInt32(reader["pet_id"]);
+            pet.AnimalType = Convert.ToString(reader["animal_type"]);
 
             return pet;
         }

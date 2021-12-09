@@ -2,10 +2,11 @@
   <div class="pet-card">
     <div class="pet-header">
       <img class="pet-img" src="https://randomuser.me/api/portraits/lego/1.jpg" alt="pet picture" />
-      <p class="pet-name">{{ pet.name }}</p>
+      <p class="pet-name">{{ pet.petName }}</p>
+      <!--eventually come back & make name, breed, and description ToUpper -->
     </div>
     <div class="pet-body">
-      <p>Animal Type: {{ pet.animal_type }}</p>
+      <p>Animal Type: {{ pet.animalType }}</p>
       <p>Breed: {{ pet.breed }}</p>
       <p>Age: {{ pet.age }}</p>
       
@@ -13,11 +14,11 @@
       <p v-if="this.pet.size == 2">Size: Medium</p>
       <p v-if="this.pet.size == 3">Size: Large</p>
       
-      <p v-if="this.pet.is_male">Gender: Male</p>
-      <p v-if="!this.pet.is_male">Gender: Female</p>
+      <p v-if="this.pet.isMale">Gender: Male</p>
+      <p v-if="!this.pet.isMale">Gender: Female</p>
       
-      <p v-if="this.pet.is_spayed_neutered">Spayed/Neutered: True</p>
-      <p v-if="!this.pet.is_spayed_neutered">Spayed/Neutered: False</p>
+      <p v-if="this.pet.isSpayed">Spayed/Neutered: True</p>
+      <p v-if="!this.pet.isSpayed">Spayed/Neutered: False</p>
 
       <p>Description: {{ pet.description }}</p>
     </div>  

@@ -3,7 +3,7 @@
     <h1 v-if="!this.isEdit">Welcome. Please enter your pet information.</h1>
     <h1 v-if="this.isEdit">Update your pet information.</h1>
 
-    <form v-on:submit="registerPet">
+    <form v-on:submit.prevent="registerPet">
       <div class="status-message error" v-show="errorMsg !== ''">
         {{ errorMsg }}
       </div>
@@ -27,7 +27,7 @@
           id="animalType"
           v-model="pet.animalType"
           required> <!--class="form-control"  -->
-        <option value="dog" selected>Dog</option>
+        <option value="dog">Dog</option>
         <option value="cat">Cat</option>
         <option value="fish">Fish</option>
         <option value="other">Other</option>
@@ -69,23 +69,23 @@
       </div>
 
       <div>
-        <label for="is_male">Gender: </label>
-        <select name="is_male" id="is_male" v-model="pet.is_male" required>
-          <option value="true">Male</option>
-          <option value="false">Female</option>
+        <label for="isMale">Gender: </label>
+        <select name="isMale" id="isMale" v-model="pet.isMale" required>
+          <option v-bind:value="true">Male</option>
+          <option v-bind:value="false">Female</option>
         </select>
       </div>
 
       <div>
-        <label for="is_spayed_neutered">Is spayed or neutered? </label>
+        <label for="isSpayed">Is spayed or neutered? </label>
         <select
-          name="is_spayed_neutered"
-          id="is_spayed_neutered"
-          v-model="pet.is_spayed_neutered"
+          name="isSpayed"
+          id="isSpayed"
+          v-model="pet.isSpayed"
           required
         >
-          <option value="true">Yes</option>
-          <option value="false">No</option>
+          <option v-bind:value="true">Yes</option>
+          <option v-bind:value="false">No</option>
         </select>
       </div>
 
@@ -99,13 +99,15 @@
           class="form-control"
           placeHolder="Description"
           v-model="pet.description"
-          required
         />
       </div>
       <!-- Come back & add pet personality traits as checkboxes -->
 
+      <!--<label for="submit">Finished adding pets? </label>-->
       <input type="submit" />
     </form>
+    <!--<button v-on:click="moreToAdd = true; registerPet;">Add another pet</button>-->
+
   </div>
 </template>
 
@@ -118,35 +120,38 @@ export default {
     return {
       pets: [],
       pet: {
-        pet_name: "",
-        animal_type: "",
+        petName: "",
+        animalType: "",
         breed: "",
         age: "",
         size: "",
-        is_male: null,
-        is_spayed_neutered: null,
+        isMale: false,
+        isSpayed: false,
         description: "",
       },
       errorMsg: "",
       isEdit: false,
+      moreToAdd: false
     };
   },
   methods: {
     registerPet() {
       if (this.isEdit == false) {
         petService
-          .addPetForUser(this.$store.state.profile.userId, this.pet)
+          .addPetForUser(this.$store.state.user.userId, this.pet)
           .then((response) => {
             if (response.status == 200) {
-           //   this.$router.push({ name: "profile" });
+              if(!this.moreToAdd){
+                this.$router.push({ name: "profile" });
+              }  
             }
           })
           .catch((error) => {
             if (error.response) {
               this.errorMsg =
-                "Error creating profile. Response received was '" +
+                "Error creating profile. Response received was " +
                 error.response.statusText +
-                "'.";
+                ".";
             } else if (error.request) {
               this.errorMsg =
                 "Error creating profile. Server could not be reached.";
@@ -180,18 +185,18 @@ export default {
         // }
       }
     },
-    resetForm(){
-      this.pet = {
-        pet_name: "",
-        animal_type: "",
-        breed: "",
-        age: "",
-        size: "",
-        is_male: null,
-        is_spayed_neutered: null,
-        description: "",
-      }
-    }
+    // resetForm(){
+    //   this.pet = {
+    //     pet_name: "",
+    //     animal_type: "",
+    //     breed: "",
+    //     age: "",
+    //     size: "",
+    //     is_male: null,
+    //     is_spayed_neutered: null,
+    //     description: "",
+    //   }
+    // }
   },
   created() {
     this.pets = this.$store.state.pets;

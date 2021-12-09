@@ -21,16 +21,16 @@ export default new Vuex.Store({
     token: currentToken || '',
     user: currentUser || {},
     pets: [],
-    pet: {
-      pet_name: "",
-      animal_type: "",
-      breed: "", 
-      age: "", 
-      size: "", 
-      is_male: null, 
-      is_spayed_neutered: null, 
-      description: ""
-    },
+    //pet: {
+      // petName: "",
+      // animalType: "",
+      // breed: "", 
+      // age: "", 
+      // size: "", 
+      // isMale: false,
+      // isSpayed: false,
+      // description: ""
+    //},
     profile: {       
       userId: "",
       firstName: "",
