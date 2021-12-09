@@ -83,7 +83,7 @@ const router = new Router({
       }
     },
     {
-      path: "/messages",
+      path: "/messages", //Messages view
       name: "messages",
       component: Messages,
       meta: {
@@ -91,7 +91,7 @@ const router = new Router({
       }
     },
     {
-      path: "/messages/id", //interpolate play date id when it lives somewhere
+      path: "/messages/:id", //Thread view
       name: "thread",
       component: Thread,
       meta: {

@@ -1,16 +1,18 @@
 <template>
   <div>
       <div class="message-header">
-        <h3>Message Sender</h3>
-        <p>post time</p>
+        <h3>{{message.fromUserId}}</h3>
+        <h4>({{message.fromPetId}})</h4>
+        <p>{{message.postDate}}</p>
       </div>
-      <p>Placeholder Message Text</p>
+      <p>{{message.text}}</p>
   </div>
 </template>
 
 <script>
 export default {
-    name: 'message'
+    name: 'message-card',
+    props: ['message']
 }
 </script>
 
