@@ -27,7 +27,7 @@ namespace Capstone.DAO
                     conn.Open();
                     SqlCommand cmd = new SqlCommand(@"insert into pet_profile(pet_name, breed, age, size, is_male, is_spayed_neutered, description, animal_type)
                                                     output inserted.pet_id values(@petName, @breed, @age, @size, @isMale, @isSpayedNeutered, @description, @animalType)", conn);
-                    cmd.Parameters.AddWithValue("@petName", pet.Name);
+                    cmd.Parameters.AddWithValue("@petName", pet.PetName);
                     cmd.Parameters.AddWithValue("@breed", pet.Breed);
                     cmd.Parameters.AddWithValue("@age", pet.Age);
                     cmd.Parameters.AddWithValue("@size", pet.Size);
@@ -161,7 +161,7 @@ namespace Capstone.DAO
                                                     is_spayed_neutered = @isSpayedNeutered,
                                                     description = @description
                                                     where pet_id = @petID", conn);
-                    cmd.Parameters.AddWithValue("@petName", pet.Name);
+                    cmd.Parameters.AddWithValue("@petName", pet.PetName);
                     cmd.Parameters.AddWithValue("@breed", pet.Breed);
                     cmd.Parameters.AddWithValue("@age", pet.Age);
                     cmd.Parameters.AddWithValue("@size", pet.Size);
@@ -223,7 +223,7 @@ namespace Capstone.DAO
         {
             petModel pet = new petModel();
             pet.Age = Convert.ToInt32(reader["age"]);
-            pet.Name = Convert.ToString(reader["pet_name"]);
+            pet.PetName = Convert.ToString(reader["pet_name"]);
             pet.Size = Convert.ToInt32(reader["size"]);
             pet.Breed = Convert.ToString(reader["breed"]);
             pet.Description = Convert.ToString(reader["description"]);

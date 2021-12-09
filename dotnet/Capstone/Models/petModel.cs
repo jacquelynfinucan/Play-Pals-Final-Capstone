@@ -9,7 +9,7 @@ namespace Capstone.Models
     {
         //Data Validation
 
-        public string Name { get; set; }
+        public string PetName { get; set; }
         public int Age { get; set; }
         public string AnimalType { get; set; }
         public bool IsMale { get; set; }
