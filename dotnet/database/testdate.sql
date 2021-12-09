@@ -57,7 +57,7 @@ VALUES (1, 1, 2, GETDATE()),											--play_date_id = 1
 	(8, 8, 3, GETDATE());												--play_date_id = 8
 
 --populate test messages
-INSERT INTO play_date_messages (play_date_id, from_user_id, from_pet_id, date_time, message_text)
+INSERT INTO play_date_messages (play_date_id, from_user_id, from_pet_id, post_date, message_text)
 VALUES (1, 1, 1, GETDATE(), 'This is a message from user!'),
 	(1, 2, 2, GETDATE(), 'Thanks for the play date!'),
 	(2, 2, 2, GETDATE(), 'This is a message from admin!'),

@@ -115,7 +115,7 @@ CREATE TABLE play_date_messages (
 	play_date_id int NOT NULL,
 	from_user_id int NOT NULL,
 	from_pet_id int NOT NULL,
-	date_time datetime NOT NULL,
+	post_date datetime NOT NULL,
 	message_text varchar(200) NOT NULL
 
 	CONSTRAINT [PK_play_date_messages] PRIMARY KEY (message_id),
