@@ -10,8 +10,17 @@
                 <input type="text" id="userFilter" placeHolder="User"/>
                 <input type="text" id="petFilter" placeHolder="Pet"/>
             </div>
+            <br/>
             <div class="thread" ><!-- v-for each playdate for user -->
-                <router-link class="nav-link" :to="{ name: 'thread' }">Placeholder PlayDate Thread Title</router-link> <!-- fill with specific playdate info late-->
+                <router-link class="nav-link" :to="{ name: 'thread' }">Placeholder PlayDate Thread Title 1</router-link> <!-- fill with specific playdate info later-->
+                <br/>
+                <router-link class="nav-link" :to="{ name: 'thread' }">Placeholder PlayDate Thread Title 2</router-link> <!-- added extra placeholder thread links to show what page would look like -->
+                <br/>
+                <router-link class="nav-link" :to="{ name: 'thread' }">Placeholder PlayDate Thread Title 3</router-link>
+                <br/>
+                <router-link class="nav-link" :to="{ name: 'thread' }">Placeholder PlayDate Thread Title 4</router-link>
+                <br/>
+                <router-link class="nav-link" :to="{ name: 'thread' }">Placeholder PlayDate Thread Title 5</router-link>
             </div>
         </div>
   </div>

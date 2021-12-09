@@ -4,9 +4,13 @@
             <img src="@/assets/loading-dog.gif" alt="loading gif"/>
       </div>
       <div v-else>
+            <h2>Placeholder Thread Title</h2>
             <router-link class="nav-link" :to="{ name: 'messages' }">Return to Message Threads</router-link>
-            <h3>Placeholder Thread Title</h3>
             <div> <!-- v-for each message in messages -->
+                <message-card/> <!-- extra message cards for to visualize what page would look like -->
+                <message-card/>
+                <message-card/>
+                <message-card/>
                 <message-card/>
             </div> 
       </div>
@@ -34,5 +38,8 @@ export default {
 </script>
 
 <style>
-
+.message{
+    margin: 10px;
+    background-color: gray;
+}
 </style>

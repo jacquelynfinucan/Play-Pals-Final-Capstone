@@ -1,7 +1,6 @@
 <template>
   <div class="profile">
     <user-profile/>
-    <router-link class="nav-link" :to="{ name: 'messages' }">Messages</router-link>
     <pet-list />
   </div>
 </template>
