@@ -30,6 +30,7 @@ export default new Vuex.Store({
       // isMale: false,
       // isSpayed: false,
       // description: ""
+      //personalityTraits: []
     //},
     profile: {       
       userId: "",

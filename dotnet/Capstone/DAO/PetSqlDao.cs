@@ -51,6 +51,23 @@ namespace Capstone.DAO
                     {
                         throw new Exception();
                     }
+
+                    if (pet.PersonalityTraits.Length >= 1)
+                    {
+                        foreach (int trait in pet.PersonalityTraits)
+                        {
+                            cmd = new SqlCommand(@"insert into pets_personality_traits(pet_id, personality_id)
+                                         values (@petId, @traitId)", conn);
+                            cmd.Parameters.AddWithValue("@petId", newPetId);
+                            cmd.Parameters.AddWithValue("@traitId", trait);
+
+                            rowsAffected = cmd.ExecuteNonQuery();
+                            if (rowsAffected != 1)
+                            {
+                                throw new Exception();
+                            }
+                        }
+                    }
                 }
             }
             catch (SqlException ex)

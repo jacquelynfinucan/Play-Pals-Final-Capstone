@@ -26,11 +26,11 @@
           name="animalType"
           id="animalType"
           v-model="pet.animalType"
-          required> <!--class="form-control"  -->
-        <option value="dog">Dog</option>
-        <option value="cat">Cat</option>
-        <option value="fish">Fish</option>
-        <option value="other">Other</option>
+          required> 
+        <option value="Dog">Dog</option>
+        <option value="Cat">Cat</option>
+        <option value="Fish">Fish</option>
+        <option value="Other">Other</option>
         </select>
       </div>
 
@@ -61,7 +61,6 @@
       <div>
         <label for="size">Size: </label>
         <select name="size" id="size" v-model.number="pet.size" required>
-          <!--class="form-control"  -->
           <option value="1">Small</option>
           <option value="2">Medium</option>
           <option value="3">Large</option>
@@ -90,7 +89,7 @@
       </div>
 
       <div>
-        <label for="description">Description: </label>
+        <label for="description">Description (optional): </label>
         <input
           type="textarea"
           rows="2"
@@ -103,10 +102,41 @@
       </div>
       <!-- Come back & add pet personality traits as checkboxes -->
 
-      <label for="submit">Finished adding pets? </label>
-      <input type="submit" />
+      <div>
+        <label for="personality_title">Personality Traits (check all that apply): </label>
 
-      <button v-on:click="moreToAdd=true">Add another pet</button>
+        <input type="checkbox" id="Energetic" name="pet.personalityTraits" value="1" v-model.number="pet.personalityTraits">
+        <label for="1">Energetic</label>
+
+        <input type="checkbox" id="Calm" name="pet.personalityTraits" value="2" v-model.number="pet.personalityTraits">
+        <label for="2">Calm</label>
+
+        <input type="checkbox" id="Shy" name="pet.personalityTraits" value="3" v-model.number="pet.personalityTraits">
+        <label for="3">Shy</label>
+
+        <input type="checkbox" id="Anxious" name="pet.personalityTraits" value="4" v-model.number="pet.personalityTraits">
+        <label for="4">Anxious</label>
+
+        <input type="checkbox" id="Aggressive" name="pet.personalityTraits" value="5" v-model.number="pet.personalityTraits">
+        <label for="5">Aggressive</label>
+
+        <input type="checkbox" id="Not_Good_With_Kids" name="pet.personalityTraits" value="6" v-model.number="pet.personalityTraits">
+        <label for="6">Not Good With Kids</label>
+
+        <input type="checkbox" id="Not_Good_With_Animals_Other_Than_Dogs" name="pet.personalityTraits" value="7" v-model.number="pet.personalityTraits">
+        <label for="7">Not Good With Animals Other Than Dogs</label>
+
+        <input type="checkbox" id="House_Trained" name="pet.personalityTraits" value="8" v-model.number="pet.personalityTraits">
+        <label for="8">House Trained</label>
+
+        <input type="checkbox" id="Command_Trained" name="pet.personalityTraits" value="9" v-model.number="pet.personalityTraits">
+        <label for="9">Command Trained</label>
+      </div>
+
+      <label for="submit">Finished adding pets? </label>
+      <input type="submit" /><br>
+
+      <button v-on:click="moreToAdd=true">Save and add another pet</button>
 
     </form>
 
@@ -127,9 +157,10 @@ export default {
         breed: "",
         age: "",
         size: "",
-        isMale: false,
-        isSpayed: false,
+        isMale: null,
+        isSpayed: null,
         description: "",
+        personalityTraits: []
       },
       errorMsg: "",
       isEdit: false,
@@ -156,15 +187,15 @@ export default {
           .catch((error) => {
             if (error.response) {
               this.errorMsg =
-                "Error creating profile. Response received was " +
+                "Error creating pet. Response received was " +
                 error.response.statusText +
                 ".";
             } else if (error.request) {
               this.errorMsg =
-                "Error creating profile. Server could not be reached.";
+                "Error creating pet. Server could not be reached.";
             } else {
               this.errorMsg =
-                "Error creating profile. Request could not be created.";
+                "Error creating pet. Request could not be created.";
             }
           });
 
@@ -194,20 +225,20 @@ export default {
     },
     resetForm(){
        this.pet = {
-        pet_name: "",
-         animal_type: "",
-         breed: "",
-         age: "",
-         size: "",
-         is_male: null,
-         is_spayed_neutered: null,
-         description: "",
+        petName: "",
+        animalType: "",
+        breed: "",
+        age: "",
+        size: "",
+        isMale: null,
+        isSpayed: null,
+        description: "",
+        personalityTraits: []
        }
      }
   },
   created() {
     this.pets = this.$store.state.pets;
-    //this.resetForm();
     // if (this.pets != []) {
     //   this.isEdit = true;
     // }
