@@ -4,8 +4,8 @@
             <img src="@/assets/loading-dog.gif" alt="loading gif"/>
       </div>
       <div v-else>
-            <h2>Placeholder Thread Title</h2>
-            <router-link class="nav-link" :to="{ name: 'messages' }">Return to Message Threads</router-link>
+            <h2 class="title">Placeholder Thread Title</h2> <!-- bind when endpoint is implemented -->
+            <router-link class="return-link" :to="{ name: 'messages' }">Return to Message Threads</router-link>
             <div v-for="message in this.messages" v-bind:key="message.messageID">
                 <message-card v-bind:message="message"/>
             </div> 
@@ -39,5 +39,14 @@ export default {
 </script>
 
 <style>
-
+.title{
+    display: flex;
+    justify-content: center;
+    font-size: 35px;
+}
+.return-link{
+    display: flex;
+    justify-content: center;
+    padding-bottom: 20px;
+}
 </style>
