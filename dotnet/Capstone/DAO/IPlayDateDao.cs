@@ -14,7 +14,7 @@ namespace Capstone.DAO
         List<PlayDate> GetAllPlayDatesForHost(int hostUserId);
         List<FrontEndPlayDate> GetFrontEndPlayDatesForHost(int hostUserId);
 
-
+        List<PlayDate> GetPlayDateThreadsForUser(int userID);
         //if we want to get play dates by id to include if they're a guest, we'd have to add guest_user_id to PlayDate model & database
     }
 }

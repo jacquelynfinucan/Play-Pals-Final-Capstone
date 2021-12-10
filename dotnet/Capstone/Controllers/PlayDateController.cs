@@ -60,5 +60,13 @@ namespace Capstone.Controllers
             bool isSuccessful = playDateDao.DeleteAPlayDate(playDateId);
             return Ok();
         }
+
+        [HttpGet("/threads/{userID}")]
+        public IActionResult GetPlayDateThreadsForUser(int userID)
+        {
+            List<PlayDate> playDateThreadsForUser = playDateDao.GetPlayDateThreadsForUser(userID);
+
+            return Ok(playDateThreadsForUser);
+        }
     }
 }

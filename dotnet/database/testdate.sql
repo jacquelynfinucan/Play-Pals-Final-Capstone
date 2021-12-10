@@ -59,18 +59,18 @@ VALUES (1, 1, 2, GETDATE()),											--play_date_id = 1
 --populate test messages
 INSERT INTO play_date_messages (play_date_id, from_user_id, from_pet_id, post_date, message_text)
 VALUES (1, 1, 1, GETDATE(), 'This is a message from user!'),
-	(1, 2, 2, GETDATE(), 'Thanks for the play date!'),
+	(1, 2, 2, DATEADD(hour, 1, GETDATE()), 'Thanks for the play date!'),
 	(2, 2, 2, GETDATE(), 'This is a message from admin!'),
-	(2, 5, 5, GETDATE(), 'Thanks for the play date!'),
+	(2, 5, 5, DATEADD(hour, 1, GETDATE()), 'Thanks for the play date!'),
 	(3, 3, 3, GETDATE(), 'This is a message from mark!'),
-	(3, 3, 2, GETDATE(), 'Thanks for the play date!'),
+	(3, 2, 2, DATEADD(hour, 1, GETDATE()), 'Thanks for the play date!'),
 	(4, 4, 4, GETDATE(), 'This is a message from zach!'),
-	(4, 4, 1, GETDATE(), 'Thanks for the play date!'),
+	(4, 1, 1, DATEADD(hour, 1, GETDATE()), 'Thanks for the play date!'),
 	(5, 5, 5, GETDATE(), 'This is a message from ryan!'),
-	(5, 5, 7, GETDATE(), 'Thanks for the play date!'),
+	(5, 7, 7, DATEADD(hour, 1, GETDATE()), 'Thanks for the play date!'),
 	(6, 6, 6, GETDATE(), 'This is a message from jacki!'),
-	(6, 6, 4, GETDATE(), 'Thanks for the play date!'),
+	(6, 4, 4, DATEADD(hour, 1, GETDATE()), 'Thanks for the play date!'),
 	(7, 7, 7, GETDATE(), 'This is a message from kiran!'),
-	(7, 7, 6, GETDATE(), 'Thanks for the play date!'),
+	(7, 6, 6, DATEADD(hour, 1, GETDATE()), 'Thanks for the play date!'),
 	(8, 8, 8, GETDATE(), 'This is a message from david!'),
-	(8, 8, 3, GETDATE(), 'Thanks for the play date!');
+	(8, 3, 3, DATEADD(hour, 1, GETDATE()), 'Thanks for the play date!');
