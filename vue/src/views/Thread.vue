@@ -7,8 +7,7 @@
 <script>
 import ThreadCard from '../components/ThreadCard.vue'
 export default {
-    components: { ThreadCard },
-    name: "thread"
+    components: { ThreadCard }
 }
 </script>
 

@@ -111,11 +111,11 @@ namespace Capstone.DAO
                     conn.Open();
 
                     SqlCommand cmd = new SqlCommand(@"SELECT user_profile.first_name as hostName, GuestPet.pet_name as guestPet, HostPet.pet_name as hostPet,date_time
-FROM play_dates 
-JOIN pet_profile as GuestPet ON GuestPet.pet_id = play_dates.guest_pet_id
-JOIN pet_profile as HostPet ON HostPet.pet_id = play_dates.host_pet_id
-JOIN user_profile ON play_dates.host_user_id = user_profile.user_id
-WHERE host_user_id = @host_user_id", conn);
+                                                    FROM play_dates 
+                                                    JOIN pet_profile as GuestPet ON GuestPet.pet_id = play_dates.guest_pet_id
+                                                    JOIN pet_profile as HostPet ON HostPet.pet_id = play_dates.host_pet_id
+                                                    JOIN user_profile ON play_dates.host_user_id = user_profile.user_id
+                                                    WHERE host_user_id = @host_user_id", conn);
                     cmd.Parameters.AddWithValue("@host_User_Id", hostUserId);
                     SqlDataReader reader = cmd.ExecuteReader();
 

@@ -11,9 +11,9 @@
                 <input type="text" id="petFilter" placeHolder="Pet"/>
             </div>
             <br/>
-            <div class="thread" v-for="playDate in playDates" v-bind:key="playDate.playDateId">
-                <router-link v-bind:playDate="playDate" v-bind:to="{name: 'thread', params:{id: playDate.playDateId}}">
-                    {{playDate.id}} <!-- Title -->
+            <div class="thread" v-for="playDate in this.playDates" v-bind:key="playDate.play_date_id">
+                <router-link v-bind:playDate="playDate" v-bind:to="{route: 'messages/:id', params:{id: playDate.playDateID}}">
+                    PlaceHolder <!-- Title -->
                 </router-link>
                 <br/>
             </div>
@@ -22,42 +22,21 @@
 </template>
 
 <script>
-//import DateService from '../services/DateService';
+import DateService from '../services/DateService';
 export default {
     name: 'thread-list',
-    //get all playdates for user through import or methods when implemented
     data() {
         return {
             isLoading: true,
             errorMsg: '',
-            playDates: [ //hard coded temporarily
-                {
-                    id: 1,
-                    fromUserId: 4,
-                    fromPetId: 4,
-                    toUserId: 3,
-                    toPetId: 3,
-                    dateTime: "12/21/21"
-                },
-                {
-                    id: 2,
-                    fromUserId: 3,
-                    fromPetId: 3,
-                    toUserId: 4,
-                    toPetId: 4,
-                    dateTime: "12/25/21"
-                }
-            ],
-        };
+            playDates: [], 
+        }
     },
-    created() {
-        //get list of ALL playdates involving this user when implemented, this only gets for from user
-        /*
-        DateService.GetPlayDatesForUser(this.$store.state.user.userId).then((response) => {
+    created() { 
+        DateService.GetPlayDatesForUser(this.$store.state.profile.userId).then((response) => {
             this.playdates = response.data;
-        });
-        */
-        this.isLoading = false; 
+            this.isLoading = false;
+        }); 
     },
     methods: { /*
         CreateThreadTitle(playDate){//wip, use to make nice title line for thread
