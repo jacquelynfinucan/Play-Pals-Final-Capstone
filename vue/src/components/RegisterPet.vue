@@ -27,10 +27,10 @@
           id="animalType"
           v-model="pet.animalType"
           required> <!--class="form-control"  -->
-        <option value="dog">Dog</option>
-        <option value="cat">Cat</option>
-        <option value="fish">Fish</option>
-        <option value="other">Other</option>
+        <option value="Dog">Dog</option>
+        <option value="Cat">Cat</option>
+        <option value="Fish">Fish</option>
+        <option value="Other">Other</option>
         </select>
       </div>
 
@@ -199,15 +199,14 @@ export default {
          breed: "",
          age: "",
          size: "",
-         is_male: null,
-         is_spayed_neutered: null,
+         isMale: false,
+         isSpayed: false,
          description: "",
        }
      }
   },
   created() {
     this.pets = this.$store.state.pets;
-    //this.resetForm();
     // if (this.pets != []) {
     //   this.isEdit = true;
     // }
