@@ -103,10 +103,12 @@
       </div>
       <!-- Come back & add pet personality traits as checkboxes -->
 
-      <!--<label for="submit">Finished adding pets? </label>-->
+      <label for="submit">Finished adding pets? </label>
       <input type="submit" />
+
+      <button v-on:click="moreToAdd=true">Add another pet</button>
+
     </form>
-    <!--<button v-on:click="moreToAdd = true; registerPet;">Add another pet</button>-->
 
   </div>
 </template>
@@ -143,7 +145,12 @@ export default {
             if (response.status == 200) {
               if(!this.moreToAdd){
                 this.$router.push({ name: "profile" });
-              }  
+              } 
+              else{
+                this.$router.push({ name: "register-pet"})
+                this.moreToAdd = false;
+                this.resetForm();
+              } 
             }
           })
           .catch((error) => {
@@ -185,18 +192,18 @@ export default {
         // }
       }
     },
-    // resetForm(){
-    //   this.pet = {
-    //     pet_name: "",
-    //     animal_type: "",
-    //     breed: "",
-    //     age: "",
-    //     size: "",
-    //     is_male: null,
-    //     is_spayed_neutered: null,
-    //     description: "",
-    //   }
-    // }
+    resetForm(){
+       this.pet = {
+        pet_name: "",
+         animal_type: "",
+         breed: "",
+         age: "",
+         size: "",
+         is_male: null,
+         is_spayed_neutered: null,
+         description: "",
+       }
+     }
   },
   created() {
     this.pets = this.$store.state.pets;
