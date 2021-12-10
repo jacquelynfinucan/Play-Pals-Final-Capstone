@@ -236,5 +236,60 @@ WHERE host_user_id = @host_user_id", conn);
             p.DateOfPlayDate = (DateTime)reader["date_time"];
             return p;
         }
+
+        public List<PlayDate> GetPlayDateThreadsForUser(int userID)
+        {
+            List<PlayDate> playDateThreadsForUser = new List<PlayDate>();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand("SELECT play_date_id, host_user_id, HU.username AS host_username, host_pet_id, " + 
+                                                    "HP.pet_name AS host_pet_name, guest_pet_id, GU.username AS guest_username, " + 
+                                                    "GP.pet_name AS guest_pet_name, date_time FROM dbo.play_dates AS PD " +
+                                                    "INNER JOIN dbo.users AS HU ON HU.user_id = PD.host_user_id " +
+                                                    "INNER JOIN dbo.pet_profile AS HP ON HP.pet_id = PD.host_pet_id " +
+                                                    "INNER JOIN dbo.pet_profile AS GP ON GP.pet_id = PD.guest_pet_id " +
+                                                    "INNER JOIN dbo.users_pets AS GUP ON GUP.pet_id = GP.pet_id " +
+                                                    "INNER JOIN dbo.users AS GU ON GU.user_id = GUP.user_id " +
+                                                    "WHERE PD.host_user_id = @userID OR GU.user_id = @userID;", conn);
+                    cmd.Parameters.AddWithValue("@userID", userID);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        PlayDate playDate = GetPlayDateThreadsFromReader(reader);
+                        playDateThreadsForUser.Add(playDate);
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+
+            return playDateThreadsForUser;
+        }
+
+        private PlayDate GetPlayDateThreadsFromReader(SqlDataReader reader)
+        {
+            PlayDate playDate = new PlayDate();
+
+            playDate.PlayDateID = Convert.ToInt32(reader["play_date_id"]);
+            playDate.HostUserID = Convert.ToInt32(reader["host_user_id"]);
+            playDate.HostUsername = Convert.ToString(reader["host_username"]);
+            playDate.HostPetID = Convert.ToInt32(reader["host_pet_id"]);
+            playDate.HostPetName = Convert.ToString(reader["host_pet_name"]);
+            playDate.GuestPetID = Convert.ToInt32(reader["guest_pet_id"]);
+            playDate.GuestUsername = Convert.ToString(reader["guest_username"]);
+            playDate.GuestPetName = Convert.ToString(reader["guest_pet_name"]);
+            playDate.DateOfPlayDate = Convert.ToDateTime(reader["date_time"]);
+
+            return playDate;
+        }
     }
 }
