@@ -8,6 +8,7 @@ import store from '../store/index'
 import Home from '@/views/Home.vue'
 import NotFound from '@/views/NotFound.vue'
 import RegisterProfile from '@/views/RegisterProfile.vue'
+import GoogleMap from '@/views/GoogleMapView.vue'
 
 Vue.use(Router)
 
@@ -24,6 +25,14 @@ const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
+    {
+      path: '/map',
+      name: 'map',
+      component: GoogleMap,
+      meta: {
+        requiresAuth: true
+      }
+    },
     {
       path: '/',
       name: 'home',
