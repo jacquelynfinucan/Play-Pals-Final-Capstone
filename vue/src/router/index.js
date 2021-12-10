@@ -9,6 +9,8 @@ import Home from '@/views/Home.vue'
 import NotFound from '@/views/NotFound.vue'
 import RegisterProfile from '@/views/RegisterProfile.vue'
 import GoogleMap from '@/views/GoogleMapView.vue'
+import Messages from '../views/Messages.vue'
+import Thread from '../views/Thread.vue'
 
 Vue.use(Router)
 
@@ -81,17 +83,30 @@ const router = new Router({
         requiresAuth: false
       }
     },
-
     {
-      path:"/RegisterProfile",
+      path:"/register-profile",
       name: "register-profile",
       component: RegisterProfile,
       meta: {
         requiresAuth: true
       }
+    },
+    {
+      path: "/messages", //Messages view
+      name: "messages",
+      component: Messages,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/messages/:id", //Thread view
+      name: "thread",
+      component: Thread,
+      meta: {
+        requiresAuth: true
+      }
     }
-
-    
   ]
 })
 

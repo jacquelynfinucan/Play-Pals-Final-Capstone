@@ -7,13 +7,14 @@ namespace Capstone.Models
 {
     public class PlayDate
     {
-        public int PlayDateID {get;set;}
+        public int PlayDateID { get;set; }
         public int HostUserID { get; set; }
-
+        public string HostUsername { get; set; }
         public int HostPetID { get; set; }
-
+        public string HostPetName { get; set; }
         public int GuestPetID { get; set; } = -1;
-
+        public string GuestUsername { get; set; }
+        public string GuestPetName { get; set; }
         //model to be created
         public dynamic Location { get; set; }
 
