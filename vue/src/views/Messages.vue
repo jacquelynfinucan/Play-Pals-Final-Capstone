@@ -7,8 +7,7 @@
 <script>
 import ThreadList from '../components/ThreadList.vue'
 export default {
-    components: { ThreadList },
-    name: "messages"
+    components: { ThreadList }
 }
 </script>
 
