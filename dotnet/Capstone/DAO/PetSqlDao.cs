@@ -52,7 +52,7 @@ namespace Capstone.DAO
                         throw new Exception();
                     }
 
-                    if (pet.PersonalityTraits.Length >= 1)
+                    if (pet.PersonalityTraits.Count >= 1)
                     {
                         foreach (int trait in pet.PersonalityTraits)
                         {
@@ -114,15 +114,32 @@ namespace Capstone.DAO
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand(@"select * from pet_profile join users_pets on users_pets.pet_id = pet_profile.pet_id
-                                                     where user_id = @userID", conn);
+                    SqlCommand cmd = new SqlCommand(@"select pet_profile.pet_id, pet_name, animal_type, breed, age, size, is_male, 
+                                                    is_spayed_neutered, description, user_id, personality_id
+                                                    from pet_profile JOIN users_pets on users_pets.pet_id = pet_profile.pet_id
+                                                    JOIN pets_personality_traits on pet_profile.pet_id = pets_personality_traits.pet_id
+                                                    where user_id = @userID", conn);
                     cmd.Parameters.AddWithValue("@userId", userID);
 
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        petModel pet = GetPetModelFromReader(reader);
-                        pets.Add(pet);
+                        int currentPetId = Convert.ToInt32(reader["pet_id"]);
+                        petModel pet = null;
+                        foreach (petModel animal in pets)
+                        {
+                            if(animal.PetId == currentPetId)
+                            {
+                                //don't add new pet to list, just update it's pet.personalitytraits to add new personality
+                                animal.PersonalityTraits.Add(Convert.ToInt32(reader["personality_id"]));
+                                pet = animal;
+                            }
+                        }
+                        if(pet == null)
+                        {
+                            pet = GetPetModelFromReader(reader);
+                            pets.Add(pet);
+                        }
                     }
                 }
             }
@@ -248,6 +265,7 @@ namespace Capstone.DAO
             pet.IsSpayed = Convert.ToBoolean(reader["is_spayed_neutered"]);
             pet.PetId = Convert.ToInt32(reader["pet_id"]);
             pet.AnimalType = Convert.ToString(reader["animal_type"]);
+            pet.PersonalityTraits.Add(Convert.ToInt32(reader["personality_id"]));
 
             return pet;
         }
