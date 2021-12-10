@@ -9,7 +9,7 @@
       </div>
       
       <div>
-        <label for="fistName">First Name</label>
+        <label for="fistName">First Name: </label>
         <input
           type="text"
           id="fistName"
@@ -21,7 +21,7 @@
       </div>
 
       <div>
-        <label for="lastName">Last Name</label>
+        <label for="lastName">Last Name: </label>
         <input
           type="text"
           id="lastName"
@@ -33,7 +33,7 @@
       </div>
 
       <div>
-        <label for="zipCode">ZIP Code</label>
+        <label for="zipCode">ZIP Code: </label>
         <input
           type="number"
           id="zipCode"
@@ -45,7 +45,7 @@
       </div>
 
       <div>
-        <label for="emailAddress">Email Address</label>
+        <label for="emailAddress">Email Address: </label>
         <input
           type="email"
           id="emailAddress"
@@ -56,7 +56,6 @@
           required
         />
       </div>
-
       <input type="submit" />
     </form>
   </div>
@@ -81,7 +80,7 @@ export default {
           .AddProfile(this.profile)
           .then((response) => {
             if (response.status == 200) {
-              this.$router.push({ name: "profile" });
+              this.$router.push({ name: "register-pet" });
             }
           })
           .catch((error) => {
@@ -121,7 +120,7 @@ export default {
             }
           });
       }
-    },
+    }
   },
   created() {
     this.profile = this.$store.state.profile;

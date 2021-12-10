@@ -21,6 +21,17 @@ export default new Vuex.Store({
     token: currentToken || '',
     user: currentUser || {},
     pets: [],
+    //pet: {
+      // petName: "",
+      // animalType: "",
+      // breed: "", 
+      // age: "", 
+      // size: "", 
+      // isMale: false,
+      // isSpayed: false,
+      // description: ""
+      //personalityTraits: []
+    //},
     profile: {       
       userId: "",
       firstName: "",
@@ -57,6 +68,10 @@ export default new Vuex.Store({
     },
     SET_PETS(state, pets) {
       state.pets = pets;
+    },
+    ADD_PET(state, pet) {
+      state.pet = pet;
+      state.pets.push(pet);
     },
     SET_PROFILE(state, profile) {
       state.profile = profile;
