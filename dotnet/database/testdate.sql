@@ -9,9 +9,9 @@ VALUES (1,'test','testerson', 'test123@gmail.com', 41000),
 
 DELETE pet_profile
 INSERT INTO pet_profile (pet_name,animal_type,breed,age,size,is_male,is_spayed_neutered,description)
-VALUES ('doggo1','dog','husky',5,3,1,1,'doggo description 1'),
-('doggo2','dog','shiba inu',1,1,0,0,'doggo description 2'),
-('doggo3','dog','shiba inu',2,2,1,1,'doggo description 3')
+VALUES ('doggo1','Dog','husky',5,3,1,1,'doggo description 1'),
+('doggo2','Dog','shiba inu',1,1,0,0,'doggo description 2'),
+('doggo3','Dog','shiba inu',2,2,1,1,'doggo description 3')
 
 --SELECT * FROM pet_profile
 

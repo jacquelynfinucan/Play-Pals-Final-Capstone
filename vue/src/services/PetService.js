@@ -14,5 +14,8 @@ export default {
   }, 
   addPetForUser(userID, pet){
     return http.post(`/profiles/${userID}/pets`, pet)
+  }, 
+  updateAPet(petId, pet){
+    return http.put(`/pets/${petId}`, pet)
   }
 }
