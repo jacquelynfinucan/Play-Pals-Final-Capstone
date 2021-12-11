@@ -118,7 +118,7 @@ namespace Capstone.DAO
                                                     is_spayed_neutered, description, user_id, personality_id
                                                     from pet_profile JOIN users_pets on users_pets.pet_id = pet_profile.pet_id
                                                     JOIN pets_personality_traits on pet_profile.pet_id = pets_personality_traits.pet_id
-                                                    where user_id = @userID", conn);
+                                                    where user_id = @userId", conn);
                     cmd.Parameters.AddWithValue("@userId", userID);
 
                     SqlDataReader reader = cmd.ExecuteReader();

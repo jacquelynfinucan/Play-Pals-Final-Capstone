@@ -95,6 +95,7 @@ CREATE TABLE location (
 
 CREATE TABLE play_dates (
 	play_date_id int IDENTITY(1,1) NOT NULL,
+	title varchar(50) NOT NULL,
 	host_user_id int NOT NULL, 
     host_pet_id int NOT NULL, 
 	guest_pet_id int NOT NULL, 
