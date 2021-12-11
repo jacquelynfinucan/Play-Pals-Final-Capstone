@@ -249,33 +249,34 @@ namespace Capstone.DAO
 
         public bool DeleteUserPet(int petID)
         {
+            bool isSuccessful = false;
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand(@"delete from users_pets
-                                                    where pet_id = @petID
-                                                    delete from pet_profile
-                                                    where pet_id = @petID", conn);
+                    SqlCommand cmd = new SqlCommand(@"delete from pets_personality_traits where pet_id = @petID
+                                                    delete from users_pets where pet_id = @petID
+                                                    delete from pet_profile where pet_id = @petID", conn);
                     cmd.Parameters.AddWithValue("@petID", petID);
 
                     int rowsAffected = cmd.ExecuteNonQuery();
-                    if (rowsAffected != 2)
+                    if (rowsAffected >= 2)
                     {
-                        return false;
+                        isSuccessful = true;
                     }
                     else
                     {
-                        return false;
+                        isSuccessful = false;
                     }
                 }
             }
             catch (SqlException ex)
             {
                 Console.WriteLine(ex.Message);
-                return false;
+                isSuccessful = false;
             }
+            return isSuccessful;
         }
 
         private petModel GetPetModelFromReader(SqlDataReader reader)

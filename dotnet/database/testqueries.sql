@@ -18,4 +18,6 @@ select pet_profile.pet_id, pet_name, animal_type, breed, age, size, is_male,
                                                     left JOIN pets_personality_traits on pet_profile.pet_id = pets_personality_traits.pet_id
                                                     where user_id = 2
 
-													DELETE from pets_personality_traits WHERE pet_id = 3
+DELETE from pets_personality_traits WHERE pet_id = 3
+
+delete from pets_personality_traitswhere pet_id = 77delete from users_petswhere pet_id = 77delete from pet_profilewhere pet_id = 77

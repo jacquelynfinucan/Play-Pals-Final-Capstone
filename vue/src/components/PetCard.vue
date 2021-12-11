@@ -7,7 +7,8 @@
         alt="pet picture"
       />
       <p class="pet-name">{{ pet.petName }}</p>
-      <!--eventually come back & make name, breed, and description ToUpper -->
+      <p class="description">Description: {{ pet.description }}</p>
+      <!--eventually come back & make name, breed, and description ToUpper or sentence case -->
     </div>
     <div class="pet-body">
       <p>Animal Type: {{ pet.animalType }}</p>
@@ -24,8 +25,6 @@
       <p v-if="this.pet.isSpayed">Spayed/Neutered: True</p>
       <p v-if="!this.pet.isSpayed">Spayed/Neutered: False</p>
 
-      <p>Description: {{ pet.description }}</p>
-
       <p>Personality Traits:</p>
       <ul>
         <li v-if="this.pet.personalityTraits.includes(1)">Energetic</li>
@@ -39,23 +38,30 @@
         <li v-if="this.pet.personalityTraits.includes(9)">Command Trained</li>
       </ul>
     </div>
-    <button id="btnEditProfile" v-on:click="goToEditPet">Edit Pet</button>
+    <button id="btnEditPet" v-on:click="goToEditPet">Edit Pet</button>
+    <button id="btnDeletePet" v-on:click="deletePet">Delete Pet</button>
   </div>
 </template>
 
 <script>
+import petService from "@/services/PetService.js";
 export default {
   name: "pet-card",
   props: ["pet"],
-  data() {
-    return {
-      name: "",
-    };
-  },
   methods: {
     goToEditPet() {
       this.$store.commit("SET_CURRENT_PET", this.pet);
       this.$router.push({ name: "register-pet" });
+    },
+    deletePet() {
+      if (confirm("Are you sure?")) {
+        petService.deleteAPet(this.pet.petId).then((response) => {
+          if (response.status == 204) {
+            this.$store.commit("REMOVE_CURRENT_PET");
+            this.$router.go();//push({name: "profile"});
+          }
+        });
+      }
     },
   },
 };

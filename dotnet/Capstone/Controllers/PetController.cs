@@ -102,7 +102,7 @@ namespace Capstone.Controllers
 
             bool result = petDao.DeleteUserPet(petID);
 
-            if (!result)
+            if (result)
             {
                 return NoContent();
             }

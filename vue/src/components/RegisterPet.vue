@@ -293,6 +293,10 @@ export default {
       this.isEdit = true;
       this.pet.personalityTraits = [];
     }
+    else
+    {
+      this.resetForm();
+    }
   },
 };
 </script>

@@ -17,5 +17,8 @@ export default {
   }, 
   updateAPet(petId, pet){
     return http.put(`/pets/${petId}`, pet)
+  }, 
+  deleteAPet(petId){
+    return http.delete(`/pets/${petId}`)
   }
 }

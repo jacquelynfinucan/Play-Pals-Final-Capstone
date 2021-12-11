@@ -89,6 +89,19 @@ export default new Vuex.Store({
     },
     SET_PROFILE(state, profile) {
       state.profile = profile;
+    }, 
+    REMOVE_CURRENT_PET(state){
+      state.currentPet = {
+        petName: "",
+        animalType: "",
+        breed: "",
+        age: "",
+        size: "",
+        isMale: null,
+        isSpayed: null,
+        description: "",
+        personalityTraits: [],
+      };
     }
   }
 })
