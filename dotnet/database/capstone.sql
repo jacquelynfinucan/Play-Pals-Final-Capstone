@@ -24,6 +24,11 @@ CREATE TABLE users (
 	CONSTRAINT PK_user PRIMARY KEY (user_id)
 )
 
+--populate default data
+INSERT INTO users (username, password_hash, salt, user_role) VALUES ('user','Jg45HuwT7PZkfuKTz6IB90CtWY4=','LHxP4Xh7bN0=','user');
+INSERT INTO users (username, password_hash, salt, user_role) VALUES ('admin','YhyGVQ+Ch69n4JMBncM4lNF/i9s=', 'Ar/aB2thQTI=','admin');
+
+GO
 
 CREATE TABLE user_profile (
 	user_id int NOT NULL,
@@ -72,8 +77,8 @@ INSERT INTO personality_traits (personality_id, personality_name) VALUES (2, 'Ca
 INSERT INTO personality_traits (personality_id, personality_name) VALUES (3, 'Shy');
 INSERT INTO personality_traits (personality_id, personality_name) VALUES (4, 'Anxious');
 INSERT INTO personality_traits (personality_id, personality_name) VALUES (5, 'Aggressive');
-INSERT INTO personality_traits (personality_id, personality_name) VALUES (6, 'Not good with kids');
-INSERT INTO personality_traits (personality_id, personality_name) VALUES (7, 'Not good with animals other than dogs');
+INSERT INTO personality_traits (personality_id, personality_name) VALUES (6, 'Not Good With Kids');
+INSERT INTO personality_traits (personality_id, personality_name) VALUES (7, 'Not Good With Animals Other Than Dogs');
 INSERT INTO personality_traits (personality_id, personality_name) VALUES (8, 'House Trained');
 INSERT INTO personality_traits (personality_id, personality_name) VALUES (9, 'Command Trained');
 
@@ -109,17 +114,3 @@ CREATE TABLE play_dates (
 
 )
 
---individual messages
-CREATE TABLE play_date_messages (
-	message_id int IDENTITY(1,1) NOT NULL,
-	play_date_id int NOT NULL,
-	from_user_id int NOT NULL,
-	from_pet_id int NOT NULL,
-	post_date datetime NOT NULL,
-	message_text varchar(200) NOT NULL
-
-	CONSTRAINT [PK_play_date_messages] PRIMARY KEY (message_id),
-	CONSTRAINT [FK_play_date_messages_play_dates] FOREIGN KEY (play_date_id) REFERENCES [play_dates] (play_date_id),
-	CONSTRAINT [FK_play_date_messages_users] FOREIGN KEY (from_user_id) REFERENCES [users] (user_id),
-	CONSTRAINT [FK_play_date_messages_pet_profile] FOREIGN KEY (from_pet_id) REFERENCES [pet_profile] (pet_id)
-)
