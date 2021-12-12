@@ -24,12 +24,6 @@ CREATE TABLE users (
 	CONSTRAINT PK_user PRIMARY KEY (user_id)
 )
 
---populate default data
-INSERT INTO users (username, password_hash, salt, user_role) VALUES ('user','Jg45HuwT7PZkfuKTz6IB90CtWY4=','LHxP4Xh7bN0=','user');
-INSERT INTO users (username, password_hash, salt, user_role) VALUES ('admin','YhyGVQ+Ch69n4JMBncM4lNF/i9s=', 'Ar/aB2thQTI=','admin');
-
-GO
-
 CREATE TABLE user_profile (
 	user_id int NOT NULL,
 	first_name varchar(50) NOT NULL, 
@@ -100,6 +94,7 @@ CREATE TABLE location (
 
 CREATE TABLE play_dates (
 	play_date_id int IDENTITY(1,1) NOT NULL,
+	title varchar(50) NOT NULL,
 	host_user_id int NOT NULL, 
     host_pet_id int NOT NULL, 
 	guest_pet_id int NOT NULL, 
@@ -112,5 +107,19 @@ CREATE TABLE play_dates (
 	CONSTRAINT [FK_play_dates_pet_guest] FOREIGN KEY (guest_pet_id) REFERENCES [pet_profile] (pet_id),
 	CONSTRAINT [FK_play_dates_location_id] FOREIGN KEY (location_id) REFERENCES [location] (location_id)
 
+)
+
+CREATE TABLE play_date_messages (
+	message_id int IDENTITY(1,1) NOT NULL,
+	play_date_id int NOT NULL,
+	from_user_id int NOT NULL,
+	from_pet_id int NOT NULL,
+	post_date datetime NOT NULL,
+	message_text varchar(200) NOT NULL
+
+	CONSTRAINT [PK_play_date_messages] PRIMARY KEY (message_id),
+	CONSTRAINT [FK_play_date_messages_play_dates] FOREIGN KEY (play_date_id) REFERENCES [play_dates] (play_date_id),
+	CONSTRAINT [FK_play_date_messages_users] FOREIGN KEY (from_user_id) REFERENCES [users] (user_id),
+	CONSTRAINT [FK_play_date_messages_pet_profile] FOREIGN KEY (from_pet_id) REFERENCES [pet_profile] (pet_id)
 )
 
