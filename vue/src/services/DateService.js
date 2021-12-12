@@ -6,6 +6,10 @@ export default {
     },
 
     getPlayDateThreadsForUser(userID) {
-        return axios.get(`/threads/${userID}`)
+        return axios.get(`/threads/${userID}`);
+    },
+
+    getPlayDateThreadForPlayDateID(playDateID) {
+        return axios.get(`/playdates/${playDateID}/threads`);
     }
 }

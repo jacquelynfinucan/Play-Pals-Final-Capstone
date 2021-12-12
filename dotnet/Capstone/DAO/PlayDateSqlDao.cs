@@ -306,5 +306,47 @@ namespace Capstone.DAO
             
             return playDateThread;
         }
+
+        public PlayDateThread GetPlayDateThreadForPlayDateID(int playDateID)
+        {
+            PlayDateThread playDateThread = new PlayDateThread();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand("SELECT PD.play_date_id, title, host_user_id, HU.username AS host_username, host_pet_id, " +
+                        "HP.pet_name AS host_pet_name, guest_pet_id, GU.username AS guest_username, " +
+                        "GP.pet_name AS guest_pet_name, date_time, MAX(PDM.post_date) AS latest_message_date " +
+                        "FROM dbo.play_dates AS PD " +
+                        "INNER JOIN dbo.users AS HU ON HU.user_id = PD.host_user_id " +
+                        "INNER JOIN dbo.pet_profile AS HP ON HP.pet_id = PD.host_pet_id " +
+                        "INNER JOIN dbo.pet_profile AS GP ON GP.pet_id = PD.guest_pet_id " +
+                        "INNER JOIN dbo.users_pets AS GUP ON GUP.pet_id = GP.pet_id " +
+                        "INNER JOIN dbo.users AS GU ON GU.user_id = GUP.user_id " +
+                        "LEFT OUTER JOIN dbo.play_date_messages AS PDM on PDM.play_date_id = PD.play_date_id " +
+                        "WHERE PD.play_date_id = @playDateID " +
+                        "GROUP BY PD.play_date_id, title, host_user_id, HU.username, host_pet_id, " +
+                        "HP.pet_name, guest_pet_id, GU.username, GP.pet_name, date_time " +
+                        "ORDER BY latest_message_date DESC;", conn);
+                    cmd.Parameters.AddWithValue("@playDateID", playDateID);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        playDateThread = GetPlayDateThreadsFromReader(reader);
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+
+            return playDateThread;
+        }
     }
 }
