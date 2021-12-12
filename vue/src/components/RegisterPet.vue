@@ -98,12 +98,6 @@
         />
       </div>
 
-<<<<<<< HEAD
-      <label for="submit">Finished adding pets? </label>
-      <input type="submit" />
-
-      <button v-on:click="moreToAdd=true">Add another pet</button>
-=======
       <div>
         <label for="personality_title"
           >Personality Traits (check all that apply):
@@ -193,7 +187,6 @@
 
       <label for="submit" v-if="!this.isEdit">Finished adding pets? </label>
       <input type="submit" /><br />
->>>>>>> 7c1e9edea0451b8d149ed98bd6213a49bad02434
 
       <button v-if="!this.isEdit" v-on:click="moreToAdd = true">Save and add another pet</button>
     </form>
@@ -217,10 +210,7 @@ export default {
         isMale: false,
         isSpayed: false,
         description: "",
-<<<<<<< HEAD
-=======
         personalityTraits: [],
->>>>>>> 7c1e9edea0451b8d149ed98bd6213a49bad02434
       },
       errorMsg: "",
       isEdit: false,
@@ -281,20 +271,6 @@ export default {
           });
       }
     },
-<<<<<<< HEAD
-    resetForm(){
-       this.pet = {
-        pet_name: "",
-         animal_type: "",
-         breed: "",
-         age: "",
-         size: "",
-         isMale: false,
-         isSpayed: false,
-         description: "",
-       }
-     }
-=======
     resetForm() {
       this.pet = {
         petName: "",
@@ -308,7 +284,6 @@ export default {
         personalityTraits: [],
       };
     },
->>>>>>> 7c1e9edea0451b8d149ed98bd6213a49bad02434
   },
   created() {
     this.pets = this.$store.state.pets;

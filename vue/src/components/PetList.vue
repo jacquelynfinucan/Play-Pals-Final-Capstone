@@ -58,6 +58,17 @@ export default {
         });
       }, 
     goToRegisterNewPet() {
+        this.$store.commit("SET_CURRENT_PET", {
+        petName: "",
+        animalType: "",
+        breed: "",
+        age: "",
+        size: "",
+        isMale: null,
+        isSpayed: null,
+        description: "",
+        personalityTraits: [],
+      });
       this.$router.push({ name: "register-pet" });
     },
   }

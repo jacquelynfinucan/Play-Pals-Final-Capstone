@@ -39,7 +39,7 @@
       </ul>
     </div>
     <button id="btnEditPet" v-on:click="goToEditPet">Edit Pet</button>
-    <button id="btnDeletePet" v-on:click="deletePet">Delete Pet</button>
+    <!--<button id="btnDeletePet" v-on:click="deletePet">Delete Pet</button>-->
   </div>
 </template>
 
