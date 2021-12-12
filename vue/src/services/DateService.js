@@ -6,5 +6,8 @@ export default {
     },
     GetPlayDatesForLocation(locationId){
         return axios.get(`playdates/place/${locationId}"`)
+    },
+    getPlayDateThreadsForUser(userID) {
+        return axios.get(`/threads/${userID}`)
     }
 }

@@ -24,7 +24,6 @@ CREATE TABLE users (
 	CONSTRAINT PK_user PRIMARY KEY (user_id)
 )
 
-
 CREATE TABLE user_profile (
 	user_id int NOT NULL,
 	first_name varchar(50) NOT NULL, 
@@ -72,8 +71,8 @@ INSERT INTO personality_traits (personality_id, personality_name) VALUES (2, 'Ca
 INSERT INTO personality_traits (personality_id, personality_name) VALUES (3, 'Shy');
 INSERT INTO personality_traits (personality_id, personality_name) VALUES (4, 'Anxious');
 INSERT INTO personality_traits (personality_id, personality_name) VALUES (5, 'Aggressive');
-INSERT INTO personality_traits (personality_id, personality_name) VALUES (6, 'Not good with kids');
-INSERT INTO personality_traits (personality_id, personality_name) VALUES (7, 'Not good with animals other than dogs');
+INSERT INTO personality_traits (personality_id, personality_name) VALUES (6, 'Not Good With Kids');
+INSERT INTO personality_traits (personality_id, personality_name) VALUES (7, 'Not Good With Animals Other Than Dogs');
 INSERT INTO personality_traits (personality_id, personality_name) VALUES (8, 'House Trained');
 INSERT INTO personality_traits (personality_id, personality_name) VALUES (9, 'Command Trained');
 
@@ -95,6 +94,7 @@ CREATE TABLE location (
 
 CREATE TABLE play_dates (
 	play_date_id int IDENTITY(1,1) NOT NULL,
+	title varchar(50) NOT NULL,
 	host_user_id int NOT NULL, 
     host_pet_id int NOT NULL, 
 	guest_pet_id int NOT NULL, 
@@ -109,7 +109,6 @@ CREATE TABLE play_dates (
 
 )
 
---individual messages
 CREATE TABLE play_date_messages (
 	message_id int IDENTITY(1,1) NOT NULL,
 	play_date_id int NOT NULL,
@@ -123,3 +122,4 @@ CREATE TABLE play_date_messages (
 	CONSTRAINT [FK_play_date_messages_users] FOREIGN KEY (from_user_id) REFERENCES [users] (user_id),
 	CONSTRAINT [FK_play_date_messages_pet_profile] FOREIGN KEY (from_pet_id) REFERENCES [pet_profile] (pet_id)
 )
+

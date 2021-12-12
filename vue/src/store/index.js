@@ -21,6 +21,17 @@ export default new Vuex.Store({
     token: currentToken || '',
     user: currentUser || {},
     pets: [],
+    currentPet: {
+      petName: "",
+      animalType: "",
+      breed: "",
+      age: "",
+      size: "",
+      isMale: null,
+      isSpayed: null,
+      description: "",
+      personalityTraits: [],
+    },
     profile: {       
       userId: "",
       firstName: "",
@@ -47,6 +58,17 @@ export default new Vuex.Store({
       state.token = '';
       state.user = {};
       state.pets = [];
+      state.currentPet = {
+        petName: "",
+        animalType: "",
+        breed: "",
+        age: "",
+        size: "",
+        isMale: null,
+        isSpayed: null,
+        description: "",
+        personalityTraits: [],
+      };
       state.profile = {       
         userId: "",
         firstName: "",
@@ -59,11 +81,31 @@ export default new Vuex.Store({
     SET_PETS(state, pets) {
       state.pets = pets;
     },
+    SET_CURRENT_PET(state, pet){
+      state.currentPet = pet;
+    },
+    ADD_PET(state, pet) {
+      state.pet = pet;
+      state.pets.push(pet);
+    },
     SET_PROFILE(state, profile) {
       state.profile = profile;
     },
     SET_SELECTED_LOCATION(state,location){
       state.selectedLocation = location;
+    }, 
+    REMOVE_CURRENT_PET(state){
+      state.currentPet = {
+        petName: "",
+        animalType: "",
+        breed: "",
+        age: "",
+        size: "",
+        isMale: null,
+        isSpayed: null,
+        description: "",
+        personalityTraits: [],
+      };
     }
   }
 })

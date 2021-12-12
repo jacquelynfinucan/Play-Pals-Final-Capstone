@@ -34,6 +34,12 @@ VALUES ('Bolt', 'dog', 'Bulldog', 5, 3, 1, 1, 'Good boy!'),				--pet_id = 1
 	('Bixby', 'dog', 'Poodle', 3, 2, 1, 1, 'Loud barker'),				--pet_id = 7
 	('Arrow', 'dog', 'Bulldog', 5, 2, 0, 0, 'Loves to play fetch');		--pet_id = 8
 
+--assign person
+INSERT INTO pets_personality_traits (pet_id, personality_id)
+VALUES (1, 1), (1, 4), (1, 8), 
+	(2, 2), (2, 8), 
+	(3, 4), (3, 5), (3, 6), (3, 8), (3, 9)
+
 --assign the test pets to users
 INSERT INTO users_pets (user_id, pet_id)
 VALUES (1,1),
@@ -46,15 +52,16 @@ VALUES (1,1),
 	(8,8);
 
 --populate test play dates
-INSERT INTO play_dates (host_user_id, host_pet_id, guest_pet_id, date_time)
-VALUES (1, 1, 2, GETDATE()),											--play_date_id = 1
-	(2, 2, 5, GETDATE()),												--play_date_id = 2
-	(3, 3, 2, GETDATE()),												--play_date_id = 3
-	(4, 4, 1, GETDATE()),												--play_date_id = 4
-	(5, 5, 7, GETDATE()),												--play_date_id = 5
-	(6, 6, 4, GETDATE()),												--play_date_id = 6
-	(7, 7, 6, GETDATE()),												--play_date_id = 7
-	(8, 8, 3, GETDATE());												--play_date_id = 8
+INSERT INTO play_dates (title, host_user_id, host_pet_id, guest_pet_id, date_time)
+VALUES ('City Park Play Date', 1, 1, 2, GETDATE()),									--play_date_id = 1
+	('At Home Play Date', 2, 2, 5, GETDATE()),										--play_date_id = 2
+	('Jogging and Dogs', 3, 3, 2, GETDATE()),										--play_date_id = 3
+	('Meet and Greet', 4, 4, 1, GETDATE()),											--play_date_id = 4
+	('Dog Yoga', 5, 5, 7, GETDATE()),												--play_date_id = 5
+	('Cinder Birthday Get Together', 6, 6, 4, GETDATE()),							--play_date_id = 6
+	('New Puppies', 7, 7, 6, GETDATE()),											--play_date_id = 7
+	('Lake Visit', 8, 8, 3, GETDATE()),												--play_date_id = 8
+	('No Message Test', 1, 1, 3, GETDATE());										--play_date_id = 9
 
 --populate test messages
 INSERT INTO play_date_messages (play_date_id, from_user_id, from_pet_id, post_date, message_text)

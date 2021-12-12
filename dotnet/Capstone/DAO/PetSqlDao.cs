@@ -18,7 +18,7 @@ namespace Capstone.DAO
 
         public int AddPet(int userId, petModel pet)
         {
-            int newId = 0;
+            int newPetId = 0;
 
             try
             {
@@ -27,7 +27,7 @@ namespace Capstone.DAO
                     conn.Open();
                     SqlCommand cmd = new SqlCommand(@"insert into pet_profile(pet_name, breed, age, size, is_male, is_spayed_neutered, description, animal_type)
                                                     output inserted.pet_id values(@petName, @breed, @age, @size, @isMale, @isSpayedNeutered, @description, @animalType)", conn);
-                    cmd.Parameters.AddWithValue("@petName", pet.Name);
+                    cmd.Parameters.AddWithValue("@petName", pet.PetName);
                     cmd.Parameters.AddWithValue("@breed", pet.Breed);
                     cmd.Parameters.AddWithValue("@age", pet.Age);
                     cmd.Parameters.AddWithValue("@size", pet.Size);
@@ -36,20 +36,37 @@ namespace Capstone.DAO
                     cmd.Parameters.AddWithValue("@description", pet.Description);
                     cmd.Parameters.AddWithValue("@animalType", pet.AnimalType);
 
-                    newId = (int)cmd.ExecuteScalar();
-                    if (newId == 0)
+                    newPetId = (int)cmd.ExecuteScalar();
+                    if (newPetId == 0)
                     {
                         throw new Exception();
                     }
                     cmd = new SqlCommand(@"insert into users_pets(user_id, pet_id)
                                          values (@userId, @newId)", conn);
                     cmd.Parameters.AddWithValue("@userId", userId);
-                    cmd.Parameters.AddWithValue("@newId", newId);
+                    cmd.Parameters.AddWithValue("@newId", newPetId);
 
                     int rowsAffected = cmd.ExecuteNonQuery();
                     if(rowsAffected != 1)
                     {
                         throw new Exception();
+                    }
+
+                    if (pet.PersonalityTraits.Count >= 1)
+                    {
+                        foreach (int trait in pet.PersonalityTraits)
+                        {
+                            cmd = new SqlCommand(@"insert into pets_personality_traits(pet_id, personality_id)
+                                         values (@petId, @traitId)", conn);
+                            cmd.Parameters.AddWithValue("@petId", newPetId);
+                            cmd.Parameters.AddWithValue("@traitId", trait);
+
+                            rowsAffected = cmd.ExecuteNonQuery();
+                            if (rowsAffected != 1)
+                            {
+                                throw new Exception();
+                            }
+                        }
                     }
                 }
             }
@@ -57,7 +74,7 @@ namespace Capstone.DAO
             {
                 Console.WriteLine(ex.Message);
             }
-            return newId;
+            return newPetId;
         }
 
         public petModel GetPetByPetId(int petId)
@@ -97,15 +114,32 @@ namespace Capstone.DAO
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand(@"select * from pet_profile join users_pets on users_pets.pet_id = pet_profile.pet_id
-                                                     where user_id = @userID", conn);
+                    SqlCommand cmd = new SqlCommand(@"select pet_profile.pet_id, pet_name, animal_type, breed, age, size, is_male, 
+                                                    is_spayed_neutered, description, user_id, personality_id
+                                                    from pet_profile LEFT JOIN users_pets on users_pets.pet_id = pet_profile.pet_id
+                                                    LEFT JOIN pets_personality_traits on pet_profile.pet_id = pets_personality_traits.pet_id
+                                                    where user_id = @userID", conn);
                     cmd.Parameters.AddWithValue("@userId", userID);
 
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        petModel pet = GetPetModelFromReader(reader);
-                        pets.Add(pet);
+                        int currentPetId = Convert.ToInt32(reader["pet_id"]);
+                        petModel pet = null;
+                        foreach (petModel animal in pets)
+                        {
+                            if(animal.PetId == currentPetId)
+                            {
+                                //don't add new pet to list, just update it's pet.personalitytraits to add new personality
+                                animal.PersonalityTraits.Add(Convert.ToInt32(reader["personality_id"]));
+                                pet = animal;
+                            }
+                        }
+                        if(pet == null)
+                        {
+                            pet = GetPetModelFromReader(reader);
+                            pets.Add(pet);
+                        }
                     }
                 }
             }
@@ -146,6 +180,7 @@ namespace Capstone.DAO
 
         public bool UpdatePetInfo(int petID, petModel pet)
         {
+            bool isSuccessful = false;
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
@@ -154,6 +189,7 @@ namespace Capstone.DAO
                     SqlCommand cmd = new SqlCommand(@"update pet_profile 
                                                     set 
                                                     pet_name = @petName,
+                                                    animal_type = @animalType,
                                                     breed = @breed,
                                                     age = @age,
                                                     size = @size,
@@ -161,7 +197,7 @@ namespace Capstone.DAO
                                                     is_spayed_neutered = @isSpayedNeutered,
                                                     description = @description
                                                     where pet_id = @petID", conn);
-                    cmd.Parameters.AddWithValue("@petName", pet.Name);
+                    cmd.Parameters.AddWithValue("@petName", pet.PetName);
                     cmd.Parameters.AddWithValue("@breed", pet.Breed);
                     cmd.Parameters.AddWithValue("@age", pet.Age);
                     cmd.Parameters.AddWithValue("@size", pet.Size);
@@ -169,17 +205,40 @@ namespace Capstone.DAO
                     cmd.Parameters.AddWithValue("@isSpayedNeutered", pet.IsSpayed);
                     cmd.Parameters.AddWithValue("@description", pet.Description);
                     cmd.Parameters.AddWithValue("@petID", petID);
+                    cmd.Parameters.AddWithValue("@animalType", pet.AnimalType);
 
                     int rowsAffected = cmd.ExecuteNonQuery();
                     if (rowsAffected > 0)
                     {
-                        return true;
+                        isSuccessful = true;
                     }
                     else
                     {
-                        return false;
+                        isSuccessful = false;
                     }
+
+                    cmd = new SqlCommand("DELETE from pets_personality_traits WHERE pet_id = @petId", conn);
+                    cmd.Parameters.AddWithValue("@petID", petID);
+                    cmd.ExecuteNonQuery();
+
+                    //if (pet.PersonalityTraits.Count >= 1)
+                    //{
+                    foreach (int trait in pet.PersonalityTraits)
+                        {
+                            cmd = new SqlCommand(@"insert into pets_personality_traits(pet_id, personality_id)
+                                         values (@petId, @traitId)", conn);
+                            cmd.Parameters.AddWithValue("@petId", pet.PetId);
+                            cmd.Parameters.AddWithValue("@traitId", trait);
+
+                            rowsAffected = cmd.ExecuteNonQuery();
+                            if (rowsAffected != 1)
+                            {
+                                throw new Exception();
+                            }
+                        }
+                    //}
                 }
+                return isSuccessful;
             }
             catch (SqlException ex)
             {
@@ -190,49 +249,57 @@ namespace Capstone.DAO
 
         public bool DeleteUserPet(int petID)
         {
+            bool isSuccessful = false;
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand(@"delete from users_pets
-                                                    where pet_id = @petID
-                                                    delete from pet_profile
-                                                    where pet_id = @petID", conn);
+                    SqlCommand cmd = new SqlCommand(@"delete from pets_personality_traits where pet_id = @petID
+                                                    delete from users_pets where pet_id = @petID
+                                                    delete from pet_profile where pet_id = @petID", conn);
                     cmd.Parameters.AddWithValue("@petID", petID);
 
                     int rowsAffected = cmd.ExecuteNonQuery();
-                    if (rowsAffected != 2)
+                    if (rowsAffected >= 2)
                     {
-                        return false;
+                        isSuccessful = true;
                     }
                     else
                     {
-                        return false;
+                        isSuccessful = false;
                     }
                 }
             }
             catch (SqlException ex)
             {
                 Console.WriteLine(ex.Message);
-                return false;
+                isSuccessful = false;
             }
+            return isSuccessful;
         }
 
         private petModel GetPetModelFromReader(SqlDataReader reader)
         {
             petModel pet = new petModel();
             pet.Age = Convert.ToInt32(reader["age"]);
-            pet.Name = Convert.ToString(reader["pet_name"]);
+            pet.PetName = Convert.ToString(reader["pet_name"]);
             pet.Size = Convert.ToInt32(reader["size"]);
             pet.Breed = Convert.ToString(reader["breed"]);
             pet.Description = Convert.ToString(reader["description"]);
-            pet.IsMale = Convert.ToBoolean(reader["is_Male"]);
-            pet.IsSpayed = Convert.ToBoolean(reader["is_Spayed_neutered"]);
+            pet.IsMale = Convert.ToBoolean(reader["is_male"]);
+            pet.IsSpayed = Convert.ToBoolean(reader["is_spayed_neutered"]);
             pet.PetId = Convert.ToInt32(reader["pet_id"]);
+            pet.AnimalType = Convert.ToString(reader["animal_type"]);
+            if(!Convert.IsDBNull(reader["personality_id"]))
+            {
+                pet.PersonalityTraits.Add(Convert.ToInt32(reader["personality_id"]));
+            }
 
             return pet;
         }
+
+       
     }
 }
 

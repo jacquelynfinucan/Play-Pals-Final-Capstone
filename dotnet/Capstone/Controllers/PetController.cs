@@ -19,13 +19,12 @@ namespace Capstone.Controllers
         }
 
 
-        [HttpPost("/profile/{userID}/pets")]
+        [HttpPost("profiles/{userID}/pets")]
         public IActionResult AddAPetToUser(int userID, petModel pet)
         {
             int newPetID = petDao.AddPet(userID, pet);
             if(newPetID != -1)
             {
-                //petDao.AddPetToUser(petId, userId);
                 return Ok();
             }
             else
@@ -35,7 +34,7 @@ namespace Capstone.Controllers
       
         }
 
-        [HttpGet("/pet/{petID}")]
+        [HttpGet("/pets/{petID}")]
         public ActionResult<petModel> GetAPet(int petID)
         {
             petModel pet = petDao.GetPetByPetId(petID);
@@ -103,7 +102,7 @@ namespace Capstone.Controllers
 
             bool result = petDao.DeleteUserPet(petID);
 
-            if (!result)
+            if (result)
             {
                 return NoContent();
             }

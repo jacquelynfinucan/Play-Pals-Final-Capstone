@@ -9,6 +9,7 @@ import Home from '@/views/Home.vue'
 import NotFound from '@/views/NotFound.vue'
 import RegisterProfile from '@/views/RegisterProfile.vue'
 import GoogleMap from '@/views/GoogleMapView.vue'
+import RegisterPet from '@/views/RegisterPet.vue'
 import Messages from '../views/Messages.vue'
 import Thread from '../views/Thread.vue'
 import ParkInfo from '../views/ParkInfoView'
@@ -99,6 +100,11 @@ const router = new Router({
       meta: {
         requiresAuth: true
       }
+    }, 
+    {
+      path:"/RegisterPet",
+      name: "register-pet",
+      component: RegisterPet,
     },
     {
       path: "/messages", //Messages view
