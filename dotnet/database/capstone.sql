@@ -87,6 +87,9 @@ CONSTRAINT [FK_pets_personality_traits_personality_traits] FOREIGN KEY (personal
 
 CREATE TABLE location (
 	location_id varchar(100), --Matches place_id from google places API
+	location_name varchar(200),
+	latitude float,
+	longitude float,
 	--formatted_address varchar(200),
 	CONSTRAINT [PK_location] PRIMARY KEY (location_id),
 )
