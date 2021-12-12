@@ -11,6 +11,7 @@ import RegisterProfile from '@/views/RegisterProfile.vue'
 import GoogleMap from '@/views/GoogleMapView.vue'
 import Messages from '../views/Messages.vue'
 import Thread from '../views/Thread.vue'
+import ParkInfo from '../views/ParkInfoView'
 
 Vue.use(Router)
 
@@ -31,6 +32,14 @@ const router = new Router({
       path: '/map',
       name: 'map',
       component: GoogleMap,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/park',
+      name: 'park',
+      component: ParkInfo,
       meta: {
         requiresAuth: true
       }

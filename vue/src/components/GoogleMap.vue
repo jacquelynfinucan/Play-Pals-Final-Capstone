@@ -22,7 +22,7 @@
         :key="index"
         v-for="(marker, index) in markers"
         :position="marker.location"
-        @click="center=marker.location"
+        @click="markerOnClick(marker)"
       />
     </GmapMap>
   </div>
@@ -38,6 +38,7 @@ export default {
       currentPlace: null,
       markers: [],
       places: [],
+      locations:[],
       icon:{
           url:"../assets/DOGPARK-MAP-MARKER-01.png"
       }
@@ -47,21 +48,26 @@ export default {
     this.geolocate();
   },
   methods: {
+    markerOnClick(marker){
+        this.center=marker.location;
+        this.$store.commit('SET_SELECTED_LOCATION',marker);
+        this.$router.push('/park');
+    },
     setPlace(place) {
       this.currentPlace = place;
     },
-    addMarker() {
-      if (this.currentPlace) {
-        const marker = {
-          lat: this.currentPlace.geometry.location.lat(),
-          lng: this.currentPlace.geometry.location.lng(),
-        };
-        this.markers.push({ position: marker });
-        this.places.push(this.currentPlace);
-        this.center = marker;
-        this.currentPlace = null;
-      }
-    },
+    // addMarker() {
+    //   if (this.currentPlace) {
+    //     const marker = {
+    //       lat: this.currentPlace.geometry.location.lat(),
+    //       lng: this.currentPlace.geometry.location.lng(),
+    //     };
+    //     this.markers.push({ position: marker });
+    //     this.places.push(this.currentPlace);
+    //     this.center = marker;
+    //     this.currentPlace = null;
+    //   }
+    // },
     geolocate: function() {
       navigator.geolocation.getCurrentPosition(position => {
         this.center = {
@@ -73,8 +79,10 @@ export default {
   },
   created(){
       PlaceService.GetParksForZip(44106).then((response)=>{
-          response.data.results.forEach(element => {
-              this.markers.push(element.geometry[0])
+          this.locations = response.data.results;
+          this.locations.forEach(element => {
+              element.location = {lat:element.geometry[0].location.lat,lng:element.geometry[0].location.lng};
+              this.markers.push(element)
           });
       })
   }

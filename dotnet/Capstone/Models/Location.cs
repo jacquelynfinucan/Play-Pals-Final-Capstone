@@ -11,8 +11,10 @@ namespace Capstone.Models
         public List<Place> results { get; set; }
     }
     public class Place
-    {
+    { 
+        public string place_id { get; set; }
         public string name { get; set; }
+        public string formatted_address { get; set; }
         [JsonPropertyName("geometry")]
         public List<Geometry> geometry { get; set; }
     }

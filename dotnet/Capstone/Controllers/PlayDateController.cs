@@ -16,6 +16,13 @@ namespace Capstone.Controllers
         {
             playDateDao = _playDateDao;
         }
+        [HttpGet("playdates/place/{locationId}")]
+        public ActionResult<List<PlayDate>> GetAllPlayDatesForLocation(int locationId)
+        {
+            return Ok(playDateDao.GetAllPlayDatesForLocation(locationId));
+        }
+
+
 
         [HttpGet("/playdates")]
         public ActionResult<List<PlayDate>> GetAllPlayDates()
