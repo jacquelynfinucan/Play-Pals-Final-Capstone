@@ -1,8 +1,8 @@
 <template>
   <div class="pet-list">
       <h1 class="pets-title">My Pets</h1>
+      <button id="btnAddPet" v-on:click="goToRegisterNewPet">Add A New Pet</button> <!--make sure add a new pet refreshes the form-inconsistent-->
       <div class="pets">
-            
             <div class="status-message error" v-show="errorMsg !== ''">{{errorMsg}}</div>
             
             <div class="loading" v-if="isLoading">
@@ -56,7 +56,10 @@ export default {
 
             this.isLoading = false;
         });
-      }
+      }, 
+    goToRegisterNewPet() {
+      this.$router.push({ name: "register-pet" });
+    },
   }
 };
 </script>
