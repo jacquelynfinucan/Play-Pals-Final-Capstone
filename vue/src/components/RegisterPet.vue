@@ -48,6 +48,7 @@
       </div>
 
       <div>
+        <!--Have to require age to be at least 0, no negative numbers -->
         <label for="age">Age: </label>
         <input
           type="number"
@@ -61,7 +62,6 @@
       <div>
         <label for="size">Size: </label>
         <select name="size" id="size" v-model.number="pet.size" required>
-          <!--class="form-control"  -->
           <option value="1">Small</option>
           <option value="2">Medium</option>
           <option value="3">Large</option>
