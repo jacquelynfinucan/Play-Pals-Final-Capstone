@@ -2,6 +2,28 @@
   <div>
       <h2> Welcome to {{location.name}} park!</h2>
       <h4> Address: {{location.formatted_address}}</h4>
+
+      <h2> Add a play date? </h2>
+
+        <form v-on:submit.prevent="registerProfile">
+      <!-- <div class="status-message error" v-show="errorMsg !== ''">
+        {{ errorMsg }}
+      </div> -->
+      
+      <div>
+        <label for="play-date-title">Play Date Title:</label>
+        <input
+          type="text"
+          id="play-date-title"
+          class="form-control"
+          placeHolder="Playdate"
+          v-model="newPlaydate.title"
+          required
+        />
+      </div>
+    </form>
+
+
       <h4>Playdates:</h4>
      <play-date-card
       v-for="playdate in this.playdates"
@@ -20,7 +42,8 @@ export default {
     data(){
         return{
             parkName:'placeholder',
-            playdates:{},
+            newPlaydate:{},
+            locationPlaydates:{},
             location:{},
         }
 
