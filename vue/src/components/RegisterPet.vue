@@ -207,8 +207,8 @@ export default {
         breed: "",
         age: "",
         size: "",
-        isMale: false,
-        isSpayed: false,
+        isMale: null,
+        isSpayed: null,
         description: "",
         personalityTraits: [],
       },
@@ -236,15 +236,15 @@ export default {
           .catch((error) => {
             if (error.response) {
               this.errorMsg =
-                "Error creating profile. Response received was " +
+                "Error creating pet. Response received was " +
                 error.response.statusText +
                 ".";
             } else if (error.request) {
               this.errorMsg =
-                "Error creating profile. Server could not be reached.";
+                "Error creating pet. Server could not be reached.";
             } else {
               this.errorMsg =
-                "Error creating profile. Request could not be created.";
+                "Error creating pet. Request could not be created.";
             }
           });
       } else { // isEdit = true
@@ -258,15 +258,15 @@ export default {
           .catch((error) => {
             if (error.response) {
               this.errorMsg =
-                "Error creating profile. Response received was '" +
+                "Error updating pet. Response received was '" +
                 error.response.statusText +
                 "'.";
             } else if (error.request) {
               this.errorMsg =
-                "Error creating profile. Server could not be reached.";
+                "Error updating pet. Server could not be reached.";
             } else {
               this.errorMsg =
-                "Error creating profile. Request could not be created.";
+                "Error updating pet. Request could not be created.";
             }
           });
       }
