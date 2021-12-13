@@ -6,6 +6,7 @@
       <router-link class="nav-link" v-bind:to="{ name: 'profile' }" v-if="$store.state.token != ''">Profile</router-link><span v-if="$store.state.token != ''">&nbsp;|&nbsp;</span>
       <router-link class="nav-link" v-bind:to="{ name: 'map' }" v-if="$store.state.token != ''">Map</router-link>&nbsp;|&nbsp;
       <router-link class="nav-link" v-bind:to="{ name: 'messages' }" v-if="$store.state.token != ''">Messages</router-link>
+      <router-link class="nav-link" v-bind:to="{ name: 'schedule' }" v-if="$store.state.token != ''">Schedule Play Date</router-link>
     </nav>
     <nav class="login-controls">
       <router-link class="nav-link" v-bind:to="{ name: 'login' }" v-if="$store.state.token == ''">Log in / Sign up</router-link>

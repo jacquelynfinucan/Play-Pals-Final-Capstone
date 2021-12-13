@@ -13,6 +13,7 @@ import RegisterPet from '@/views/RegisterPet.vue'
 import Messages from '../views/Messages.vue'
 import Thread from '../views/Thread.vue'
 import ParkInfo from '../views/ParkInfoView'
+import SchedulePlayDate from '../views/SchedulePlayDate'
 
 Vue.use(Router)
 
@@ -119,6 +120,14 @@ const router = new Router({
       name: "thread",
       component: Thread,
       meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path:"/schedule",
+      name:"schedule",
+      component: SchedulePlayDate,
+      mete:{
         requiresAuth: true
       }
     }
