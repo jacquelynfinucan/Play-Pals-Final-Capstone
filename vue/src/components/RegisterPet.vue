@@ -55,7 +55,6 @@
           class="form-control"
           placeHolder="Age"
           v-model.number="pet.age"
-          required
         />
       </div>
 
