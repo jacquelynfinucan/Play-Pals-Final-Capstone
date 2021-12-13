@@ -8,9 +8,11 @@ import store from '../store/index'
 import Home from '@/views/Home.vue'
 import NotFound from '@/views/NotFound.vue'
 import RegisterProfile from '@/views/RegisterProfile.vue'
+import GoogleMap from '@/views/GoogleMapView.vue'
 import RegisterPet from '@/views/RegisterPet.vue'
 import Messages from '../views/Messages.vue'
 import Thread from '../views/Thread.vue'
+import ParkInfo from '../views/ParkInfoView'
 
 Vue.use(Router)
 
@@ -27,6 +29,22 @@ const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
+    {
+      path: '/map',
+      name: 'map',
+      component: GoogleMap,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/park',
+      name: 'park',
+      component: ParkInfo,
+      meta: {
+        requiresAuth: true
+      }
+    },
     {
       path: '/',
       name: 'home',

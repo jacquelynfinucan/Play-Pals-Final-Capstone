@@ -12,6 +12,8 @@ namespace Capstone.DAO
         bool UpdateAPlayDate(PlayDate updatedPlayDate);
         bool DeleteAPlayDate(int playDateId);
         List<PlayDate> GetAllPlayDatesForHost(int hostUserId);
+        List<PlayDate> GetAllPlayDatesForLocation(int locationId);
+
         List<FrontEndPlayDate> GetFrontEndPlayDatesForHost(int hostUserId);
 
         List<PlayDateThread> GetPlayDateThreadsForUser(int userID);

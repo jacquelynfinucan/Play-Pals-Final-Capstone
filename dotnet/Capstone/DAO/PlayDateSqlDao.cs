@@ -280,6 +280,37 @@ namespace Capstone.DAO
             return playDateThreadsForUser;
         }
 
+        public List<PlayDate> GetAllPlayDatesForLocation(int LocationID)
+        {
+            List<PlayDate> allPlayDates = new List<PlayDate>();
+            PlayDate currentPlayDate;
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand(@"SELECT host_user_id, host_pet_id, guest_pet_id, date_time, location_id
+                                                      FROM play_dates 
+                                                      WHERE location_id = @LocationID", conn); 
+                    cmd.Parameters.AddWithValue("@LocationID", LocationID);
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        currentPlayDate = GetPlayDateFromReader(reader);
+                        allPlayDates.Add(currentPlayDate);
+                    }
+                }
+            }
+            catch (SqlException)
+            {
+                throw;
+            }
+            return allPlayDates;
+        }
+
+
         private PlayDateThread GetPlayDateThreadsFromReader(SqlDataReader reader)
         {
             PlayDateThread playDateThread = new PlayDateThread();

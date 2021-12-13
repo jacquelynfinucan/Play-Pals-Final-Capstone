@@ -65,6 +65,7 @@ namespace Capstone
             services.AddTransient<IUserDao>(m => new UserSqlDao(connectionString));
             services.AddTransient<IProfileDao>(m => new ProfileSqlDao(connectionString));
             services.AddTransient<IPlayDateDao>(m => new PlayDateSqlDao(connectionString));
+            services.AddTransient<IPlaceDao>(m => new PlaceDao(connectionString));
             services.AddTransient<IPetDao>(m => new PetSqlDao(connectionString));
             services.AddTransient<IMessageDao>(m => new MessageSqlDao(connectionString));
         }
