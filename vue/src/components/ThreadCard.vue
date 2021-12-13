@@ -4,8 +4,12 @@
             <img src="@/assets/loading-dog.gif" alt="loading gif"/>
       </div>
       <div v-else>
-            <h2 class="title">Placeholder Thread Title</h2> <!-- bind when endpoint is implemented -->
+            <h2 class="title">{{ playDateThread.title }}</h2> <!-- bind when endpoint is implemented -->
             <router-link class="return-link" :to="{ name: 'messages' }">Return to Message Threads</router-link>
+            <form class="new-post-form" v-on:submit.prevent="addNewMessage">
+                <input type="text" placeholder="Message Text" v-model="newMessage.messageText" required/>
+                <input type="submit" />
+            </form>
             <div v-for="message in this.messages" v-bind:key="message.messageID">
                 <message-card v-bind:message="message"/>
             </div> 
@@ -15,7 +19,9 @@
 
 <script>
 import MessageCard from '../components/MessageCard';
-import MessageService from '../services/MessageService';
+import messageService from '../services/MessageService';
+import dateService from "../services/DateService";
+
 export default {
     name: 'thread-card',
     components: {
@@ -26,14 +32,50 @@ export default {
             isLoading: true,
             errorMsg: '',
             messages: [],
+            newMessage: {
+                playDateID: this.$route.params.id,
+                fromUserID: this.$store.state.user.userId,
+                fromPetID: '',
+                messageText: ''
+            },
+            playDateThread: {}
         };
     },
-    created() {    
-        MessageService.GetMessagesForPlayDate(this.$route.params.id).then((response) => {
-            this.messages = response.data;
-            this.isLoading = false;
-        });
+    created() {
+        this.retrievePlayDateThreadForPlayDateID();    
+        this.retrieveMessagesForPlayDate();      
+    },
+    methods: {
+        addNewMessage() { 
+            this.newMessage.fromPetID = this.playDateThread.hostUserID == this.$store.state.user.userId ? this.playDateThread.hostPetID : this.playDateThread.guestPetID;
+            
+            messageService.addMessage(this.newMessage).then( (response) => {
+                
+                if (response.status == 201) {                   
+                    this.newMessage = {
+                        playDateID: this.$route.params.id,
+                        fromUserID: this.$store.state.user.userId,
+                        fromPetID: '',
+                        messageText: ''
+                    }
+
+                    this.retrieveMessagesForPlayDate();
+                }
+            });
+        },
         
+        retrieveMessagesForPlayDate() {
+            messageService.GetMessagesForPlayDate(this.$route.params.id).then((response) => {
+                this.messages = response.data;
+                this.isLoading = false;
+            });
+        },
+
+        retrievePlayDateThreadForPlayDateID() {
+            dateService.getPlayDateThreadForPlayDateID(this.$route.params.id).then((response) => {
+                this.playDateThread = response.data;
+            });
+        }
     }
 }
 </script>

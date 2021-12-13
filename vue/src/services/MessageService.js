@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export default {
-    AddMessage(message) {
+    addMessage(message) {
         return axios.post('/messages', message)
     },
     UpdateMessage(messageID, message) {

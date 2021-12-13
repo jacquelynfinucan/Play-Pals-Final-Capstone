@@ -68,5 +68,13 @@ namespace Capstone.Controllers
 
             return Ok(playDateThreadsForUser);
         }
+
+        [HttpGet("/playdates/{playDateID}/threads")]
+        public IActionResult GetPlayDateThreadForPlayDateID(int playDateID)
+        {
+            PlayDateThread playDateThread = playDateDao.GetPlayDateThreadForPlayDateID(playDateID);
+
+            return Ok(playDateThread);
+        }
     }
 }
