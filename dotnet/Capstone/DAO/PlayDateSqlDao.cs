@@ -434,7 +434,7 @@ namespace Capstone.DAO
                         INNER JOIN dbo.pet_profile AS GP ON GP.pet_id = PD.guest_pet_id
                         INNER JOIN dbo.users_pets AS GUP ON GUP.pet_id = GP.pet_id
                         INNER JOIN dbo.users AS GU ON GU.user_id = GUP.user_id
-                        WHERE(PD.host_user_id = @userID OR GU.user_id = @userID) AND status_id = @statudID", conn);
+                        WHERE(PD.host_user_id = @userID OR GU.user_id = @userID) AND status_id = @statusID", conn);
                     cmd.Parameters.AddWithValue("@userID", userID);
                     cmd.Parameters.AddWithValue("@statusID", statusID);
 

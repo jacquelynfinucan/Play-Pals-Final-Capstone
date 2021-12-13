@@ -90,5 +90,13 @@ namespace Capstone.Controllers
 
             return Ok(playDateThread);
         }
+
+        [HttpGet("/playdates/users/{userID}/status/{statusID}")]
+        public IActionResult GetPlayDatesForUserByStatus(int userID, int statusID)
+        {
+            List<PlayDate> playDateForUserByStatus = playDateDao.GetPlayDatesForUserByStatus(userID, statusID);
+
+            return Ok(playDateForUserByStatus);
+        }
     }
 }
