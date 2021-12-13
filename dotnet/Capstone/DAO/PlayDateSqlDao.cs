@@ -141,9 +141,9 @@ namespace Capstone.DAO
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new SqlCommand("INSERT INTO play_dates (title, host_user_id, host_pet_id, guest_pet_id, date_time, address)" + //location is TBD**
+                    SqlCommand cmd = new SqlCommand("INSERT INTO play_dates (title, host_user_id, host_pet_id, guest_pet_id, date_time, address, status_id)" + //location is TBD**
                         "OUTPUT inserted.play_date_id " +
-                        "VALUES (@title, @hostUserId, @hostPetId, @guestPetId, @dateTime, @address)", conn);
+                        "VALUES (@title, @hostUserId, @hostPetId, @guestPetId, @dateTime, @address,1)", conn);
                     cmd.Parameters.AddWithValue("@title", newPlayDate.title);
                     cmd.Parameters.AddWithValue("@hostUserId", newPlayDate.HostUserID);
                     cmd.Parameters.AddWithValue("@hostPetId", newPlayDate.HostPetID);
