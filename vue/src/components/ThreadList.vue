@@ -3,6 +3,13 @@
     <h1 class="thread-title">My Message Threads</h1>
     <div class="threads">
       
+      <div class="filters">
+          <span>Filters: </span>
+          <input type="text" id="usernameFilter" v-model="filter.username" placeholder="Username" />&nbsp;
+          <input type="text" id="petNameFilter" v-model="filter.petName" placeholder="Pet Name" />&nbsp;
+          <input type="text" id="titleFilter" v-model="filter.title" placeholder="Play Date Title" />
+      </div>
+
       <div class="status-message error" v-show="errorMsg !== ''">
         {{ errorMsg }}
       </div>
@@ -11,7 +18,7 @@
         <img src="@/assets/loading-dog.gif" alt="loading gif" />
       </div>
 
-      <router-link v-for="playDate in this.playDates" v-bind:key="playDate.playDateID" v-bind:to="{name: 'thread', params: {id: playDate.playDateID}}">
+      <router-link v-for="playDate in this.filteredPlayDates" v-bind:key="playDate.playDateID" v-bind:to="{name: 'thread', params: {id: playDate.playDateID}}">
           <div  class="thread-card">
               <h3>{{ playDate.title }}</h3>
               <p>Host: {{ playDate.hostUsername }}({{ playDate.hostPetName }})</p>
@@ -35,7 +42,49 @@ export default {
       isLoading: true,
       errorMsg: "",
       playDates: [],
+      filter: {
+          username: '',
+          petName: '',
+          title: ''
+      }
     };
+  },
+  computed: {
+      filteredPlayDates() {
+          let filteredThreds = this.playDates;
+
+          if (this.filter.username != "") {
+            filteredThreds = filteredThreds.filter((thread) =>
+                thread.hostUsername
+                    .toLowerCase()
+                    .includes(this.filter.username.toLowerCase())
+                || thread.guestUsername
+                    .toLowerCase()
+                    .includes(this.filter.username.toLowerCase())
+            );
+          }
+
+          if (this.filter.petName != "") {
+            filteredThreds = filteredThreds.filter((thread) =>
+                thread.hostPetName
+                    .toLowerCase()
+                    .includes(this.filter.petName.toLowerCase())
+                || thread.guestPetName
+                    .toLowerCase()
+                    .includes(this.filter.petName.toLowerCase())
+            );
+          }
+
+          if (this.filter.title != "") {
+            filteredThreds = filteredThreds.filter((thread) =>
+                thread.title
+                    .toLowerCase()
+                    .includes(this.filter.title.toLowerCase())
+            );
+          }
+
+          return filteredThreds;
+      }
   },
   created() {
     this.retrieveThreadsForUser();
@@ -86,5 +135,9 @@ export default {
 
 .status-message.error {
     color: red;
+}
+
+.filters {
+    padding-bottom: 10px;
 }
 </style>

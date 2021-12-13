@@ -38,7 +38,8 @@ export default new Vuex.Store({
       lastName: "",
       zip: "",
       email: "",
-    }
+    },
+    selectedLocation: {},
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
@@ -89,6 +90,9 @@ export default new Vuex.Store({
     },
     SET_PROFILE(state, profile) {
       state.profile = profile;
+    },
+    SET_SELECTED_LOCATION(state,location){
+      state.selectedLocation = location;
     }, 
     REMOVE_CURRENT_PET(state){
       state.currentPet = {

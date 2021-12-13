@@ -280,6 +280,37 @@ namespace Capstone.DAO
             return playDateThreadsForUser;
         }
 
+        public List<PlayDate> GetAllPlayDatesForLocation(int LocationID)
+        {
+            List<PlayDate> allPlayDates = new List<PlayDate>();
+            PlayDate currentPlayDate;
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand(@"SELECT host_user_id, host_pet_id, guest_pet_id, date_time, location_id
+                                                      FROM play_dates 
+                                                      WHERE location_id = @LocationID", conn); 
+                    cmd.Parameters.AddWithValue("@LocationID", LocationID);
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        currentPlayDate = GetPlayDateFromReader(reader);
+                        allPlayDates.Add(currentPlayDate);
+                    }
+                }
+            }
+            catch (SqlException)
+            {
+                throw;
+            }
+            return allPlayDates;
+        }
+
+
         private PlayDateThread GetPlayDateThreadsFromReader(SqlDataReader reader)
         {
             PlayDateThread playDateThread = new PlayDateThread();
@@ -304,6 +335,48 @@ namespace Capstone.DAO
                 playDateThread.LatestMessageDate = Convert.ToDateTime(reader["latest_message_date"]);
             }
             
+            return playDateThread;
+        }
+
+        public PlayDateThread GetPlayDateThreadForPlayDateID(int playDateID)
+        {
+            PlayDateThread playDateThread = new PlayDateThread();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand("SELECT PD.play_date_id, title, host_user_id, HU.username AS host_username, host_pet_id, " +
+                        "HP.pet_name AS host_pet_name, guest_pet_id, GU.username AS guest_username, " +
+                        "GP.pet_name AS guest_pet_name, date_time, MAX(PDM.post_date) AS latest_message_date " +
+                        "FROM dbo.play_dates AS PD " +
+                        "INNER JOIN dbo.users AS HU ON HU.user_id = PD.host_user_id " +
+                        "INNER JOIN dbo.pet_profile AS HP ON HP.pet_id = PD.host_pet_id " +
+                        "INNER JOIN dbo.pet_profile AS GP ON GP.pet_id = PD.guest_pet_id " +
+                        "INNER JOIN dbo.users_pets AS GUP ON GUP.pet_id = GP.pet_id " +
+                        "INNER JOIN dbo.users AS GU ON GU.user_id = GUP.user_id " +
+                        "LEFT OUTER JOIN dbo.play_date_messages AS PDM on PDM.play_date_id = PD.play_date_id " +
+                        "WHERE PD.play_date_id = @playDateID " +
+                        "GROUP BY PD.play_date_id, title, host_user_id, HU.username, host_pet_id, " +
+                        "HP.pet_name, guest_pet_id, GU.username, GP.pet_name, date_time " +
+                        "ORDER BY latest_message_date DESC;", conn);
+                    cmd.Parameters.AddWithValue("@playDateID", playDateID);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        playDateThread = GetPlayDateThreadsFromReader(reader);
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+
             return playDateThread;
         }
     }

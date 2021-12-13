@@ -16,6 +16,13 @@ namespace Capstone.Controllers
         {
             playDateDao = _playDateDao;
         }
+        [HttpGet("playdates/place/{locationId}")]
+        public ActionResult<List<PlayDate>> GetAllPlayDatesForLocation(int locationId)
+        {
+            return Ok(playDateDao.GetAllPlayDatesForLocation(locationId));
+        }
+
+
 
         [HttpGet("/playdates")]
         public ActionResult<List<PlayDate>> GetAllPlayDates()
@@ -67,6 +74,14 @@ namespace Capstone.Controllers
             List<PlayDateThread> playDateThreadsForUser = playDateDao.GetPlayDateThreadsForUser(userID);
 
             return Ok(playDateThreadsForUser);
+        }
+
+        [HttpGet("/playdates/{playDateID}/threads")]
+        public IActionResult GetPlayDateThreadForPlayDateID(int playDateID)
+        {
+            PlayDateThread playDateThread = playDateDao.GetPlayDateThreadForPlayDateID(playDateID);
+
+            return Ok(playDateThread);
         }
     }
 }
