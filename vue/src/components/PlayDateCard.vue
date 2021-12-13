@@ -11,6 +11,7 @@
     <h3 class="address">Address: {{playdate.address}}</h3>
     <h3 class="status">Status: {{playdate.statusID}}</h3>
 
+
    </div>
 </template>
 

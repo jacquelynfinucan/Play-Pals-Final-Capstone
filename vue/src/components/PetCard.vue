@@ -38,7 +38,8 @@
         <li v-if="this.pet.personalityTraits.includes(9)">Command Trained</li>
       </ul>
     </div>
-    <button id="btnEditPet" v-on:click="goToEditPet">Edit Pet</button>
+    <button v-if="isViewOnly == false" id="btnEditPet" v-on:click="goToEditPet">Edit Pet</button>
+    <button v-if="isViewOnly == true" v-on:click="goToSchedulePlayDate">Schedule Play Date</button>
     <!--<button id="btnDeletePet" v-on:click="deletePet">Delete Pet</button>-->
   </div>
 </template>
@@ -47,7 +48,12 @@
 import petService from "@/services/PetService.js";
 export default {
   name: "pet-card",
-  props: ["pet"],
+  props: ["pet", "isViewOnly"],
+  data(){
+    return{
+
+    }
+  },
   methods: {
     goToEditPet() {
       this.$store.commit("SET_CURRENT_PET", this.pet);
@@ -63,6 +69,9 @@ export default {
         });
       }
     },
+    goToSchedulePlayDate(){
+      this.$route.push(); //push to schedule play date view??
+    }
   },
 };
 </script>
@@ -104,5 +113,6 @@ export default {
 
 .pet-body {
   padding: 10px;
+  height:425px;
 }
 </style>

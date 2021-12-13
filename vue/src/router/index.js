@@ -14,6 +14,7 @@ import Messages from '../views/Messages.vue'
 import Thread from '../views/Thread.vue'
 import ParkInfo from '../views/ParkInfoView'
 import PlaydateList from '../views/PlaydateList.vue'
+import SchedulePlayDate from '../views/SchedulePlayDate'
 
 Vue.use(Router)
 
@@ -131,6 +132,14 @@ const router = new Router({
         requiresAuth: true
       }
     },
+    {
+      path:"/schedule",
+      name:"schedule",
+      component: SchedulePlayDate,
+      mete:{
+        requiresAuth: true
+      }
+    }
   ]
 })
 
