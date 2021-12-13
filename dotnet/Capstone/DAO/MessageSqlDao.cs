@@ -28,11 +28,10 @@ namespace Capstone.DAO
 
                     SqlCommand cmd = new SqlCommand("INSERT INTO dbo.play_date_messages (play_date_id, from_user_id, from_pet_id, post_date, message_text) " +
                                                     "OUTPUT INSERTED.message_id " +
-                                                    "VALUES(@playDateID, @fromUserID, @fromPetID, @postDate, @messageText);", conn);
+                                                    "VALUES(@playDateID, @fromUserID, @fromPetID, GETDATE(), @messageText);", conn);
                     cmd.Parameters.AddWithValue("@playDateID", message.PlayDateID);
                     cmd.Parameters.AddWithValue("@fromUserID", message.FromUserID);
                     cmd.Parameters.AddWithValue("@fromPetID", message.FromPetID);
-                    cmd.Parameters.AddWithValue("@postDate", message.PostDate);
                     cmd.Parameters.AddWithValue("@messageText", message.MessageText);
 
                     newMessageID = (int)cmd.ExecuteScalar();
@@ -119,7 +118,8 @@ namespace Capstone.DAO
                                                     "FROM dbo.play_date_messages AS PDM " +
                                                     "INNER JOIN dbo.users AS U ON U.user_id = PDM.from_user_id " +
                                                     "INNER JOIN dbo.pet_profile AS PP ON PP.pet_id = PDM.from_pet_id " +
-                                                    "WHERE play_date_id = @playDateID;", conn);
+                                                    "WHERE play_date_id = @playDateID " +
+                                                    "ORDER BY post_date DESC;", conn);
                     cmd.Parameters.AddWithValue("@playDateID", playDateID);
 
 
