@@ -53,7 +53,14 @@ namespace Capstone.Controllers
             int newPlayDateId = playDateDao.AddAPlayDate(newPlayDate);
             return Ok();
         }
-     
+        [HttpPut("/playdates/{playDateId}/status/{statusId}")]
+        public IActionResult UpdateAStatus(int statusId, int playDateId)
+        {
+            playDateDao.UpdateStatus(playDateId,statusId);
+            return Ok();
+        }
+
+
         [HttpPut("/playdates/{playDateId}")]
         public IActionResult UpdateAPlayDate(int playDateId, PlayDate updatedPlayDate)
         {
@@ -82,6 +89,14 @@ namespace Capstone.Controllers
             PlayDateThread playDateThread = playDateDao.GetPlayDateThreadForPlayDateID(playDateID);
 
             return Ok(playDateThread);
+        }
+
+        [HttpGet("/playdates/users/{userID}/status/{statusID}")]
+        public IActionResult GetPlayDatesForUserByStatus(int userID, int statusID)
+        {
+            List<PlayDate> playDateForUserByStatus = playDateDao.GetPlayDatesForUserByStatus(userID, statusID);
+
+            return Ok(playDateForUserByStatus);
         }
     }
 }

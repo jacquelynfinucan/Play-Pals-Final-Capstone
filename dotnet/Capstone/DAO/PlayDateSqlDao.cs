@@ -132,6 +132,32 @@ namespace Capstone.DAO
             return allPlayDates;
         }
 
+        public int UpdateStatus(int playDateID,int newStatus)
+        {
+            int newPlayDateId = 0;
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand(@"UPDATE play_dates
+                                                      SET status_Id = @statusID
+                                                      WHERE play_date_id = @playDateId", conn);
+                    cmd.Parameters.AddWithValue("@statusID", newStatus);
+                    cmd.Parameters.AddWithValue("@playDateID", playDateID);
+
+                    newPlayDateId = (int)cmd.ExecuteNonQuery();
+                }
+            }
+            catch (SqlException)
+            {
+
+                throw;
+            }
+
+            return newPlayDateId;
+        }
         public int AddAPlayDate(PlayDate newPlayDate)
         {
             int newPlayDateId = 0;
@@ -144,7 +170,7 @@ namespace Capstone.DAO
                     SqlCommand cmd = new SqlCommand("INSERT INTO play_dates (title, host_user_id, host_pet_id, guest_pet_id, date_time, address, status_id)" + //location is TBD**
                         "OUTPUT inserted.play_date_id " +
                         "VALUES (@title, @hostUserId, @hostPetId, @guestPetId, @dateTime, @address,1)", conn);
-                    cmd.Parameters.AddWithValue("@title", newPlayDate.title);
+                    cmd.Parameters.AddWithValue("@title", newPlayDate.Title);
                     cmd.Parameters.AddWithValue("@hostUserId", newPlayDate.HostUserID);
                     cmd.Parameters.AddWithValue("@hostPetId", newPlayDate.HostPetID);
                     cmd.Parameters.AddWithValue("@guestPetId", newPlayDate.GuestPetID);
@@ -218,16 +244,22 @@ namespace Capstone.DAO
 
         private PlayDate GetPlayDateFromReader(SqlDataReader reader)
         {
-            PlayDate p = new PlayDate()
-            {
-                HostUserID = Convert.ToInt32(reader["host_user_id"]),
-                HostPetID = Convert.ToInt32(reader["host_pet_id"]),
-                GuestPetID = Convert.ToInt32(reader["guest_pet_id"]),
-                //Location = Convert.ToInt32(reader["location_id"]), //convert to dynamic??-TBD
-                DateOfPlayDate = Convert.ToDateTime(reader["date_time"]),
-            };
+            PlayDate playDate = new PlayDate();
 
-            return p;
+            playDate.PlayDateID = Convert.ToInt32(reader["play_date_id"]);
+            playDate.Title = Convert.ToString(reader["title"]);
+            playDate.HostUserID = Convert.ToInt32(reader["host_user_id"]);
+            playDate.HostUsername = Convert.ToString(reader["host_username"]);
+            playDate.HostPetID = Convert.ToInt32(reader["host_pet_id"]);
+            playDate.HostPetName = Convert.ToString(reader["host_pet_name"]);
+            playDate.GuestPetID = Convert.ToInt32(reader["guest_pet_id"]);
+            playDate.GuestUsername = Convert.ToString(reader["guest_username"]);
+            playDate.GuestPetName = Convert.ToString(reader["guest_pet_name"]);
+            playDate.DateOfPlayDate = Convert.ToDateTime(reader["date_time"]);
+            playDate.Address = Convert.ToString(reader["address"]);
+            playDate.StatusID = Convert.ToInt32(reader["status_id"]);
+
+            return playDate;
         }
 
         private FrontEndPlayDate GetFrontEndPlayDateFromReader(SqlDataReader reader)
@@ -381,6 +413,46 @@ namespace Capstone.DAO
             }
 
             return playDateThread;
+        }
+
+        public List<PlayDate> GetPlayDatesForUserByStatus(int userID, int statusID)
+        {
+            List<PlayDate> playDatesForUserByStatus = new List<PlayDate>();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand(@"SELECT PD.play_date_id, title, host_user_id, HU.username AS host_username, host_pet_id,
+                        HP.pet_name AS host_pet_name, guest_pet_id, GU.username AS guest_username,
+                        GP.pet_name AS guest_pet_name, date_time, address, status_id
+                        FROM dbo.play_dates AS PD
+                        INNER JOIN dbo.users AS HU ON HU.user_id = PD.host_user_id
+                        INNER JOIN dbo.pet_profile AS HP ON HP.pet_id = PD.host_pet_id
+                        INNER JOIN dbo.pet_profile AS GP ON GP.pet_id = PD.guest_pet_id
+                        INNER JOIN dbo.users_pets AS GUP ON GUP.pet_id = GP.pet_id
+                        INNER JOIN dbo.users AS GU ON GU.user_id = GUP.user_id
+                        WHERE(PD.host_user_id = @userID OR GU.user_id = @userID) AND status_id = @statusID", conn);
+                    cmd.Parameters.AddWithValue("@userID", userID);
+                    cmd.Parameters.AddWithValue("@statusID", statusID);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        PlayDate playDate = GetPlayDateFromReader(reader);
+                        playDatesForUserByStatus.Add(playDate);
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+
+            return playDatesForUserByStatus;
         }
     }
 }

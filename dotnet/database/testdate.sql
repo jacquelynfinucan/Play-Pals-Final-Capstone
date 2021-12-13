@@ -61,7 +61,10 @@ VALUES ('City Park Play Date', 1, 1, 2, GETDATE(),'address1', 2),									--play
 	('Cinder Birthday Get Together', 6, 6, 4, GETDATE(),'address6', 2),							--play_date_id = 6
 	('New Puppies', 7, 7, 6, GETDATE(),'address7', 2),											--play_date_id = 7
 	('Lake Visit', 8, 8, 3, GETDATE(),'address8', 2),												--play_date_id = 8
-	('No Message Test', 1, 1, 3, GETDATE(),'address9', 2);										--play_date_id = 9
+	('No Message Test', 1, 1, 3, GETDATE(),'address9', 2),											--play_date_id = 9
+	('Pending Test', 3, 3, 2, GETDATE(),'address3', 1),
+	('Accepted Test', 3, 3, 2, GETDATE(),'address3', 2),
+	('Rejetected Test', 3, 3, 2, GETDATE(),'address3', 3);										
 
 --populate test messages
 INSERT INTO play_date_messages (play_date_id, from_user_id, from_pet_id, post_date, message_text)
