@@ -84,7 +84,6 @@ CONSTRAINT [PK_pets_personality_traits] PRIMARY KEY (pet_id, personality_id),
 CONSTRAINT [FK_pets_personality_traits_pet_profile] FOREIGN KEY (pet_id) REFERENCES [pet_profile] (pet_id),
 CONSTRAINT [FK_pets_personality_traits_personality_traits] FOREIGN KEY (personality_id) REFERENCES [personality_traits] (personality_id),
 )
-
 CREATE TABLE location (
 	location_id varchar(100), --Matches place_id from google places API
 	location_name varchar(200),
@@ -97,6 +96,7 @@ CREATE TABLE location (
 
 CREATE TABLE play_dates (
 	play_date_id int IDENTITY(1,1) NOT NULL,
+	address varchar (100) NOT NULL,
 	title varchar(50) NOT NULL,
 	host_user_id int NOT NULL, 
     host_pet_id int NOT NULL, 
