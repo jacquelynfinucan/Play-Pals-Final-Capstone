@@ -102,6 +102,7 @@ CREATE TABLE play_dates (
     host_pet_id int NOT NULL, 
 	guest_pet_id int, 
 	date_time datetime NOT NULL,
+	status_id int NOT NULL,
 	location_id varchar(100) --NOT NULL
 
 	CONSTRAINT [PK_play_dates] PRIMARY KEY (play_date_id), 
