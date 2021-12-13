@@ -7,7 +7,8 @@ namespace Capstone.Models
 {
     public class PlayDate
     {
-        public string title { get; set; } //required
+        public string Title { get; set; } //required
+
         public int PlayDateID { get;set; } //required
         public int HostUserID { get; set; } //required
         public int HostPetID { get; set; } //required
@@ -15,6 +16,7 @@ namespace Capstone.Models
 
         public string Address { get; set; } //required
         public DateTime DateOfPlayDate { get; set; } //required
+        public int StatusID { get; set; } //required
         public string HostUsername { get; set; }
         public string HostPetName { get; set; }
         public string GuestUsername { get; set; }
