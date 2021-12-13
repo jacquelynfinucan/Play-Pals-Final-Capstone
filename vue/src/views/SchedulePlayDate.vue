@@ -1,7 +1,9 @@
 <template>
   <div>
     <h1>View Pets</h1>
-    <pet-card class="list" v-bind:pet="pet" v-bind:isViewOnly="true" v-for="pet in allPets" v-bind:key="pet.petID" />
+    <div class="list">
+        <pet-card v-bind:pet="pet" v-bind:isViewOnly="true" v-for="pet in allPets" v-bind:key="pet.petID" />
+    </div>
   </div>
 </template>
 
@@ -35,9 +37,9 @@ export default {
 
 <style>
 .list{
-    display:flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap:10px;
 }
 
 </style>

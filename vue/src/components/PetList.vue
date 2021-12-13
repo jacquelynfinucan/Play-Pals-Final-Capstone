@@ -85,9 +85,9 @@ export default {
     margin-bottom: 10px;
 
     background-color: lightgrey;
-    display:flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap:10px;
 }
 
 .status-message.error {

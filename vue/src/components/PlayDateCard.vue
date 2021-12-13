@@ -3,8 +3,10 @@
 
     <h3 id="header">Host Name: {{playdate.hostName}}</h3>
     <br/>
+
     <h3 class="pet-name">Host Pet Name: {{playdate.hostPet}}</h3>
     <h3 class="pet-name">Guest Pet Name: {{playdate.guestPet}}</h3>
+
 
 
 

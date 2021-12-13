@@ -113,5 +113,6 @@ export default {
 
 .pet-body {
   padding: 10px;
+  height:425px;
 }
 </style>
