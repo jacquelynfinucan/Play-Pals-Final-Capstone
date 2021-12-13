@@ -62,6 +62,7 @@
       <div>
         <label for="size">Size: </label>
         <select name="size" id="size" v-model.number="pet.size" required>
+          <!--class="form-control"  -->
           <option value="1">Small</option>
           <option value="2">Medium</option>
           <option value="3">Large</option>
@@ -85,7 +86,7 @@
       </div>
 
       <div>
-        <label for="description">Description (optional): </label>
+        <label for="description">Description: </label>
         <input
           type="textarea"
           rows="2"
@@ -257,15 +258,15 @@ export default {
           .catch((error) => {
             if (error.response) {
               this.errorMsg =
-                "Error creating profile. Response received was '" +
+                "Error updating pet. Response received was '" +
                 error.response.statusText +
                 "'.";
             } else if (error.request) {
               this.errorMsg =
-                "Error creating profile. Server could not be reached.";
+                "Error updating pet. Server could not be reached.";
             } else {
               this.errorMsg =
-                "Error creating profile. Request could not be created.";
+                "Error updating pet. Request could not be created.";
             }
           });
       }
