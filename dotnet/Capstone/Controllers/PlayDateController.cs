@@ -28,7 +28,7 @@ namespace Capstone.Controllers
         public ActionResult<List<PlayDate>> GetAllPlayDates()
         {
             List<PlayDate> playDates = playDateDao.GetAllPlayDates();
-
+            
             return Ok(playDates);
         }
 

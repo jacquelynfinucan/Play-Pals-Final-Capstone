@@ -141,22 +141,23 @@ namespace Capstone.DAO
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new SqlCommand("INSERT INTO play_dates (title, host_user_id, host_pet_id, location_id, date_time)" + //location is TBD**
+                    SqlCommand cmd = new SqlCommand("INSERT INTO play_dates (title, host_user_id, host_pet_id, guest_pet_id, date_time, address)" + //location is TBD**
                         "OUTPUT inserted.play_date_id " +
-                        "VALUES (@title, @hostUserId, @hostPetId, @location, @dateTime)", conn);
+                        "VALUES (@title, @hostUserId, @hostPetId, @guestPetId, @dateTime, @address)", conn);
                     cmd.Parameters.AddWithValue("@title", newPlayDate.title);
                     cmd.Parameters.AddWithValue("@hostUserId", newPlayDate.HostUserID);
                     cmd.Parameters.AddWithValue("@hostPetId", newPlayDate.HostPetID);
-                    //cmd.Parameters.AddWithValue("@guestPetId", newPlayDate.GuestPetID);
-                    cmd.Parameters.AddWithValue("@location", newPlayDate.location_id); //tbd-might not be in this table-have to join?-TBD**
-                    cmd.Parameters.AddWithValue("@dateTime", DateTime.Now);
+                    cmd.Parameters.AddWithValue("@guestPetId", newPlayDate.GuestPetID);
+                    // cmd.Parameters.AddWithValue("@location", newPlayDate.location_id); //tbd-might not be in this table-have to join?-TBD**
+                    cmd.Parameters.AddWithValue("@dateTime", newPlayDate.DateOfPlayDate);
+                    cmd.Parameters.AddWithValue("@address", newPlayDate.Address);
                     newPlayDateId = (int)cmd.ExecuteScalar();
                 }
             }
             catch (SqlException)
             {
-                Console.WriteLine("error");
-                //throw;
+              
+                throw;
             }
 
             return newPlayDateId;
