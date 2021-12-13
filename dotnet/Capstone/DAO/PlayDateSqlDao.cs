@@ -132,6 +132,32 @@ namespace Capstone.DAO
             return allPlayDates;
         }
 
+        public int UpdateStatus(int playDateID,int newStatus)
+        {
+            int newPlayDateId = 0;
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand(@"UPDATE play_dates
+                                                      SET status_Id = @statusID
+                                                      WHERE play_date_id = @playDateId", conn);
+                    cmd.Parameters.AddWithValue("@statusID", newStatus);
+                    cmd.Parameters.AddWithValue("@playDateID", playDateID);
+
+                    newPlayDateId = (int)cmd.ExecuteNonQuery();
+                }
+            }
+            catch (SqlException)
+            {
+
+                throw;
+            }
+
+            return newPlayDateId;
+        }
         public int AddAPlayDate(PlayDate newPlayDate)
         {
             int newPlayDateId = 0;
