@@ -160,13 +160,30 @@ namespace Capstone.DAO
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand("select * from pet_profile", conn);
+                    SqlCommand cmd = new SqlCommand(@"select pet_profile.pet_id, pet_name, animal_type, breed, age, size, is_male, 
+                                                    is_spayed_neutered, description, user_id, personality_id
+                                                    from pet_profile LEFT JOIN users_pets on users_pets.pet_id = pet_profile.pet_id
+                                                    LEFT JOIN pets_personality_traits on pet_profile.pet_id = pets_personality_traits.pet_id", conn);
 
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        petModel pet = GetPetModelFromReader(reader);
-                        pets.Add(pet);
+                        int currentPetId = Convert.ToInt32(reader["pet_id"]);
+                        petModel pet = null;
+                        foreach (petModel animal in pets)
+                        {
+                            if (animal.PetId == currentPetId)
+                            {
+                                //don't add new pet to list, just update it's pet.personalitytraits to add new personality
+                                animal.PersonalityTraits.Add(Convert.ToInt32(reader["personality_id"]));
+                                pet = animal;
+                            }
+                        }
+                        if (pet == null)
+                        {
+                            pet = GetPetModelFromReader(reader);
+                            pets.Add(pet);
+                        }
                     }
                 }
             }
