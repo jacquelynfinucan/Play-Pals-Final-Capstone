@@ -53,7 +53,14 @@ namespace Capstone.Controllers
             int newPlayDateId = playDateDao.AddAPlayDate(newPlayDate);
             return Ok();
         }
-     
+        [HttpPut("/playdates/{playDateId}/status/{statusId}")]
+        public IActionResult UpdateAStatus(int statusId, int playDateId)
+        {
+            playDateDao.UpdateStatus(playDateId,statusId);
+            return Ok();
+        }
+
+
         [HttpPut("/playdates/{playDateId}")]
         public IActionResult UpdateAPlayDate(int playDateId, PlayDate updatedPlayDate)
         {

@@ -14,6 +14,8 @@ namespace Capstone.DAO
         List<PlayDate> GetAllPlayDatesForHost(int hostUserId);
         List<PlayDate> GetAllPlayDatesForLocation(int locationId);
 
+        int UpdateStatus(int statusId, int playDateId);
+
         List<FrontEndPlayDate> GetFrontEndPlayDatesForHost(int hostUserId);
 
         List<PlayDateThread> GetPlayDateThreadsForUser(int userID);
