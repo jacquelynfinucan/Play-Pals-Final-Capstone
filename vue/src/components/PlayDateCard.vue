@@ -1,13 +1,14 @@
 <template>
    <div id="main">
 
-    <h3 id="header">Host Name: {{playdate.hostName}}</h3>
+    <h2 id="header">Playdate Title: {{playdate.title}}</h2>
     <br/>
+    <h3 class="date-time">Date and Time: {{playdate.dateOfPlayDate}}</h3>
+    <h3 class ="host-name">Host User Name: {{playdate.hostName}}</h3>
     <h3 class="pet-name">Host Pet Name: {{playdate.hostPet}}</h3>
     <h3 class="pet-name">Guest Pet Name: {{playdate.guestPet}}</h3>
-
-
-
+    <h3 class="address">Address: {{playdate.address}}</h3>
+    <h3 class="status">Status: {{playdate.status}}</h3>
 
    </div>
 </template>
@@ -17,9 +18,12 @@
 export default {
     name: 'PlayDateCard',
  
-
     props: ['playdate'],
-
+    data() {
+      return{
+        currentUserIsHost: false,
+      }
+    },
 }
 </script>
 

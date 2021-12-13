@@ -4,7 +4,7 @@ export default {
     AddPlayDate(playDate){
         return axios.post('/playdates', playDate)
     },
-    GetPlayDatesForUser(userID){
+    GetAllPlayDatesForUser(userID){
         return axios.get(`/playdates/user/${userID}`)
     },
     GetPlayDatesForLocation(locationId){
@@ -13,7 +13,9 @@ export default {
     getPlayDateThreadsForUser(userID) {
         return axios.get(`/threads/${userID}`);
     },
-
+    GetPlayDatesForUserByStatus(userID, statusID){
+        return axios.get(`/playdates/users/${userID}/status/${statusID}`)
+    },
     getPlayDateThreadForPlayDateID(playDateID) {
         return axios.get(`/playdates/${playDateID}/threads`);
     }

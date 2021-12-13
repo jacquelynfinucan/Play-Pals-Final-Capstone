@@ -7,7 +7,6 @@
         alt="pet picture"
       />
       <p class="pet-name">{{ pet.petName }}</p>
-      <!--Make description a v-if so if there isn't one, the field doesn't show -->
       <p v-if="pet.description != ''" class="description">Description: {{ pet.description }}</p>
       <!--eventually come back & make name, breed, and description first letter ToUpper or sentence case -->
     </div>
