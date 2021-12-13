@@ -65,9 +65,27 @@ export default {
         }
     },
     methods:{
-        addAPlayDate(playdate){
-            DateService.AddPlayDate(playdate);
-        }
+      registerPlaydate(){
+        DateService.AddPlayDate(this.newPlaydate).then((response) => {
+            if (response.status == 200) {
+                this.resetForm();
+            }
+          })
+          .catch((error) => {
+            if (error.response) {
+              this.errorMsg =
+                "Error creating playdate. Response received was " +
+                error.response.statusText +
+                ".";
+            } else if (error.request) {
+              this.errorMsg =
+                "Error creating playdate. Server could not be reached.";
+            } else {
+              this.errorMsg =
+                "Error creating playdate. Request could not be created.";
+            }
+          });
+      }
     },
         created(){
         this.newPlaydate.host_user_id = this.$store.state.user.userId;
