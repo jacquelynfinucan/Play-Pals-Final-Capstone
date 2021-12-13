@@ -141,20 +141,22 @@ namespace Capstone.DAO
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new SqlCommand("INSERT INTO play_dates (host_user_id, host_pet_id, guest_pet_id, date_time, location)" + //location is TBD**
-                        "OUTPUT inserted.play_date_id" +
-                        "VALUES (@hostUserId, @hostPetId, @guestPetId, @location, @dateTime)", conn);
+                    SqlCommand cmd = new SqlCommand("INSERT INTO play_dates (title, host_user_id, host_pet_id, location_id, date_time)" + //location is TBD**
+                        "OUTPUT inserted.play_date_id " +
+                        "VALUES (@title, @hostUserId, @hostPetId, @location, @dateTime)", conn);
+                    cmd.Parameters.AddWithValue("@title", newPlayDate.title);
                     cmd.Parameters.AddWithValue("@hostUserId", newPlayDate.HostUserID);
                     cmd.Parameters.AddWithValue("@hostPetId", newPlayDate.HostPetID);
-                    cmd.Parameters.AddWithValue("@guestPetId", newPlayDate.GuestPetID);
-                    cmd.Parameters.AddWithValue("@location", newPlayDate.Location); //tbd-might not be in this table-have to join?-TBD**
-                    cmd.Parameters.AddWithValue("@dateTime", newPlayDate.DateOfPlayDate);
+                    //cmd.Parameters.AddWithValue("@guestPetId", newPlayDate.GuestPetID);
+                    cmd.Parameters.AddWithValue("@location", newPlayDate.location_id); //tbd-might not be in this table-have to join?-TBD**
+                    cmd.Parameters.AddWithValue("@dateTime", DateTime.Now);
                     newPlayDateId = (int)cmd.ExecuteScalar();
                 }
             }
             catch (SqlException)
             {
-                throw;
+                Console.WriteLine("error");
+                //throw;
             }
 
             return newPlayDateId;
@@ -174,7 +176,7 @@ namespace Capstone.DAO
                         "guest_pet_id = @guestPetId, date_time = @dateTime, location = @location)", conn); //location is TBD**
                     cmd.Parameters.AddWithValue("@hostPetId", updatedPlayDate.HostPetID);
                     cmd.Parameters.AddWithValue("@guestPetId", updatedPlayDate.GuestPetID);
-                    cmd.Parameters.AddWithValue("@location", updatedPlayDate.Location); //tbd-might not be in this table-have to join?-TBD**
+                    cmd.Parameters.AddWithValue("@location", updatedPlayDate.location_id); //tbd-might not be in this table-have to join?-TBD**
                     cmd.Parameters.AddWithValue("@dateTime", updatedPlayDate.DateOfPlayDate);
                     cmd.ExecuteNonQuery();
                     isUpdateSuccessful = true;

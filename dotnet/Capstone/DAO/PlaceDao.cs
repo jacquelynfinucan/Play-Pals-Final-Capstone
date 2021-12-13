@@ -19,7 +19,7 @@ namespace Capstone.DAO
         }
         public Location GetPlacesInZip(int zipCode)
         {
-            var url = $"https://maps.googleapis.com/maps/api/place/textsearch/json?query=park+in+{zipCode}&key=AIzaSyBCEUQy7Ko99B-a-IVKJbxWkKkiqBtkjik";
+            var url = $"https://maps.googleapis.com/maps/api/place/textsearch/json?query=park+near+{zipCode}&key=AIzaSyBCEUQy7Ko99B-a-IVKJbxWkKkiqBtkjik";
             var request = new RestRequest(url);
             var response = client.Get<Location>(request);
             addPlacesToDatabase(response.Data);
