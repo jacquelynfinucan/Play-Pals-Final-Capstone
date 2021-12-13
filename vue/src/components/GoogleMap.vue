@@ -12,10 +12,14 @@
       </button>
     </div> 
     <br>-->
+    <br>
+    <input type="text" />
+    <br>
+
     <GmapMap
       :center='center'
       :zoom='16'
-      style='width:100%;  height: 1000px;'
+      style='width:100%;  height: 700px;'
     >
       <Gmap-Marker
         :icon="{ url: require('@/assets/DOGPARK-MAP-MARKER-01.png')}"

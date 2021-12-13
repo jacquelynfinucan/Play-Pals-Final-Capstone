@@ -5,7 +5,7 @@
 
       <h2> Add a play date? </h2>
 
-        <form v-on:submit.prevent="registerProfile">
+        <form v-on:submit.prevent="registerPlaydate">
       <!-- <div class="status-message error" v-show="errorMsg !== ''">
         {{ errorMsg }}
       </div> -->
@@ -23,33 +23,35 @@
       </div>
       <br>
         <label for="petSelection">Choose a pet:</label>
-        <select name="petSelection" id="petSelection">
-          <option v-for="pet in pets" :key="pet.petId" :value="pet.petId" :v-text="pet.petName">{{pet.petName}}</option>/
+        <select v-model="newPlaydate.host_pet_id" name="petSelection" id="petSelection">
+          <option  v-for="pet in pets" :key="pet.petId" :value="pet.petId" :v-text="pet.petName">{{pet.petName}}</option>/
         </select>
+      <input type="submit" />
+
     </form>
 
 
-      <h4>Playdates:</h4>
+      <!-- <h4>Playdates:</h4>
      <play-date-card
       v-for="playdate in this.playdates"
       v-bind:key="playdate.PlayDateID"
       v-bind:playdate="playdate"
-    />
+    /> -->
       </div>
 </template>
 
 <script>
 import petService from '../services/PetService'
-import PlayDateCard from './PlayDateCard.vue'
-//import DateService from '../services/DateService'
+import dateService from  '../services/DateService'
+// import PlayDateCard from './PlayDateCard.vue'
 export default {
-  components: { PlayDateCard },
+  // components: { PlayDateCard },
     name: 'ParkInfo',
     data(){
         return{
             parkName:'placeholder',
             newPlaydate:{
-              
+
             },
             locationPlaydates:{},
             location:{},
@@ -58,13 +60,37 @@ export default {
 
     },
     methods:{
-      registerProfile(){
-
+       resetForm() {
+      this.newPlaydate.title = "";
+    },
+      registerPlaydate(){
+        dateService.AddPlayDate(this.newPlaydate).then((response) => {
+            if (response.status == 200) {
+                this.resetForm();
+            }
+          })
+          .catch((error) => {
+            if (error.response) {
+              this.errorMsg =
+                "Error creating playdate. Response received was " +
+                error.response.statusText +
+                ".";
+            } else if (error.request) {
+              this.errorMsg =
+                "Error creating playdate. Server could not be reached.";
+            } else {
+              this.errorMsg =
+                "Error creating playdate. Request could not be created.";
+            }
+          });
       }
     },
     created(){
+        this.newPlaydate.host_user_id = this.$store.state.user.userId;
         //DateService.GetPlayDatesForLocation();
         this.location = this.$store.state.selectedLocation;
+        this.newPlaydate.location_id = this.location.place_id;
+
          petService.getPetsForUser(this.$store.state.user.userId).then( (response) => {
             this.pets = response.data;
         })

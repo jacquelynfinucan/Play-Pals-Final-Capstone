@@ -100,7 +100,7 @@ CREATE TABLE play_dates (
 	title varchar(50) NOT NULL,
 	host_user_id int NOT NULL, 
     host_pet_id int NOT NULL, 
-	guest_pet_id int NOT NULL, 
+	guest_pet_id int, 
 	date_time datetime NOT NULL,
 	location_id varchar(100) --NOT NULL
 

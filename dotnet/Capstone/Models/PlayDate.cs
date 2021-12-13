@@ -7,6 +7,7 @@ namespace Capstone.Models
 {
     public class PlayDate
     {
+        public string title { get; set; }
         public int PlayDateID { get;set; }
         public int HostUserID { get; set; }
         public string HostUsername { get; set; }
@@ -16,7 +17,7 @@ namespace Capstone.Models
         public string GuestUsername { get; set; }
         public string GuestPetName { get; set; }
         //model to be created
-        public dynamic Location { get; set; }
+        public string location_id { get; set; }
         public DateTime DateOfPlayDate { get; set; }
     }
 
@@ -32,7 +33,7 @@ namespace Capstone.Models
         public string GuestUsername { get; set; }
         public string GuestPetName { get; set; }
         //model to be created
-        public dynamic Location { get; set; }
+        public string location_id { get; set; }
         public DateTime DateOfPlayDate { get; set; }
         public DateTime? LatestMessageDate { get; set; }
     }
