@@ -21,6 +21,11 @@
           required
         />
       </div>
+      <br>
+        <label for="petSelection">Choose a pet:</label>
+        <select name="petSelection" id="petSelection">
+          <option v-for="pet in pets" :key="pet.petId" :value="pet.petId" :v-text="pet.petName">{{pet.petName}}</option>/
+        </select>
     </form>
 
 
@@ -34,6 +39,7 @@
 </template>
 
 <script>
+import petService from '../services/PetService'
 import PlayDateCard from './PlayDateCard.vue'
 //import DateService from '../services/DateService'
 export default {
@@ -42,15 +48,26 @@ export default {
     data(){
         return{
             parkName:'placeholder',
-            newPlaydate:{},
+            newPlaydate:{
+              
+            },
             locationPlaydates:{},
             location:{},
+            pets:[],
         }
 
+    },
+    methods:{
+      registerProfile(){
+
+      }
     },
     created(){
         //DateService.GetPlayDatesForLocation();
         this.location = this.$store.state.selectedLocation;
+         petService.getPetsForUser(this.$store.state.user.userId).then( (response) => {
+            this.pets = response.data;
+        })
     }
 }
 </script>

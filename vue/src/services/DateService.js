@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 export default {
-    AddPlayDates(playdate){
-        return axios.post('/playdates',playdate)
+    AddPlayDates(playDate){
+        return axios.post('/playdates', playDate)
     },
     GetPlayDatesForUser(userID){
         return axios.get(`/playdates/user/${userID}`)
