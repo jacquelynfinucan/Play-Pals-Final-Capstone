@@ -7,28 +7,18 @@
     <h2>Zipcode: {{ this.user.zip }}</h2>
     <h2>Email Address: {{ this.user.email }}</h2>
     <br />
-
-    <h1>My Playdates</h1>
-    <play-date-card
-      v-for="playdate in this.playdates"
-      v-bind:key="playdate.PlayDateID"
-      v-bind:playdate="playdate"
-    />
   </div>
 </template>
 
 <script>
 import UserService from "../services/UserService";
-import DateService from "../services/DateService";
-import PlayDateCard from "./PlayDateCard.vue";
 
 export default {
-  components: { PlayDateCard },
+  components: { },
   name: "UserProfile",
   data() {
     return {
       user: {},
-      playdates: {},
     };
   },
   computed: {
@@ -54,11 +44,7 @@ export default {
         this.user = response.data;
       }
     });
-    DateService.GetPlayDatesForUser(this.$store.state.user.userId).then(
-      (response) => {
-        this.playdates = response.data;
-      }
-    );
+    
   },
   methods: {
       goToEditProfile() {

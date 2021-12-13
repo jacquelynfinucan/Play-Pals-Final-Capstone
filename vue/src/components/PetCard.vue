@@ -7,8 +7,8 @@
         alt="pet picture"
       />
       <p class="pet-name">{{ pet.petName }}</p>
-      <p class="description">Description: {{ pet.description }}</p>
-      <!--eventually come back & make name, breed, and description ToUpper or sentence case -->
+      <p v-if="pet.description != ''" class="description">Description: {{ pet.description }}</p>
+      <!--eventually come back & make name, breed, and description first letter ToUpper or sentence case -->
     </div>
     <div class="pet-body">
       <p>Animal Type: {{ pet.animalType }}</p>
