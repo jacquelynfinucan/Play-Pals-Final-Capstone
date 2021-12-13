@@ -1,17 +1,17 @@
 <template>
    <div id="main">
-
     <h2 id="header">Playdate Title: {{playdate.title}}</h2>
-    <br/>
+    <div id="card-body">
     <h3 class="date-time">Date and Time: {{playdate.dateOfPlayDate}}</h3>
-    <h3 class ="host-name">Host User Name: {{playdate.hostUsername}}</h3>
-    <h3 class="pet-name">Host Pet Name: {{playdate.hostPetName}}</h3>
-    <h3 class="pet-name">Guest User Name: {{playdate.guestUsername}}</h3>
-    <h3 class="pet-name">Guest Pet Name: {{playdate.guestPetName}}</h3>
+    <h3 class ="host-name">Host User: {{playdate.hostUsername}}</h3>
+    <h3 class="pet-name">Host Pet: {{playdate.hostPetName}}</h3>
+    <h3 class="pet-name">Guest User: {{playdate.guestUsername}}</h3>
+    <h3 class="pet-name">Guest Pet: {{playdate.guestPetName}}</h3>
     <h3 class="address">Address: {{playdate.address}}</h3>
-    <h3 class="status">Status: {{playdate.statusID}}</h3>
-
-
+    <h3 v-if="this.playdate.statusID == 1" class="status">Status: Pending</h3>
+    <h3 v-if="this.playdate.statusID == 2" class="status">Status: Accepted</h3>
+    <h3 v-if="this.playdate.statusID == 3" class="status">Status: Rejected</h3>
+    </div>
    </div>
 </template>
 
@@ -33,38 +33,40 @@ export default {
 #main {
   border: solid 1px darkgrey;
   border-radius: 5px;
-
   background-color: white;
-
   margin-bottom: 10px;
+  margin-left: 10px;
 }
 
 #header {
-  border-radius: 5px;
-  
-  background-color: lightblue;
-    margin-top:0px;
-    padding:30px;
+  border-radius: 5px; 
+  background-color:lightblue;
+  margin-top:0px;
+  padding:10px;
   display: flex;
   flex-direction: row;
+}
+
+#card-body{
+  margin-left: 10px;
 }
 
 .pet-img {
   border: solid 5px darkgrey;
   border-radius: 9999px;
-  
   width: 75px;
-  margin: 10px;
-  
+  margin: 10px;  
   align-self: flex-start;
   justify-self: center;
-}
-
-.pet-name{ 
-text-align: left;
 }
 
 .pet-body {
   padding: 10px;
 }
+
+.status{
+  font-style: italic;
+}
+
+
 </style>

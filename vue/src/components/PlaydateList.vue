@@ -54,5 +54,19 @@ export default {
 </script>
 
 <style>
+#main {
+  border: solid 1px darkgrey;
+  border-radius: 5px;
+  background-color: white;
+  margin-bottom: 10px;
+}
 
+h1 {
+  border-radius: 5px;
+  background-color: aquamarine;
+  margin-top:0px;
+  padding:20px;
+  display: flex;
+  flex-direction: row;
+}
 </style>
