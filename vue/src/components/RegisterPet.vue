@@ -313,7 +313,7 @@ form, button {
 
 .submit-button {
   margin: 5px;
-  background-color: #59d697;
+  background-color: var(--tertiary-color);
   border: none;
   color: white;
   padding: 10px 25px;

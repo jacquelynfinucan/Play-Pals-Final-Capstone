@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <nav class="nav-links">
-
+      <img src="@/assets/Play Pals-logos.jpeg"/>
       <router-link class="nav-link" v-bind:to="{ name: 'home' }">Home</router-link><!--<span v-if="$store.state.token != ''">&nbsp;|&nbsp;</span>-->
       <router-link class="nav-link" v-bind:to="{ name: 'profile' }" v-if="$store.state.token != ''">Profile</router-link><!--<span v-if="$store.state.token != ''">&nbsp;|&nbsp;</span>-->
       <router-link class="nav-link" v-bind:to="{ name: 'map' }" v-if="$store.state.token != ''">Map</router-link><!--&nbsp;|&nbsp;-->
@@ -22,30 +22,31 @@ export default {
 };
 </script>
 
-<style>
-  body{
-    font-family:Cursive;
-  /* font-family:'Barlow Condensed'; */
-}
-</style>
 
 
 
 <style scoped>
+
+img{
+  height:160px;
+  position:fixed;
+  top:0px;
+  left:0px;
+}
+
 
 @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500&display=swap');
 
 
 
 .header{
-    background-color: lightgrey;
-    background:linear-gradient(110deg, lightgrey 70%,rgb(23, 114, 53) 74%);
+    background:linear-gradient(110deg, var(--secondary-color) 70%,var(--primary-color)
+ 74%);
   width :100vw;
-  height:80px;
+  height:160px;
   position:fixed;
   top:0px;
   left:0px;
-  color:white;
   display:flex;
   justify-content: space-between;
   align-items: center;
@@ -53,15 +54,15 @@ export default {
 }
 
 .nav-links {
-  margin-left: 30px;
+  margin-left: 190px;
 }
 
 .login-controls {
   margin-right:50px;
 } 
-.login-controls .nav-link{
+/* .login-controls .nav-link{
   color:white;
-}
+} */
 
 .nav-link {
   /* font-family:'Barlow Condensed'; */

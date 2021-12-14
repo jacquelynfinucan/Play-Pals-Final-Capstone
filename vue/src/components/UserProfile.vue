@@ -93,18 +93,18 @@ article {
   border-width: 1px;
   border-color: darkgray;
   border-style: solid;
-  background-color: lightgray;
+  background-color: var(--secondary-color);
   margin-top:-21px;
   border-radius:5px;
 }
 
 article div:first-child {
-  background-color: lightblue;
+  background-color: var(--tertiary-color);
 }
 
 button {
   margin: 5px;
-  background-color: #59d697;
+  background-color: var(--tertiary-color);
   border: none;
   color: white;
   padding: 10px 25px;
