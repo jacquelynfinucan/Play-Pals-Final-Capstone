@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <header-top />
-    <router-view />
+    <router-view id="router" />
     <footer-bottom />
   </div>
 </template>
@@ -19,6 +19,9 @@ export default {
 </script>
 
 <style>
+#router{
+  margin-top:80px;
+}
 .nav-link:hover {
   color: red;
 }

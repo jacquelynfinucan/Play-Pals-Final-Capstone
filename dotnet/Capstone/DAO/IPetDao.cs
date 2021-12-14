@@ -11,6 +11,7 @@ namespace Capstone.DAO
         public int AddPet(int userID, petModel pet);
         public petModel GetPetByPetId(int petId);
         public List<petModel> GetListOfUserPets(int userID);
+        public List<petModel> GetListOfNotUserPets(int userID);
         public List<petModel> GetListOfAllPets();
         public bool UpdatePetInfo(int petID, petModel pet);
         public bool DeleteUserPet(int petID);

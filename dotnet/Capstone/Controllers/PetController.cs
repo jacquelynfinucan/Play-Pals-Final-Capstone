@@ -63,6 +63,22 @@ namespace Capstone.Controllers
             }
         }
 
+        [HttpGet("/profiles/not/{userID}/pets")]
+        public IActionResult GetNotUserPets(int userID)
+        {
+            List<petModel> pets = petDao.GetListOfNotUserPets(userID);
+            if (pets == null)
+            {
+                return NotFound("No pets found.");
+            }
+            else
+            {
+                return Ok(pets);
+            }
+        }
+
+
+
         [HttpGet("/pets")]
         public IActionResult GetAllThePets()
         {
