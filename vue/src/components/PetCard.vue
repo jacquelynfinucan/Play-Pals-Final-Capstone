@@ -79,7 +79,7 @@ export default {
 
 <style scoped>
 #btnScheduleDate{
-  background-color:var(--primary-color);
+  background-color:var(--tertiary-color);
 }
 .pet-card {
   border: solid 1px darkgrey;
