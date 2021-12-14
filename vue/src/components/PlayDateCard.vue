@@ -10,7 +10,7 @@
     <h3 class="address">Address: {{playdate.address}}</h3>
     <h3 v-if="this.playdate.statusID == 1" class="status pending" :class="this.$store.state.user.userId != this.playdate.host_user_id ? 'pending-guest' : 'notCurrentUser'">Status: Pending</h3>
     <h3 v-if="this.playdate.statusID == 2" class="status accepted">Status: Accepted</h3>
-    <h3 v-if="this.playdate.statusID == 3" class="status rejected">Status: Rejected/Cancelled</h3>
+    <h3 v-if="this.playdate.statusID == 3" class="status rejected">Status: Rejected/Canceled</h3>
 
     <button v-if="this.playdate.statusID == 1 && this.$store.state.user.userId != this.playdate.host_user_id" v-on:click="changeStatusToAccepted">Accept Request</button>
     <button v-if="this.playdate.statusID == 1 && this.$store.state.user.userId != this.playdate.host_user_id" v-on:click="changeStatusToRejected">Decline Request</button>

@@ -14,7 +14,7 @@
       v-bind:playdate="playdate"
     />
 
-    <h1>Rejected Playdates</h1>
+    <h1>Rejected/Canceled Playdates</h1>
     <play-date-card
       v-for="playdate in this.rejectedPlaydates"
       v-bind:key="playdate.PlayDateID"
