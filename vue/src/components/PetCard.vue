@@ -3,7 +3,7 @@
     <div class="pet-header">
       <img
         class="pet-img"
-        src="https://randomuser.me/api/portraits/lego/1.jpg"
+        src="@/assets/yorkshire.jpg"
         alt="pet picture"
       />
       <p class="pet-name">{{ pet.petName }}</p>
