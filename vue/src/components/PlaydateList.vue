@@ -223,6 +223,7 @@ h1 {
 
 .expand-collapse-arrow{
   width: 40px;
+  padding-right: 20px;
 }
 
 .filters{
