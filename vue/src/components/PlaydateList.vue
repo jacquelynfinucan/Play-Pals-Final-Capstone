@@ -1,12 +1,13 @@
 <template>
 <div>
+  <!--
   <div class="filters">
     <span>Filters: </span>
     <input type="text" id="usernameFilter" v-model="filter.username" placeholder="Username" />&nbsp;
     <input type="text" id="petNameFilter" v-model="filter.petName" placeholder="Pet Name" />&nbsp;
     <input type="text" id="titleFilter" v-model="filter.title" placeholder="Play Date Title" />
   </div>
-
+  -->
     <h1>Pending Playdates</h1>
     <play-date-card
       v-for="playdate in this.pendingPlaydates"
@@ -15,6 +16,12 @@
     />
 
     <h1>Confirmed Playdates</h1>
+    <div class="filters">
+      <span>Filters: </span>
+      <input type="text" id="usernameFilterConfirmed" v-model="filterConfirmed.username" placeholder="Username" />&nbsp;
+      <input type="text" id="petNameFilterConfirmed" v-model="filterConsirmed.petName" placeholder="Pet Name" />&nbsp;
+      <input type="text" id="titleFilterConfirmed" v-model="filterConfirmed.title" placeholder="Play Date Title" />
+    </div>
     <play-date-card
       v-for="playdate in filteredConfirmedPlaydates"
       v-bind:key="playdate.PlayDateID"
@@ -41,7 +48,7 @@ export default {
       pendingPlaydates: [],
       confirmedPlaydates: [],
       rejectedPlaydates: [],
-      filter: {
+      filterConfirmed: {
         username: '',
         petName: '',
         title: ''
@@ -53,7 +60,7 @@ export default {
       let filteredPlaydates = this.confirmedPlaydates;
 
       if (this.filter.username != '') {
-        filteredPlaydates = filteredPlaydates.filter((playdate) => playdate.hostUsername.toLowerCase().includes(this.filter.username.toLowerCase()) || playdate.guestUsername.toLowerCase().includes(this.filter.username.toLowerCase())
+        filteredPlaydates = filteredPlaydates.filter((playdate) => playdate.hostUsername.toLowerCase().includes(this.filterConfirmed.username.toLowerCase()) || playdate.guestUsername.toLowerCase().includes(this.filterConfirmed.username.toLowerCase())
         );
       }
 
