@@ -60,11 +60,13 @@ VALUES ('City Park Play Date', 1, 1, 2, GETDATE(),'1234 Main St Cleveland, OH 44
 	('Dog Yoga', 5, 5, 7, GETDATE(),'89 Memory Lane Brooklyn, OH 44144', 2),												--play_date_id = 5
 	('Cinder Birthday Get Together', 6, 6, 4, GETDATE(),'1234 Main St Cleveland, OH 44111', 2),							--play_date_id = 6
 	('Weekly Exercise Regime', 7, 7, 6, GETDATE(),'89 Memory Lane Brooklyn, OH 44144', 2),											--play_date_id = 7
-	('Lake Visit', 8, 8, 3, GETDATE(),'567 Other Blvd Lakewood, OH 44107', 2),												--play_date_id = 8
+	('Lake Visit', 8, 8, 3, GETDATE(),'567 Brick Blvd Lakewood, OH 44107', 2),												--play_date_id = 8
 	('Surprise Puppy Playdate!', 1, 1, 3, GETDATE(),'1234 Main St Cleveland, OH 44111', 1),											--play_date_id = 9
 	('Happy Holidays Party!', 3, 3, 2, GETDATE(),'89 Memory Lane Brooklyn, OH 44144', 1),
 	('Welcome to the Neighborhood', 3, 3, 2, GETDATE(),'1234 Main St Cleveland, OH 44111', 2),
-	('New Puppies', 3, 3, 2, GETDATE(),'567 Brick Blvd Lakewood, OH 44107', 3);										
+	('New Puppies', 3, 3, 2, GETDATE(),'2468 Maple Tree Ave Shaker Heights, OH 44001', 3),
+	('Lets Play!', 3, 3, 2, GETDATE(),'9753 Doggie Drive Cleveland, OH 44111', 2),
+	('New Dog Park Opening', 2, 1, 3, GETDATE(),'1357 Puppers Ave Rocky River, OH 44123', 1);	
 
 --populate test messages
 INSERT INTO play_date_messages (play_date_id, from_user_id, from_pet_id, post_date, message_text)
