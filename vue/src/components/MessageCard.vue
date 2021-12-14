@@ -7,12 +7,12 @@
         <p>{{formatedDate}}</p>
       </div>
       <div class="sent-body" v-if="sender">
-        <p class="message-text">{{message.messageText}}</p>
         <img class="pet-img" src="https://randomuser.me/api/portraits/lego/1.jpg" alt="pet picture" /> <!-- replace with user/pet image -->
+        <p class="message-text">{{message.messageText}}</p>
       </div>
       <div class="received-body" v-if="!sender">
-        <img class="pet-img" src="https://randomuser.me/api/portraits/lego/1.jpg" alt="pet picture" /> <!-- replace with user/pet image -->
         <p class="message-text">{{message.messageText}}</p>
+        <img class="pet-img" src="https://randomuser.me/api/portraits/lego/1.jpg" alt="pet picture" /> <!-- replace with user/pet image -->
       </div>
     </div>
   </div>
@@ -75,45 +75,16 @@ export default {
 .message-text{
   font-size: 18px;
 }
-/* Sent Messages */
-.sent-message{
-  background-color: lawngreen;
-}
-.sent-message .message-header{
-  padding-left: 5%;
-}
-.sent-message .message-text{
-  padding-left: 15%;
-  margin-right: 5%;
-}
-.sent-body{
-  display: flex;
-  justify-content: space-between;
-  align-items: top;
-}
-.sent-body .pet-img{
-  margin-right: 2%;
-  margin-top: 0%;
-  margin-bottom: 1%;
-}
-/* Received Messages */
+/* Recieved Messages */
 .received-message{
-  background-color: hotpink;
-}
-.received-message-box{
-  display: flex;
-  justify-content: flex-end;
-  margin: 5px;
+  background-color: lightgray;
 }
 .received-message .message-header{
-  justify-content: right;
-  padding-right: 5%;
+  padding-left: 5%;
 }
 .received-message .message-text{
-  display: flex;
-  justify-content: right;
-  padding-right: 15%;
-  padding-left: 5%;
+  padding-left: 15%;
+  margin-right: 5%;
 }
 .received-body{
   display: flex;
@@ -121,6 +92,35 @@ export default {
   align-items: top;
 }
 .received-body .pet-img{
+  margin-right: 2%;
+  margin-top: 0%;
+  margin-bottom: 1%;
+}
+/* Sent Messages */
+.sent-message{
+  background-color: lightblue;
+}
+.sent-message-box{
+  display: flex;
+  justify-content: flex-end;
+  margin: 5px;
+}
+.sent-message .message-header{
+  justify-content: right;
+  padding-right: 5%;
+}
+.sent-message .message-text{
+  display: flex;
+  justify-content: right;
+  padding-right: 15%;
+  padding-left: 5%;
+}
+.sent-body{
+  display: flex;
+  justify-content: space-between;
+  align-items: top;
+}
+.sent-body .pet-img{
   margin-left: 2%;
   margin-top: 0%;
   margin-bottom: 1%;

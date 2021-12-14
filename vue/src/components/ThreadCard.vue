@@ -91,4 +91,10 @@ export default {
     justify-content: center;
     padding-bottom: 20px;
 }
+.new-post-form{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+    width: 40%;
+}
 </style>

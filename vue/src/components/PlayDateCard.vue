@@ -1,6 +1,10 @@
 <template>
    <div id="main">
-    <h2 id="header">Playdate Title: {{playdate.title}}</h2>
+    <h2 id="header">Playdate Title: {{playdate.title}} 
+      <router-link v-bind:to="{name: 'thread', params: {id: playdate.playDateID}}">
+        <img id="img-messages" src="@/assets/message-thread-icon.png" alt="messages"/>
+      </router-link>
+    </h2>
     <div id="card-body">
     <h3 class="date-time">Date and Time: {{formatedDate}}</h3>
     <h3 class ="host-name">Host User: {{playdate.hostUsername}}</h3>
@@ -51,6 +55,7 @@ export default {
   padding:10px;
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
 }
 
 #card-body{
@@ -74,5 +79,8 @@ export default {
   font-style: italic;
 }
 
+#img-messages{
+  width: 35px;
+}
 
 </style>
