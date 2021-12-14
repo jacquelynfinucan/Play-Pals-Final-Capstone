@@ -9,6 +9,12 @@
   </div>
   -->
     <h1>Pending Playdates</h1>
+    <div class="filters">
+      <span>Filters: </span>
+      <input type="text" id="usernameFilterPending" v-model="filterPending.username" placeholder="Username" />&nbsp;
+      <input type="text" id="petNameFilterPending" v-model="filterPending.petName" placeholder="Pet Name" />&nbsp;
+      <input type="text" id="titleFilterPending" v-model="filterPending.title" placeholder="Play Date Title" />
+    </div>
     <play-date-card
       v-for="playdate in this.pendingPlaydates"
       v-bind:key="playdate.PlayDateID"
@@ -19,7 +25,7 @@
     <div class="filters">
       <span>Filters: </span>
       <input type="text" id="usernameFilterConfirmed" v-model="filterConfirmed.username" placeholder="Username" />&nbsp;
-      <input type="text" id="petNameFilterConfirmed" v-model="filterConsirmed.petName" placeholder="Pet Name" />&nbsp;
+      <input type="text" id="petNameFilterConfirmed" v-model="filterConfirmed.petName" placeholder="Pet Name" />&nbsp;
       <input type="text" id="titleFilterConfirmed" v-model="filterConfirmed.title" placeholder="Play Date Title" />
     </div>
     <play-date-card
@@ -52,28 +58,29 @@ export default {
         username: '',
         petName: '',
         title: ''
+      },
+      filterPending: {
+        username: '',
+        petName: '',
+        title: ''
       }
     };
   },
   computed: {
     filteredConfirmedPlaydates() { 
       let filteredPlaydates = this.confirmedPlaydates;
-
-      if (this.filter.username != '') {
+      if (this.filterConfirmed.username != '') {
         filteredPlaydates = filteredPlaydates.filter((playdate) => playdate.hostUsername.toLowerCase().includes(this.filterConfirmed.username.toLowerCase()) || playdate.guestUsername.toLowerCase().includes(this.filterConfirmed.username.toLowerCase())
         );
       }
-
-      if (this.filter.petName != '') {
-        filteredPlaydates = filteredPlaydates.filter((playdate) => playdate.hostPetName.toLowerCase().includes(this.filter.petName.toLowerCase()) || playdate.guestPetName.toLowerCase().includes(this.filter.petName.toLowerCase())
+      if (this.filterConfirmed.petName != '') {
+        filteredPlaydates = filteredPlaydates.filter((playdate) => playdate.hostPetName.toLowerCase().includes(this.filterConfirmed.petName.toLowerCase()) || playdate.guestPetName.toLowerCase().includes(this.filterConfirmed.petName.toLowerCase())
         );
       }
-
-      if (this.filter.title != '') {
-        filteredPlaydates = filteredPlaydates.filter((playdate) => playdate.title.toLowerCase().includes(this.filter.title.toLowerCase())
+      if (this.filterConfirmed.title != '') {
+        filteredPlaydates = filteredPlaydates.filter((playdate) => playdate.title.toLowerCase().includes(this.filterConfirmed.title.toLowerCase())
         );
       }
-
       return filteredPlaydates;
     }
   },
