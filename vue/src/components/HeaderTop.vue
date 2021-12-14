@@ -22,12 +22,6 @@ export default {
 };
 </script>
 
-<style>
-  body{
-    font-family:Cursive;
-  /* font-family:'Barlow Condensed'; */
-}
-</style>
 
 
 
@@ -46,8 +40,7 @@ img{
 
 
 .header{
-    background-color: lightgrey;
-    background:linear-gradient(110deg, rgba(217,217,217,255) 70%,rgba(247,111,115,255)
+    background:linear-gradient(110deg, var(--secondary-color) 70%,var(--primary-color)
  74%);
   width :100vw;
   height:160px;

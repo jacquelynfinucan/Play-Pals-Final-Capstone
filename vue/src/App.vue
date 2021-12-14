@@ -7,6 +7,7 @@
 </template>
 
 <script>
+
 import HeaderTop from '@/components/HeaderTop.vue';
 import FooterBottom from '@/components/FooterBottom.vue';
 
@@ -19,6 +20,7 @@ export default {
 </script>
 
 <style>
+@import url('./UniversalStyles.css');
 #router{
   margin-top:160px;
 }
