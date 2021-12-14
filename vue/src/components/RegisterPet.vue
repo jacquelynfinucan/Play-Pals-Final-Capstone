@@ -186,7 +186,7 @@
       </div>
 
       <label for="submit" v-if="!this.isEdit">Finished adding pets? </label>
-      <input type="submit" /><br />
+      <input class="submit-button" type="submit" /><br />
 
       <button v-if="!this.isEdit" v-on:click="moreToAdd = true">Save and add another pet</button>
     </form>
@@ -306,4 +306,26 @@ export default {
 .status-message.error {
   color: red;
 }
+
+form, button {
+  margin:5px;
+}
+
+.submit-button {
+  margin: 5px;
+  background-color: #59d697;
+  border: none;
+  color: white;
+  padding: 10px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  border-style: solid;
+  border-color: black;
+  border-width: 1px;
+  color:black;
+  border-radius:5px;
+}
+
 </style>

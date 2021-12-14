@@ -63,7 +63,7 @@ export default {
 
 h1 {
   border-radius: 5px;
-  background-color: aquamarine;
+  background-color: #59d697;
   margin-top:0px;
   padding:20px;
   display: flex;
