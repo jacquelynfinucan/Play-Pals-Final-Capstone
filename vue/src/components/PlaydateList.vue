@@ -1,5 +1,7 @@
 <template>
 <div>
+  <h1>My Playdates</h1>
+  <br>
   <!--
   <div class="filters">
     <span>Filters: </span>
@@ -15,6 +17,7 @@
       <input type="text" id="petNameFilterPending" v-model="filterPending.petName" placeholder="Pet Name" />&nbsp;
       <input type="text" id="titleFilterPending" v-model="filterPending.title" placeholder="Play Date Title" />
     </div>
+        <br>
     <play-date-card
       v-for="playdate in this.pendingPlaydates"
       v-bind:key="playdate.PlayDateID"
@@ -28,6 +31,7 @@
       <input type="text" id="petNameFilterConfirmed" v-model="filterConfirmed.petName" placeholder="Pet Name" />&nbsp;
       <input type="text" id="titleFilterConfirmed" v-model="filterConfirmed.title" placeholder="Play Date Title" />
     </div>
+        <br>
     <play-date-card
       v-for="playdate in filteredConfirmedPlaydates"
       v-bind:key="playdate.PlayDateID"
@@ -101,7 +105,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 #main {
   border: solid 1px darkgrey;
   border-radius: 5px;
@@ -109,12 +113,4 @@ export default {
   margin-bottom: 10px;
 }
 
-h1 {
-  border-radius: 5px;
-  background-color: var(--primary-color);
-  margin-top:0px;
-  padding:20px;
-  display: flex;
-  flex-direction: row;
-}
 </style>

@@ -124,10 +124,6 @@ export default {
   background-color: yellow;
 }
 
-button{
-  font-weight: bold;
-}
-
 #img-messages{
   width: 35px;
 }
