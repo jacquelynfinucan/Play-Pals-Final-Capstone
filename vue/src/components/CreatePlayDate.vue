@@ -5,9 +5,10 @@
       <!-- <div class="status-message error" v-show="errorMsg !== ''">
         {{ errorMsg }}
       </div> -->
-      
+      <h1>New Playdate Details:</h1>
+      <div class="form-body">
       <div>
-        <label for="play-date-title">Play Date Title:</label>
+        <label for="play-date-title">Playdate Title: </label>
         <input
           type="text"
           id="play-date-title"
@@ -21,7 +22,7 @@
         <br>
 
       <div>
-        <label for="play-date-address">Play Date Address:</label>
+        <label for="play-date-address">Playdate Address: </label>
         <input
           type="text"
           id="play-date-address"
@@ -34,12 +35,12 @@
 
       <br>
 
-
+      <label for="play-date-datetime">Playdate Date and Time: </label>
       <input type="datetime-local" id="datetime" class="form-control" v-model="newPlaydate.DateOfPlayDate">
 
       <br>
       <br>
-        <label for="petSelection">Choose a pet:</label>
+        <label for="petSelection">Choose your pet for the playdate: </label>
         <select v-model="newPlaydate.host_pet_id" name="petSelection" id="petSelection">
           <option  v-for="pet in pets" :key="pet.petId" :value="pet.petId" :v-text="pet.petName">{{pet.petName}}</option>/
         </select>
@@ -47,7 +48,7 @@
       <br>
       <input type="submit" />
       <br>
-
+      </div>
     </form>
 
 
@@ -100,6 +101,13 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+.form-body{
+  border: solid 1px darkgrey;
+  border-radius: 5px;
+  background-color: white;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  padding:10px;
+}
 </style>

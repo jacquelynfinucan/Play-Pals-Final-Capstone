@@ -20,7 +20,7 @@
     <button v-if="this.playdate.statusID == 1 && this.$store.state.user.userId != this.playdate.host_user_id" v-on:click="changeStatusToAccepted">Accept Request</button>
     <button v-if="this.playdate.statusID == 1 && this.$store.state.user.userId != this.playdate.host_user_id" v-on:click="changeStatusToRejected">Decline Request</button>
 
-    <button v-if="this.playdate.statusID == 2 && this.$store.state.user.userId == this.playdate.host_user_id" v-on:click="sendToUpdatePlaydate">Update Playdate</button>
+    <button v-if="this.playdate.statusID == 2 && this.$store.state.user.userId == this.playdate.host_user_id" v-on:click="sendToUpdatePlaydate">Edit Playdate</button>
     <button v-if="(this.playdate.statusID == 2 || this.playdate.statusID == 1) && this.$store.state.user.userId == this.playdate.host_user_id" v-on:click="changeStatusToRejected">Cancel Playdate</button>
 
     </div>
