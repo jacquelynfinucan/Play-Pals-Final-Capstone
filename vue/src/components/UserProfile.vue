@@ -1,11 +1,28 @@
 <template>
   <div class="main">
     <h1>User Profile</h1>
-    <button id="btnEditProfile" v-on:click="goToEditProfile">Edit Profile</button>
-    <h2>First Name: {{ this.user.firstName }}</h2>
-    <h2>Last Name: {{ this.user.lastName }}</h2>
-    <h2>Zipcode: {{ this.user.zip }}</h2>
-    <h2>Email Address: {{ this.user.email }}</h2>
+
+    <article>
+      <div>
+        <h2>My Name</h2>
+        <h5>{{ this.user.firstName }} {{ this.user.lastName }}</h5>
+      </div>
+
+      <div>
+        <h2>My Location</h2>
+        <h5>{{ this.user.zip }}</h5>
+      </div>
+
+      <div>
+        <h2>My Contact</h2>
+        <h5>{{ this.user.email }}</h5>
+      </div>
+
+      <button id="btnEditProfile" v-on:click="goToEditProfile">
+        Edit My Info
+      </button>
+    </article>
+
     <br />
   </div>
 </template>
@@ -14,7 +31,7 @@
 import UserService from "../services/UserService";
 
 export default {
-  components: { },
+  components: {},
   name: "UserProfile",
   data() {
     return {
@@ -43,7 +60,6 @@ export default {
         this.user = response.data;
       }
     });
-    
   },
   methods: {
     goToEditProfile() {
@@ -60,6 +76,7 @@ h3 {
   text-align: left;
 }
 
+
 article > div {
   text-align: left;
   background-color: white;
@@ -67,20 +84,22 @@ article > div {
   padding: 2px;
   padding-left: 10px;
   margin: 10px;
-  border-style:solid;
-  border-color:black;
-  border-width:1px;
+  border-style: solid;
+  border-color: black;
+  border-width: 1px;
 }
 
 article {
   border-width: 1px;
-  border-color: black;
+  border-color: darkgray;
   border-style: solid;
-  background-color:lightgray;
+  background-color: lightgray;
+  margin-top:-21px;
+  border-radius:5px;
 }
 
 article div:first-child {
-  background-color: rgb(250, 128, 114);
+  background-color: lightblue;
 }
 
 button {
@@ -93,13 +112,21 @@ button {
   text-decoration: none;
   display: inline-block;
   font-size: 15px;
-  border-style:solid;
-  border-color:black;
-  border-width:1px;
+  border-style: solid;
+  border-color: black;
+  border-width: 1px;
+  color:black;
+  border-radius:5px;
 }
 
 h2,
 h5 {
   margin: 5px;
 }
+
+
+.main{
+  margin-top:10px;
+}
+
 </style>

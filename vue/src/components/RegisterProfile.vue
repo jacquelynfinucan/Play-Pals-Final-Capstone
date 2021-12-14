@@ -56,7 +56,7 @@
           required
         />
       </div>
-      <input type="submit" />
+      <input class="submit-button" type="submit" />
     </form>
   </div>
 </template>
@@ -145,6 +145,23 @@ form{
 
 div{
   margin:5px;
+}
+
+.submit-button {
+  margin: 5px;
+  background-color: #59d697;
+  border: none;
+  color: white;
+  padding: 10px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  border-style: solid;
+  border-color: black;
+  border-width: 1px;
+  color:black;
+  border-radius:5px;
 }
 
 </style>

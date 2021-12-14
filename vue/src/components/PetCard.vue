@@ -85,6 +85,9 @@ export default {
   background-color: white;
 
   margin-bottom: 10px;
+  border-color:black;
+  border-style:solid;
+  border-width:1px;
 }
 
 .pet-header {
