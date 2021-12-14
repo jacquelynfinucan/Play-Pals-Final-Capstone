@@ -65,7 +65,15 @@ namespace Capstone.Controllers
         public IActionResult UpdateAPlayDate(int playDateId, PlayDate updatedPlayDate)
         {
             bool isSuccessful = playDateDao.UpdateAPlayDate(updatedPlayDate);
-            return Ok();
+            
+            if (isSuccessful)
+            {
+                return Ok();
+            }
+            else
+            {
+                return StatusCode(500);
+            }
         }
 
         [HttpDelete("/playdates/{playDateId}")]

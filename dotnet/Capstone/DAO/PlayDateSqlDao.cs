@@ -201,14 +201,30 @@ namespace Capstone.DAO
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new SqlCommand("UPDATE play_dates SET host_pet_id = @hostPetId," +
-                        "guest_pet_id = @guestPetId, date_time = @dateTime, location = @location)", conn); //location is TBD**
-                    cmd.Parameters.AddWithValue("@hostPetId", updatedPlayDate.HostPetID);
-                    cmd.Parameters.AddWithValue("@guestPetId", updatedPlayDate.GuestPetID);
-                    cmd.Parameters.AddWithValue("@location", updatedPlayDate.location_id); //tbd-might not be in this table-have to join?-TBD**
+                    SqlCommand cmd = new SqlCommand(@"UPDATE dbo.play_dates SET title = @title, host_user_id = @hostUserID, address = @address, 
+                        host_pet_id = @hostPetID, guest_pet_id = @guestPetID, date_time = @dateTime, location_id = @locationID 
+                        WHERE play_date_id = @playDateID;", conn);
+                    cmd.Parameters.AddWithValue("@title", updatedPlayDate.Title);
+                    cmd.Parameters.AddWithValue("@hostUserID", updatedPlayDate.HostUserID);
+                    cmd.Parameters.AddWithValue("@address", updatedPlayDate.Address);
+                    cmd.Parameters.AddWithValue("@hostPetID", updatedPlayDate.HostPetID);
+                    cmd.Parameters.AddWithValue("@guestPetID", updatedPlayDate.GuestPetID);
                     cmd.Parameters.AddWithValue("@dateTime", updatedPlayDate.DateOfPlayDate);
-                    cmd.ExecuteNonQuery();
-                    isUpdateSuccessful = true;
+                    if (updatedPlayDate.location_id == null)
+                    {
+                        cmd.Parameters.AddWithValue("@locationID", DBNull.Value);
+                    }
+                    else {
+                        cmd.Parameters.AddWithValue("@locationID", updatedPlayDate.location_id);
+                    }
+                    cmd.Parameters.AddWithValue("@playDateID", updatedPlayDate.PlayDateID);
+
+                    int rowsAffected = cmd.ExecuteNonQuery();
+
+                    if (rowsAffected == 1)
+                    {
+                        isUpdateSuccessful = true;
+                    }
                 }
             }
             catch (SqlException)
