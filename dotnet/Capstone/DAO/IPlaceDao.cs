@@ -10,6 +10,8 @@ namespace Capstone.DAO
     {
 
         public Location GetPlacesInZip(int zipCode);
+        public Location GetPlacesNearLocation(double lat, double lng);
+
 
     }
 }
