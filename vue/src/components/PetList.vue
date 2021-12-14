@@ -1,6 +1,6 @@
 <template>
   <div class="pet-list">
-      <h1 class="pets-title">My Pets</h1>
+      <h1>My Pets</h1>
       <button id="btnAddPet" v-on:click="goToRegisterNewPet">Add A New Pet</button> <!--make sure add a new pet refreshes the form-inconsistent-->
       <div class="pets">
             <div class="status-message error" v-show="errorMsg !== ''">{{errorMsg}}</div>
@@ -94,9 +94,9 @@ export default {
     color: red;
 }
 
-.pets-title {
-    text-align: left;
-
+button {
+    margin: 5px;
 }
+
 
 </style>

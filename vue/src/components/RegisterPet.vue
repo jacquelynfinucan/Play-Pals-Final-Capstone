@@ -306,4 +306,9 @@ export default {
 .status-message.error {
   color: red;
 }
+
+form, button {
+  margin:5px;
+}
+
 </style>

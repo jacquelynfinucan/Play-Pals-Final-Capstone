@@ -138,4 +138,13 @@ export default {
 .status-message.error {
   color: red;
 }
+
+form{
+  margin:5px;
+}
+
+div{
+  margin:5px;
+}
+
 </style>

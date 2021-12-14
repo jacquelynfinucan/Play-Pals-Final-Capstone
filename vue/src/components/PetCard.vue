@@ -93,7 +93,14 @@ export default {
 
   display: flex;
   flex-direction: row;
+  align-items: center; 
+
 }
+
+.description {
+  margin:15px;
+}
+
 
 .pet-img {
   border: solid 5px darkgrey;
@@ -102,17 +109,22 @@ export default {
   width: 75px;
   margin: 10px;
 
-  align-self: flex-start;
+  align-self: center;
   justify-self: center;
 }
 
 .pet-name {
   font-weight: bold;
   font-size: 2rem;
+
 }
 
 .pet-body {
   padding: 10px;
   height:425px;
+}
+
+button {
+  margin:5px;
 }
 </style>
