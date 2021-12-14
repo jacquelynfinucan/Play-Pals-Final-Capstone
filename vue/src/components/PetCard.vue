@@ -71,6 +71,9 @@ export default {
     },
     goToSchedulePlayDate(petID){
       this.$store.commit("SET_SAVED_PET_ID",petID);
+      this.$store.commit("SET_CURRENT_PLAYDATE", {
+      title: ""  
+    });
       this.$router.push({name:"CreateDate"}); //push to schedule play date view??
     }
   },
