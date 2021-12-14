@@ -10,10 +10,19 @@
   -->
     <h1>Pending Playdates</h1>
     <div class="filters">
-      <span>Filters: </span>
-      <input type="text" id="usernameFilterPending" v-model="filterPending.username" placeholder="Username" />&nbsp;
-      <input type="text" id="petNameFilterPending" v-model="filterPending.petName" placeholder="Pet Name" />&nbsp;
-      <input type="text" id="titleFilterPending" v-model="filterPending.title" placeholder="Play Date Title" />
+      <span>Filters:</span>
+      <div class="filter-category">
+        <label for="usernameFilterPending">Username:</label>
+        <input type="text" id="usernameFilterPending" v-model="filterPending.username" placeholder="Username" />&nbsp;
+      </div>
+      <div class="filter-category">
+        <label for="petNameFilterPending">Pet Name:</label>
+        <input type="text" id="petNameFilterPending" v-model="filterPending.petName" placeholder="Pet Name" />&nbsp;
+      </div>
+      <div class="filter-category">
+        <label for="titleFilterPending">Playdate Title:</label>
+        <input type="text" id="titleFilterPending" v-model="filterPending.title" placeholder="Play Date Title" />
+      </div>
     </div>
     <play-date-card
       v-for="playdate in filteredPendingPlaydates"
@@ -23,10 +32,19 @@
 
     <h1>Confirmed Playdates</h1>
     <div class="filters">
-      <span>Filters: </span>
-      <input type="text" id="usernameFilterConfirmed" v-model="filterConfirmed.username" placeholder="Username" />&nbsp;
-      <input type="text" id="petNameFilterConfirmed" v-model="filterConfirmed.petName" placeholder="Pet Name" />&nbsp;
-      <input type="text" id="titleFilterConfirmed" v-model="filterConfirmed.title" placeholder="Play Date Title" />
+      <span >Filters: </span>
+      <div class="filter-category">
+        <label for="usernameFilterConfirmed">Username:</label>
+        <input type="text" id="usernameFilterConfirmed" v-model="filterConfirmed.username" placeholder="Username" />&nbsp;
+      </div>
+      <div class="filter-category">
+        <label for="petNameFilterConfirmed">Pet Name:</label>
+        <input type="text" id="petNameFilterConfirmed" v-model="filterConfirmed.petName" placeholder="Pet Name" />&nbsp;
+      </div>
+      <div class="filter-category">
+        <label for="titleFilterConfirmed">Playdate Title:</label>
+        <input type="text" id="titleFilterConfirmed" v-model="filterConfirmed.title" placeholder="Play Date Title" />
+      </div>
     </div>
     <play-date-card
       v-for="playdate in filteredConfirmedPlaydates"
@@ -37,9 +55,18 @@
     <h1>Rejected Playdates</h1>
     <div class="filters">
       <span>Filters: </span>
-      <input type="text" id="usernameFilterRejected" v-model="filterRejected.username" placeholder="Username" />&nbsp;
-      <input type="text" id="petNameFilterRejected" v-model="filterRejected.petName" placeholder="Pet Name" />&nbsp;
-      <input type="text" id="titleFilterRejected" v-model="filterRejected.title" placeholder="Play Date Title" />
+      <div class="filter-category">
+        <label for="usernameFilterRejected">Username:</label>
+        <input type="text" id="usernameFilterRejected" v-model="filterRejected.username" placeholder="Username" />&nbsp;
+      </div>
+      <div class="filter-category">
+        <label for="petNameFilterRejected">Pet Name:</label>
+        <input type="text" id="petNameFilterRejected" v-model="filterRejected.petName" placeholder="Pet Name" />&nbsp;
+      </div>
+      <div class="filter-category">
+        <label for="titleFilterRejected">Playdate Title:</label>
+        <input type="text" id="titleFilterRejected" v-model="filterRejected.title" placeholder="Play Date Title" />
+      </div>
     </div>
     <play-date-card
       v-for="playdate in filteredRejectedPlaydates"
@@ -159,5 +186,26 @@ h1 {
   padding:20px;
   display: flex;
   flex-direction: row;
+}
+
+.filters{
+  display: flex;
+  border: solid 1px darkgrey;
+  border-radius: 5px;
+
+  padding: 10px;
+  margin-bottom: 10px;
+
+  display: flex;
+  gap: 10px;
+}
+span{
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+}
+.filter-category{
+  display: flex;
+  flex-direction: column;
 }
 </style>

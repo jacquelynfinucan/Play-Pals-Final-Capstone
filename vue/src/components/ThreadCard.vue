@@ -95,6 +95,5 @@ export default {
     display: flex;
     justify-content: center;
     margin-bottom: 10px;
-    width: 40%;
 }
 </style>
