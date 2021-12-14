@@ -27,6 +27,12 @@ namespace Capstone.Controllers
         {
             return PlaceDao.GetPlacesInZip(zipCode);
         }
+        [HttpGet("/parks/{lat}/{lng}")]
+        public Location GetPlacesInZip(double lat, double lng)
+        {
+            return PlaceDao.GetPlacesNearLocation(lat, lng);
+        }
+
 
 
 
