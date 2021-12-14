@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Text.Json.Serialization;
 
 namespace Capstone.Models
 {
@@ -10,8 +11,11 @@ namespace Capstone.Models
         public string Title { get; set; } //required
 
         public int PlayDateID { get;set; } //required
+        [JsonPropertyName("host_user_id")]
         public int HostUserID { get; set; } //required
+        [JsonPropertyName("host_pet_id")]
         public int HostPetID { get; set; } //required
+        [JsonPropertyName("guest_pet_id")]
         public int GuestPetID { get; set; } = -1;  //required
 
         public string Address { get; set; } //required
