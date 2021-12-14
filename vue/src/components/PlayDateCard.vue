@@ -2,13 +2,8 @@
    <div id="main">
     <h2 id="header">Playdate Title: {{playdate.title}}</h2>
     <div id="card-body">
-<<<<<<< HEAD
-    <h3 class="date-time">Date and Time: {{playdate.dateOfPlayDate}}</h3>
-    <h3 class ="host-name">Host User: {{playdate.hostUsername}}</h3> <!--v-bind:class="{'currentUser': playdate.hostUserID == this.$store.state.User}"-->
-=======
     <h3 class="date-time">Date and Time: {{formatedDate}}</h3>
-    <h3 class ="host-name">Host User: {{playdate.hostUsername}}</h3>
->>>>>>> 5f88e358c62451127c8626d3296f590c25e59512
+    <h3 class ="host-name">Host User: {{playdate.hostUsername}}</h3> <!--v-bind:class="{'currentUser': playdate.hostUserID == this.$store.state.User}"-->
     <h3 class="pet-name">Host Pet: {{playdate.hostPetName}}</h3>
     <h3 class="pet-name">Guest User: {{playdate.guestUsername}}</h3> <!--v-bind:class="{'currentUser': playdate.guestUsername == this.$store.User}"-->
     <h3 class="pet-name">Guest Pet: {{playdate.guestPetName}}</h3>
