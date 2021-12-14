@@ -39,7 +39,7 @@
       </ul>
     </div>
     <button v-if="isViewOnly == false" id="btnEditPet" v-on:click="goToEditPet">Edit Pet</button>
-    <button v-if="isViewOnly == true" v-on:click="goToSchedulePlayDate">Schedule Play Date</button>
+    <button v-if="isViewOnly == true" v-on:click="goToSchedulePlayDate(pet.petId)">Schedule Play Date</button>
     <!--<button id="btnDeletePet" v-on:click="deletePet">Delete Pet</button>-->
   </div>
 </template>
@@ -69,8 +69,9 @@ export default {
         });
       }
     },
-    goToSchedulePlayDate(){
-      this.$route.push(); //push to schedule play date view??
+    goToSchedulePlayDate(petID){
+      this.$store.commit("SET_SAVED_PET_ID",petID);
+      this.$router.push({name:"CreateDate"}); //push to schedule play date view??
     }
   },
 };
