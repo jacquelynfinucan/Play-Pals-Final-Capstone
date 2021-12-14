@@ -23,5 +23,8 @@ export default {
   },
   getAllPets(){
     return http.get('/pets')
+  },
+  getAllPetsNotForUser(userID) {
+    return http.get(`/profiles/not/${userID}/pets`)
   }
 }
