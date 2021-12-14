@@ -8,7 +8,7 @@ export default {
         return axios.get(`/playdates/user/${userID}`)
     },
     GetPlayDatesForLocation(locationId){
-        return axios.get(`playdates/place/${locationId}"`)
+        return axios.get(`/playdates/place/${locationId}"`)
     },
     getPlayDateThreadsForUser(userID) {
         return axios.get(`/threads/${userID}`);
@@ -18,5 +18,11 @@ export default {
     },
     getPlayDateThreadForPlayDateID(playDateID) {
         return axios.get(`/playdates/${playDateID}/threads`);
+    }, 
+    updatePlayDateStatus(playDateID, statusID) {
+        return axios.put(`/playdates/${playDateID}/status/${statusID}`)
+    }, 
+    updatePlayDate(playDateId){
+        return axios.put(`/playdates/${playDateId}`)
     }
 }
