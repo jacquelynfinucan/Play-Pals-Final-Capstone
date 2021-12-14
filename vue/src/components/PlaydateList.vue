@@ -2,7 +2,7 @@
 <div>
   <h1>My Playdates</h1>
     <br>
-  <h1>
+  <h1 class="playdate-status">
     Pending Playdates
     <div v-if="!pendingMinimized" v-on:click="pendingMinimized = true">
         <img class="expand-collapse-arrow" src="@/assets/collapse-arrow.png" alt="collapse"/>
@@ -35,7 +35,7 @@
     />
   </div>
 
-  <h1>
+  <h1 class="playdate-status">
     Confirmed Playdates
     <div v-if="!confirmedMinimized" v-on:click="confirmedMinimized = true">
       <img class="expand-collapse-arrow" src="@/assets/collapse-arrow.png" alt="collapse"/>
@@ -68,7 +68,7 @@
       />
   </div>
 
-  <h1>
+  <h1 class="playdate-status">
     Rejected Playdates
     <div v-if="!rejectedMinimized" v-on:click="rejectedMinimized = true">
       <img class="expand-collapse-arrow" src="@/assets/collapse-arrow.png" alt="collapse"/>
@@ -215,6 +215,9 @@ h1 {
   padding:20px;
   display: flex;
   flex-direction: row;
+}
+
+.playdate-status{
   justify-content: space-between;
 }
 
