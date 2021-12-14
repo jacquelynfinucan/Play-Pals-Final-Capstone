@@ -132,9 +132,8 @@ namespace Capstone.DAO
             return allPlayDates;
         }
 
-        public int UpdateStatus(int playDateID,int newStatus)
+        public void UpdateStatus(int playDateID,int newStatus)
         {
-            int newPlayDateId = 0;
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
@@ -142,12 +141,16 @@ namespace Capstone.DAO
                     conn.Open();
 
                     SqlCommand cmd = new SqlCommand(@"UPDATE play_dates
-                                                      SET status_Id = @statusID
+                                                      SET status_id = @statusID
                                                       WHERE play_date_id = @playDateId", conn);
                     cmd.Parameters.AddWithValue("@statusID", newStatus);
                     cmd.Parameters.AddWithValue("@playDateID", playDateID);
 
-                    newPlayDateId = (int)cmd.ExecuteNonQuery();
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    if (rowsAffected != 1)
+                    {
+                        throw new Exception();
+                    }
                 }
             }
             catch (SqlException)
@@ -156,7 +159,6 @@ namespace Capstone.DAO
                 throw;
             }
 
-            return newPlayDateId;
         }
         public int AddAPlayDate(PlayDate newPlayDate)
         {
