@@ -2,20 +2,20 @@
   <div class="main">
     <h1>User Profile</h1>
 
-    <article>
+    <article id="profile">
       <div>
-        <h2>My Name</h2>
-        <h5>{{ this.user.firstName }} {{ this.user.lastName }}</h5>
+        <h2 class="field-title">My Name</h2>
+        <h5 class="field-info">{{ this.user.firstName }} {{ this.user.lastName }}</h5>
       </div>
 
       <div>
-        <h2>My Location</h2>
-        <h5>{{ this.user.zip }}</h5>
+        <h2 class="field-title">My Location</h2>
+        <h5 class="field-info">{{ this.user.zip }}</h5>
       </div>
 
       <div>
-        <h2>My Contact</h2>
-        <h5>{{ this.user.email }}</h5>
+        <h2 class="field-title">My Contact</h2>
+        <h5 class="field-info">{{ this.user.email }}</h5>
       </div>
 
       <button id="btnEditProfile" v-on:click="goToEditProfile">
@@ -76,7 +76,6 @@ h3 {
   text-align: left;
 }
 
-
 article > div {
   text-align: left;
   background-color: white;
@@ -89,7 +88,7 @@ article > div {
   border-width: 1px;
 }
 
-article {
+#profile {
   border-width: 1px;
   border-color: darkgray;
   border-style: solid;
@@ -102,28 +101,9 @@ article div:first-child {
   background-color: var(--tertiary-color);
 }
 
-button {
-  margin: 5px;
-  background-color: var(--tertiary-color);
-  border: none;
-  color: white;
-  padding: 10px 25px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 15px;
-  border-style: solid;
-  border-color: black;
-  border-width: 1px;
-  color:black;
-  border-radius:5px;
+.field-info, .field-title{
+  margin:5px;
 }
-
-h2,
-h5 {
-  margin: 5px;
-}
-
 
 .main{
   margin-top:10px;

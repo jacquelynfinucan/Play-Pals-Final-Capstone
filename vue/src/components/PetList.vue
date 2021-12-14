@@ -1,7 +1,8 @@
 <template>
   <div class="pet-list">
     <h1>My Pets</h1>
-  
+    <br>
+    <button id="btnAddPet" v-on:click="goToRegisterNewPet">Add A New Pet</button>
     <!--make sure add a new pet refreshes the form-inconsistent-->
     <div class="background">
       <div class="pets">
@@ -22,9 +23,7 @@
           <pet-card v-bind:pet="pet" v-bind:isViewOnly="false" />
         </div>
       </div>
-            <button id="btnAddPet" v-on:click="goToRegisterNewPet">
-      Add A New Pet
-    </button>
+      
     </div>
 
   </div>
