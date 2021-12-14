@@ -86,6 +86,8 @@ export default {
                 "Error creating playdate. Request could not be created.";
             }
           });
+      this.$router.push({ name: "playdate-list" });
+
       }
     },
         created(){
@@ -93,6 +95,7 @@ export default {
          petService.getPetsForUser(this.$store.state.user.userId).then( (response) => {
             this.pets = response.data;
         })
+
     }
 }
 </script>

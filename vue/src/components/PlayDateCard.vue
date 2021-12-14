@@ -1,6 +1,11 @@
 <template>
    <div id="main">
-    <h2 id="header">Playdate Title: {{playdate.title}}</h2><!--<p v-if="this.$store.state.user.userId != this.playdate.host_user_id ? role='Host' : role='Guest'">({{role}})</p>-->
+    <h2 id="header">Playdate Title: {{playdate.title}} 
+      <router-link v-bind:to="{name: 'thread', params: {id: playdate.playDateID}}">
+        <img id="img-messages" src="@/assets/message-thread-icon.png" alt="messages"/>
+      </router-link>
+      <!--<p v-if="this.$store.state.user.userId != this.playdate.host_user_id ? role='Host' : role='Guest'">({{role}})</p>-->
+    </h2>
     <div id="card-body">
     <h3 class="date-time">Date and Time: {{formatedDate}}</h3>
     <h3 class ="host-name" :class="this.$store.state.user.userId == this.playdate.host_user_id ? 'currentUser' : 'notCurrentUser'">Host User: {{playdate.hostUsername}}</h3>
@@ -78,6 +83,7 @@ export default {
   padding:10px;
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
 }
 
 #card-body{
@@ -106,6 +112,7 @@ export default {
   font-style: italic;
 }
 
+<<<<<<< HEAD
 .pending{
   color: red;
 }
@@ -120,6 +127,10 @@ export default {
 
 button{
   font-weight: bold;
+=======
+#img-messages{
+  width: 35px;
+>>>>>>> 63b4589bfd700cf24200d5e6db8c0c6a7cdc73f7
 }
 
 </style>
