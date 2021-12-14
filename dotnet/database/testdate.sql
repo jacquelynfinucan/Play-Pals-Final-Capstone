@@ -53,18 +53,18 @@ VALUES (1,1),
 
 --populate test play dates
 INSERT INTO play_dates (title, host_user_id, host_pet_id, guest_pet_id, date_time, address, status_id)
-VALUES ('City Park Play Date', 1, 1, 2, GETDATE(),'address1', 2),									--play_date_id = 1
-	('At Home Play Date', 2, 2, 5, GETDATE(),'address2', 2),										--play_date_id = 2
-	('Jogging and Dogs', 3, 3, 2, GETDATE(),'address3', 2),										--play_date_id = 3
-	('Meet and Greet', 4, 4, 1, GETDATE(),'address4', 2),											--play_date_id = 4
-	('Dog Yoga', 5, 5, 7, GETDATE(),'address5', 2),												--play_date_id = 5
-	('Cinder Birthday Get Together', 6, 6, 4, GETDATE(),'address6', 2),							--play_date_id = 6
-	('New Puppies', 7, 7, 6, GETDATE(),'address7', 2),											--play_date_id = 7
-	('Lake Visit', 8, 8, 3, GETDATE(),'address8', 2),												--play_date_id = 8
-	('No Message Test', 1, 1, 3, GETDATE(),'address9', 2),											--play_date_id = 9
-	('Pending Test', 3, 3, 2, GETDATE(),'address3', 1),
-	('Accepted Test', 3, 3, 2, GETDATE(),'address3', 2),
-	('Rejetected Test', 3, 3, 2, GETDATE(),'address3', 3);										
+VALUES ('City Park Play Date', 1, 1, 2, GETDATE(),'1234 Main St Cleveland, OH 44111', 2),									--play_date_id = 1
+	('At Home Play Date', 2, 2, 5, GETDATE(),'567 Brick Blvd Lakewood, OH 44107', 2),										--play_date_id = 2
+	('Jogging and Dogs', 3, 3, 2, GETDATE(),'1234 Main St Cleveland, OH 44111', 2),										--play_date_id = 3
+	('Meet and Greet', 4, 4, 1, GETDATE(),'567 Brick Blvd Lakewood, OH 44107', 2),											--play_date_id = 4
+	('Dog Yoga', 5, 5, 7, GETDATE(),'89 Memory Lane Brooklyn, OH 44144', 2),												--play_date_id = 5
+	('Cinder Birthday Get Together', 6, 6, 4, GETDATE(),'1234 Main St Cleveland, OH 44111', 2),							--play_date_id = 6
+	('Weekly Exercise Regime', 7, 7, 6, GETDATE(),'89 Memory Lane Brooklyn, OH 44144', 2),											--play_date_id = 7
+	('Lake Visit', 8, 8, 3, GETDATE(),'567 Other Blvd Lakewood, OH 44107', 2),												--play_date_id = 8
+	('Surprise Puppy Playdate!', 1, 1, 3, GETDATE(),'1234 Main St Cleveland, OH 44111', 1),											--play_date_id = 9
+	('Happy Holidays Party!', 3, 3, 2, GETDATE(),'89 Memory Lane Brooklyn, OH 44144', 1),
+	('Welcome to the Neighborhood', 3, 3, 2, GETDATE(),'1234 Main St Cleveland, OH 44111', 2),
+	('New Puppies', 3, 3, 2, GETDATE(),'567 Brick Blvd Lakewood, OH 44107', 3);										
 
 --populate test messages
 INSERT INTO play_date_messages (play_date_id, from_user_id, from_pet_id, post_date, message_text)

@@ -3,20 +3,21 @@
     <h2 id="header">Playdate Title: {{playdate.title}}</h2>
     <div id="card-body">
     <h3 class="date-time">Date and Time: {{formatedDate}}</h3>
-    <h3 class ="host-name">Host User: {{playdate.hostUsername}}</h3> <!--v-bind:class="{'currentUser': playdate.hostUserID == this.$store.state.User}"-->
+    <h3 class ="host-name" :class="this.$store.state.user.userId == this.playdate.host_user_id ? 'currentUser' : 'notCurrentUser'">Host User: {{playdate.hostUsername}}</h3>
     <h3 class="pet-name">Host Pet: {{playdate.hostPetName}}</h3>
-    <h3 class="pet-name">Guest User: {{playdate.guestUsername}}</h3> <!--v-bind:class="{'currentUser': playdate.guestUsername == this.$store.User}"-->
+    <h3 class="pet-name" :class="this.$store.state.user.userId != this.playdate.host_user_id  ? 'currentUser' : 'notCurrentUser'">Guest User: {{playdate.guestUsername}}</h3>
     <h3 class="pet-name">Guest Pet: {{playdate.guestPetName}}</h3>
     <h3 class="address">Address: {{playdate.address}}</h3>
-    <h3 v-if="this.playdate.statusID == 1" class="status">Status: Pending</h3>
-    <h3 v-if="this.playdate.statusID == 2" class="status">Status: Accepted</h3>
-    <h3 v-if="this.playdate.statusID == 3" class="status">Status: Rejected</h3>
+    <h3 v-if="this.playdate.statusID == 1" class="status pending" :class="this.$store.state.user.userId != this.playdate.host_user_id ? 'pending-guest' : 'notCurrentUser'">Status: Pending</h3>
+    <h3 v-if="this.playdate.statusID == 2" class="status accepted">Status: Accepted</h3>
+    <h3 v-if="this.playdate.statusID == 3" class="status rejected">Status: Rejected</h3>
 
-    <button v-if="this.playdate.statusID == 1" v-on:click="changeStatusToAccepted">Accept Request</button>
-    <button v-if="this.playdate.statusID == 1" v-on:click="changeStatusToRejected">Decline Request</button>
+    <button v-if="this.playdate.statusID == 1 && this.$store.state.user.userId != this.playdate.host_user_id" v-on:click="changeStatusToAccepted">Accept Request</button>
+    <button v-if="this.playdate.statusID == 1 && this.$store.state.user.userId != this.playdate.host_user_id" v-on:click="changeStatusToRejected">Decline Request</button>
 
-    <button v-if="this.playdate.statusID == 2 && this.playdate.hostUserID == this.$store.state.currentUser" v-on:click="cancelPlaydate">Cancel Playdate</button>
-    <button v-if="this.playdate.statusID == 2 && this.playdate.hostUserID == this.$store.state.currentUser" v-on:click="sendToUpdatePlaydate">Update Playdate</button>
+    <button v-if="this.playdate.statusID == 2 && this.$store.state.user.userId == this.playdate.host_user_id" v-on:click="sendToUpdatePlaydate">Update Playdate</button>
+    <!--<button v-if="this.playdate.statusID == 2 && this.$store.state.user.userId == this.playdate.host_user_id" v-on:click="cancelPlaydate">Cancel Playdate</button>-->
+
     </div>
    </div>
 </template>
@@ -86,7 +87,7 @@ export default {
 }
 
 .currentUser{
-  color: red;
+  color: dodgerblue;
   font-style: italic;
 }
 
@@ -107,5 +108,16 @@ export default {
   font-style: italic;
 }
 
+.pending{
+  color: red;
+}
+
+.accepted{
+  color: #33d348f1;
+}
+
+.pending-guest{
+  background-color: yellow;
+}
 
 </style>
