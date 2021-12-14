@@ -1,13 +1,13 @@
 <template>
   <div class="header">
     <nav class="nav-links">
-
-      <router-link class="nav-link" v-bind:to="{ name: 'home' }">Home</router-link><span v-if="$store.state.token != ''">&nbsp;|&nbsp;</span>
-      <router-link class="nav-link" v-bind:to="{ name: 'profile' }" v-if="$store.state.token != ''">Profile</router-link><span v-if="$store.state.token != ''">&nbsp;|&nbsp;</span>
-      <router-link class="nav-link" v-bind:to="{ name: 'map' }" v-if="$store.state.token != ''">Map</router-link>&nbsp;|&nbsp;
-      <router-link class="nav-link" v-bind:to="{ name: 'messages' }" v-if="$store.state.token != ''">Messages</router-link>&nbsp;|&nbsp;
-      <router-link class="nav-link" v-bind:to="{ name: 'playdate-list' }" v-if="$store.state.token != ''">My Playdates</router-link>&nbsp;|&nbsp;
-      <router-link class="nav-link" v-bind:to="{ name: 'schedule' }" v-if="$store.state.token != ''">Schedule A Playdate</router-link>&nbsp;|&nbsp;
+      <img src="@/assets/Play Pals-logos.jpeg"/>
+      <router-link class="nav-link" v-bind:to="{ name: 'home' }">Home</router-link><!--<span v-if="$store.state.token != ''">&nbsp;|&nbsp;</span>-->
+      <router-link class="nav-link" v-bind:to="{ name: 'profile' }" v-if="$store.state.token != ''">Profile</router-link><!--<span v-if="$store.state.token != ''">&nbsp;|&nbsp;</span>-->
+      <router-link class="nav-link" v-bind:to="{ name: 'map' }" v-if="$store.state.token != ''">Map</router-link><!--&nbsp;|&nbsp;-->
+      <router-link class="nav-link" v-bind:to="{ name: 'messages' }" v-if="$store.state.token != ''">Messages</router-link><!--&nbsp;|&nbsp;-->
+      <router-link class="nav-link" v-bind:to="{ name: 'playdate-list' }" v-if="$store.state.token != ''">My Playdates</router-link><!--&nbsp;|&nbsp;-->
+      <router-link class="nav-link" v-bind:to="{ name: 'schedule' }" v-if="$store.state.token != ''">Schedule A Playdate</router-link><!--&nbsp;|&nbsp;-->
     </nav>
     <nav class="login-controls">
       <router-link class="nav-link" v-bind:to="{ name: 'login' }" v-if="$store.state.token == ''">Log in / Sign up</router-link>
@@ -22,36 +22,53 @@ export default {
 };
 </script>
 
+
+
+
 <style scoped>
-.header {
-  background-color: lightgrey;
 
-  padding-top: 10px;
-  padding-bottom: 10px;
-  padding-left: 10px;
-  padding-right: 10px;
+img{
+  height:160px;
+  position:fixed;
+  top:0px;
+  left:0px;
+}
 
-  border-radius: 5px;
-  border: solid 1px darkgrey;
 
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-areas: 
-    "nav login";
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500&display=swap');
+
+
+
+.header{
+    background:linear-gradient(110deg, var(--secondary-color) 70%,var(--primary-color)
+ 74%);
+  width :100vw;
+  height:160px;
+  position:fixed;
+  top:0px;
+  left:0px;
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size:26px;
 }
 
 .nav-links {
-  grid-area: nav;
+  margin-left: 190px;
 }
 
 .login-controls {
-  grid-area: login;
-  
-  display: flex;
-  justify-content: right;
-}
+  margin-right:50px;
+} 
+/* .login-controls .nav-link{
+  color:white;
+} */
 
 .nav-link {
+  /* font-family:'Barlow Condensed'; */
   font-weight: bold;
+  text-decoration: none;
+  color:rgb(4, 16, 20);
+  margin-right:35px;
 }
 </style>

@@ -6,7 +6,7 @@
       </router-link>
     </h2>
     <div id="card-body">
-    <h3 class="date-time">Date and Time: {{playdate.dateOfPlayDate}}</h3>
+    <h3 class="date-time">Date and Time: {{formatedDate}}</h3>
     <h3 class ="host-name">Host User: {{playdate.hostUsername}}</h3>
     <h3 class="pet-name">Host Pet: {{playdate.hostPetName}}</h3>
     <h3 class="pet-name">Guest User: {{playdate.guestUsername}}</h3>
@@ -30,6 +30,12 @@ export default {
         currentUserIsHost: false,
       }
     },
+    computed: {
+      formatedDate() {
+        let date = new Date(this.playdate.dateOfPlayDate);        
+        return date.toLocaleString();
+      }
+    }
 }
 </script>
 
@@ -44,7 +50,7 @@ export default {
 
 #header {
   border-radius: 5px; 
-  background-color:lightblue;
+  background-color:var(--tertiary-color);
   margin-top:0px;
   padding:10px;
   display: flex;

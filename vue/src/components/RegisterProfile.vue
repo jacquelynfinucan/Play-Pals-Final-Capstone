@@ -56,7 +56,7 @@
           required
         />
       </div>
-      <input type="submit" />
+      <input class="submit-button" type="submit" />
     </form>
   </div>
 </template>
@@ -138,4 +138,30 @@ export default {
 .status-message.error {
   color: red;
 }
+
+form{
+  margin:5px;
+}
+
+div{
+  margin:5px;
+}
+
+.submit-button {
+  margin: 5px;
+  background-color:var(--tertiary-color);
+  border: none;
+  color: white;
+  padding: 10px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  border-style: solid;
+  border-color: black;
+  border-width: 1px;
+  color:black;
+  border-radius:5px;
+}
+
 </style>

@@ -1,15 +1,15 @@
 <template>
   <div class="home-welcome">    
-    <div class="welcome-title">
+    <!-- <div class="welcome-title">
         <h1>Pet Pals</h1>
-    </div>
+    </div> -->
     <div class="welcome-image">
         <img id="img-dogs" src="@/assets/dogs.png" alt="dogs-playing" />
     </div>
     <div class="welcome-content">       
-        <h2>Welcome to Pet Pals!</h2>
+        <h2>Welcome to Play Pals!</h2>
         <div>
-        <h3>Pet Pals offers you the abilty to:</h3> 
+        <h3>Play Pals offers you the abilty to:</h3> 
         <ul>
             <li> Register your pets for play dates</li>
             <li> Request play dates with other users pets</li>

@@ -39,7 +39,7 @@
       </ul>
     </div>
     <button v-if="isViewOnly == false" id="btnEditPet" v-on:click="goToEditPet">Edit Pet</button>
-    <button v-if="isViewOnly == true" v-on:click="goToSchedulePlayDate(pet.petId)">Schedule Play Date</button>
+    <button v-if="isViewOnly == true" id="btnScheduleDate" v-on:click="goToSchedulePlayDate(pet.petId)">Schedule Play Date</button>
     <!--<button id="btnDeletePet" v-on:click="deletePet">Delete Pet</button>-->
   </div>
 </template>
@@ -78,6 +78,9 @@ export default {
 </script>
 
 <style scoped>
+#btnScheduleDate{
+  background-color:var(--primary-color);
+}
 .pet-card {
   border: solid 1px darkgrey;
   border-radius: 5px;
@@ -85,16 +88,26 @@ export default {
   background-color: white;
 
   margin-bottom: 10px;
+  border-color:black;
+  border-style:solid;
+  border-width:1px;
 }
 
 .pet-header {
   border-radius: 5px;
 
-  background-color: lightblue;
+  background-color: var(--tertiary-color);
 
   display: flex;
   flex-direction: row;
+  align-items: center; 
+
 }
+
+.description {
+  margin:15px;
+}
+
 
 .pet-img {
   border: solid 5px darkgrey;
@@ -103,17 +116,22 @@ export default {
   width: 75px;
   margin: 10px;
 
-  align-self: flex-start;
+  align-self: center;
   justify-self: center;
 }
 
 .pet-name {
   font-weight: bold;
   font-size: 2rem;
+
 }
 
 .pet-body {
   padding: 10px;
   height:425px;
+}
+
+button {
+  margin:5px;
 }
 </style>

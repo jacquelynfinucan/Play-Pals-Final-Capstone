@@ -97,7 +97,7 @@ export default {
 
 h1 {
   border-radius: 5px;
-  background-color: aquamarine;
+  background-color: var(--primary-color);
   margin-top:0px;
   padding:20px;
   display: flex;
