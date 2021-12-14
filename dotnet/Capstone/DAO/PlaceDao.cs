@@ -28,6 +28,17 @@ namespace Capstone.DAO
             return response.Data;
         }
 
+        public Location GetPlacesNearLocation(double lat, double lng)
+        {
+            var url = $"https://maps.googleapis.com/maps/api/place/nearbysearch/json?location={lat}%2C{lng}&radius=1500&type=park&key=AIzaSyBCEUQy7Ko99B-a-IVKJbxWkKkiqBtkjik";
+            var request = new RestRequest(url);
+            var response = client.Get<Location>(request);
+            addPlacesToDatabase(response.Data);
+            return response.Data;
+        }
+
+
+
         public int addPlacesToDatabase(Location location)
         {
             try

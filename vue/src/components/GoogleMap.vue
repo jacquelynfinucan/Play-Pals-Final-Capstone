@@ -12,10 +12,10 @@
       </button>
     </div> 
     <br>-->
-    <br>
+    <!-- <br>
     <input type="text" />
-    <br>
-
+    <br> -->
+  
     <GmapMap
       :center='center'
       :zoom='16'
@@ -50,8 +50,18 @@ export default {
   },
   mounted() {
     this.geolocate();
+      
   },
   methods: {
+    updateMarkersToLocation(lat,lng){
+          PlaceService.GetParksForLocation(lat,lng).then((response)=>{
+          this.locations = response.data.results;
+          this.locations.forEach(element => {
+              element.location = {lat:element.geometry[0].location.lat,lng:element.geometry[0].location.lng};
+              this.markers.push(element)
+          });
+      })
+    },
     markerOnClick(marker){
         this.center=marker.location;
         this.$store.commit('SET_SELECTED_LOCATION',marker);
@@ -78,17 +88,18 @@ export default {
           lat: position.coords.latitude,
           lng: position.coords.longitude,
         };
+        this.updateMarkersToLocation(this.center.lat,this.center.lng);
       });
     },
   },
-  created(){
-      PlaceService.GetParksForZip(44106).then((response)=>{
-          this.locations = response.data.results;
-          this.locations.forEach(element => {
-              element.location = {lat:element.geometry[0].location.lat,lng:element.geometry[0].location.lng};
-              this.markers.push(element)
-          });
-      })
-  }
+  // created(){
+  //     PlaceService.GetParksForZip(44106).then((response)=>{
+  //         this.locations = response.data.results;
+  //         this.locations.forEach(element => {
+  //             element.location = {lat:element.geometry[0].location.lat,lng:element.geometry[0].location.lng};
+  //             this.markers.push(element)
+  //         });
+  //     })
+  // }
 };
 </script>
