@@ -11,7 +11,7 @@
 
             
             <div class="pet" v-for="pet in this.$store.state.pets" v-bind:key="pet.pet_id" v-else>
-                <pet-card v-bind:pet="pet" />
+                <pet-card v-bind:pet="pet" v-bind:isViewOnly="false"/>
             </div>
       </div>
   </div>
@@ -85,6 +85,9 @@ export default {
     margin-bottom: 10px;
 
     background-color: lightgrey;
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap:10px;
 }
 
 .status-message.error {
@@ -93,6 +96,7 @@ export default {
 
 .pets-title {
     text-align: left;
+
 }
 
 </style>

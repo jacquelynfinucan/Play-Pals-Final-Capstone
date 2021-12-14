@@ -3,14 +3,14 @@ GO
 
 --populate test users with a default password of "password"
 INSERT INTO users (username, password_hash, salt, user_role) 
-VALUES ('user','Jg45HuwT7PZkfuKTz6IB90CtWY4=','LHxP4Xh7bN0=','user'),	--user_id = 1
-	('admin','YhyGVQ+Ch69n4JMBncM4lNF/i9s=', 'Ar/aB2thQTI=','admin'),	--user_id = 2
-	('mark','Jg45HuwT7PZkfuKTz6IB90CtWY4=','LHxP4Xh7bN0=','user'),		--user_id = 3
-	('zach','Jg45HuwT7PZkfuKTz6IB90CtWY4=','LHxP4Xh7bN0=','user'),		--user_id = 4
-	('ryan','Jg45HuwT7PZkfuKTz6IB90CtWY4=','LHxP4Xh7bN0=','user'),		--user_id = 5
-	('jacki','Jg45HuwT7PZkfuKTz6IB90CtWY4=','LHxP4Xh7bN0=','user'),		--user_id = 6
-	('kirin','Jg45HuwT7PZkfuKTz6IB90CtWY4=','LHxP4Xh7bN0=','user'),		--user_id = 7
-	('david','Jg45HuwT7PZkfuKTz6IB90CtWY4=','LHxP4Xh7bN0=','user');		--user_id = 8
+VALUES ('User','Jg45HuwT7PZkfuKTz6IB90CtWY4=','LHxP4Xh7bN0=','user'),	--user_id = 1
+	('Admin','YhyGVQ+Ch69n4JMBncM4lNF/i9s=', 'Ar/aB2thQTI=','admin'),	--user_id = 2
+	('Mark','Jg45HuwT7PZkfuKTz6IB90CtWY4=','LHxP4Xh7bN0=','user'),		--user_id = 3
+	('Zach','Jg45HuwT7PZkfuKTz6IB90CtWY4=','LHxP4Xh7bN0=','user'),		--user_id = 4
+	('Ryan','Jg45HuwT7PZkfuKTz6IB90CtWY4=','LHxP4Xh7bN0=','user'),		--user_id = 5
+	('Jacque','Jg45HuwT7PZkfuKTz6IB90CtWY4=','LHxP4Xh7bN0=','user'),		--user_id = 6
+	('Kiran','Jg45HuwT7PZkfuKTz6IB90CtWY4=','LHxP4Xh7bN0=','user'),		--user_id = 7
+	('David','Jg45HuwT7PZkfuKTz6IB90CtWY4=','LHxP4Xh7bN0=','user');		--user_id = 8
 
 --populate test profiles for the above users
 INSERT INTO user_profile (user_id, first_name, last_name, email, zip_code) 
@@ -25,14 +25,14 @@ VALUES (1, 'userFirst', 'userLast', 'user@gmail.com', 41000),
 
 --populate test pets for the above users
 INSERT INTO pet_profile (pet_name, animal_type, breed, age, size, is_male, is_spayed_neutered, description)
-VALUES ('Bolt', 'dog', 'Bulldog', 5, 3, 1, 1, 'Good boy!'),				--pet_id = 1
-	('Hunter', 'dog', 'Poodle', 2, 2, 0, 0, 'Very energetic'),			--pet_id = 2
-	('Alpha', 'dog', 'Beagle', 4, 1, 1, 1, 'Sleepy'),					--pet_id = 3
-	('Rain', 'dog', 'Golden Retriever', 6, 3, 0, 0, 'Very shy'),		--pet_id = 4
-	('Ritz', 'dog', 'German Shepherd', 1, 1, 1, 1, 'Bites!'),			--pet_id = 5
-	('Cinder', 'dog', 'Beagle', 4, 3, 0, 0, 'Playful'),					--pet_id = 6
-	('Bixby', 'dog', 'Poodle', 3, 2, 1, 1, 'Loud barker'),				--pet_id = 7
-	('Arrow', 'dog', 'Bulldog', 5, 2, 0, 0, 'Loves to play fetch');		--pet_id = 8
+VALUES ('Bolt', 'Dog', 'Bulldog', 5, 3, 1, 1, 'Good boy!'),				--pet_id = 1
+	('Hunter', 'Dog', 'Poodle', 2, 2, 0, 0, 'Very energetic'),			--pet_id = 2
+	('Alpha', 'Dog', 'Beagle', 4, 1, 1, 1, 'Sleepy'),					--pet_id = 3
+	('Rain', 'Dog', 'Golden Retriever', 6, 3, 0, 0, 'Very shy'),		--pet_id = 4
+	('Ritz', 'Dog', 'German Shepherd', 1, 1, 1, 1, 'Bites!'),			--pet_id = 5
+	('Cinder', 'Dog', 'Beagle', 4, 3, 0, 0, 'Playful'),					--pet_id = 6
+	('Bixby', 'Dog', 'Poodle', 3, 2, 1, 1, 'Loud barker'),				--pet_id = 7
+	('Arrow', 'Dog', 'Bulldog', 5, 2, 0, 0, 'Loves to play fetch');		--pet_id = 8
 
 --assign person
 INSERT INTO pets_personality_traits (pet_id, personality_id)
@@ -61,23 +61,26 @@ VALUES ('City Park Play Date', 1, 1, 2, GETDATE(),'address1', 2),									--play
 	('Cinder Birthday Get Together', 6, 6, 4, GETDATE(),'address6', 2),							--play_date_id = 6
 	('New Puppies', 7, 7, 6, GETDATE(),'address7', 2),											--play_date_id = 7
 	('Lake Visit', 8, 8, 3, GETDATE(),'address8', 2),												--play_date_id = 8
-	('No Message Test', 1, 1, 3, GETDATE(),'address9', 2);										--play_date_id = 9
+	('No Message Test', 1, 1, 3, GETDATE(),'address9', 2),											--play_date_id = 9
+	('Pending Test', 3, 3, 2, GETDATE(),'address3', 1),
+	('Accepted Test', 3, 3, 2, GETDATE(),'address3', 2),
+	('Rejetected Test', 3, 3, 2, GETDATE(),'address3', 3);										
 
 --populate test messages
 INSERT INTO play_date_messages (play_date_id, from_user_id, from_pet_id, post_date, message_text)
-VALUES (1, 1, 1, DATEADD(hour, -2, GETDATE()), 'This is a message from user!'),
+VALUES (1, 1, 1, DATEADD(hour, -2, GETDATE()), 'This is a message from User!'),
 	(1, 2, 2, DATEADD(hour, -1, GETDATE()), 'Thanks for the play date!'),
-	(2, 2, 2, DATEADD(hour, -2, GETDATE()), 'This is a message from admin!'),
+	(2, 2, 2, DATEADD(hour, -2, GETDATE()), 'This is a message from Admin!'),
 	(2, 5, 5, DATEADD(hour, -1, GETDATE()), 'Thanks for the play date!'),
-	(3, 3, 3, DATEADD(hour, -2, GETDATE()), 'This is a message from mark!'),
+	(3, 3, 3, DATEADD(hour, -2, GETDATE()), 'This is a message from Mark!'),
 	(3, 2, 2, DATEADD(hour, -1, GETDATE()), 'Thanks for the play date!'),
-	(4, 4, 4, DATEADD(hour, -2, GETDATE()), 'This is a message from zach!'),
+	(4, 4, 4, DATEADD(hour, -2, GETDATE()), 'This is a message from Zach!'),
 	(4, 1, 1, DATEADD(hour, -1, GETDATE()), 'Thanks for the play date!'),
-	(5, 5, 5, DATEADD(hour, -2, GETDATE()), 'This is a message from ryan!'),
+	(5, 5, 5, DATEADD(hour, -2, GETDATE()), 'This is a message from Ryan!'),
 	(5, 7, 7, DATEADD(hour, -1, GETDATE()), 'Thanks for the play date!'),
-	(6, 6, 6, DATEADD(hour, -2, GETDATE()), 'This is a message from jacki!'),
+	(6, 6, 6, DATEADD(hour, -2, GETDATE()), 'This is a message from Jacque!'),
 	(6, 4, 4, DATEADD(hour, -1, GETDATE()), 'Thanks for the play date!'),
-	(7, 7, 7, DATEADD(hour, -2, GETDATE()), 'This is a message from kiran!'),
+	(7, 7, 7, DATEADD(hour, -2, GETDATE()), 'This is a message from Kiran!'),
 	(7, 6, 6, DATEADD(hour, -1, GETDATE()), 'Thanks for the play date!'),
-	(8, 8, 8, DATEADD(hour, -2, GETDATE()), 'This is a message from david!'),
+	(8, 8, 8, DATEADD(hour, -2, GETDATE()), 'This is a message from David!'),
 	(8, 3, 3, DATEADD(hour, -1, GETDATE()), 'Thanks for the play date!');

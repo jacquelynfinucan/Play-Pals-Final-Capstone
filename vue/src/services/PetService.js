@@ -20,5 +20,8 @@ export default {
   }, 
   deleteAPet(petId){
     return http.delete(`/pets/${petId}`)
+  },
+  getAllPets(){
+    return http.get('/pets')
   }
 }
