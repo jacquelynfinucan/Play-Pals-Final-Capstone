@@ -15,8 +15,13 @@
     <!-- <br>
     <input type="text" />
     <br> -->
-  
+    <div id="listener"></div>
+    <img id="refresh" src='@/assets/refresh.png' v-on:click="refreshClicked" title="Image from freepik">
     <GmapMap
+      ref="gMap"
+
+      v-on:bounds_changed="center_event"
+
       :center='center'
       :zoom='16'
       style='width:100%;  height: 700px;'
@@ -39,10 +44,12 @@ export default {
   data() {
     return {
       center: { lat: 45.508, lng: -73.587 },
+      trueCenter:{},
       currentPlace: null,
       markers: [],
       places: [],
       locations:[],
+      bounds:{},
       icon:{
           url:"../assets/DOGPARK-MAP-MARKER-01.png"
       }
@@ -50,10 +57,28 @@ export default {
   },
   mounted() {
     this.geolocate();
-      
+        document.querySelector('#listener').addEventListener('center_changed', function(a) { this.bounds = a })
+
+  },
+  computed:{
+      location: function(){
+        var thisLat = (this.bounds.zb.g + this.bounds.zb.h)/2;
+        var thisLng = (this.bounds.Qa.g + this.bounds.Qa.h)/2;
+        return {
+          lat:thisLat,
+          lng:thisLng
+        }
+      }
   },
   methods: {
+    center_event(event){
+        this.bounds = event;
+    },
+    refreshClicked(){
+         this.updateMarkersToLocation(this.location.lat,this.location.lng);
+    },
     updateMarkersToLocation(lat,lng){
+          this.markers = [];
           PlaceService.GetParksForLocation(lat,lng).then((response)=>{
           this.locations = response.data.results;
           this.locations.forEach(element => {
@@ -103,3 +128,15 @@ export default {
   // }
 };
 </script>
+
+<style scoped>
+  #refresh{
+    background-color:white;
+    border: black solid 4px;
+    border-radius:50%;
+    position:fixed;
+    height:60px;
+    z-index: 3;
+    left: 210px;
+  }
+</style>
