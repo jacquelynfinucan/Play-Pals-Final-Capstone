@@ -66,6 +66,7 @@ export default {
     },
     methods:{
       registerPlaydate(){
+        this.newPlaydate.guest_pet_id = this.$store.state.savedPetID;
         DateService.AddPlayDate(this.newPlaydate).then((response) => {
             if (response.status == 200) {
                 this.resetForm();

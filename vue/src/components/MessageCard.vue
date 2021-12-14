@@ -4,7 +4,7 @@
       <div class="message-header">
         <h3>{{message.fromUsername}}</h3>
         <h4>({{message.fromPetName}})</h4>
-        <p>{{message.postDate}}</p>
+        <p>{{formatedDate}}</p>
       </div>
       <div class="sent-body" v-if="sender">
         <p class="message-text">{{message.messageText}}</p>
@@ -34,6 +34,12 @@ export default {
         this.sender = true;
       }
     },
+    computed: {
+      formatedDate() {
+        let date = new Date(this.message.postDate);        
+        return date.toLocaleString();
+      }
+    }
 }
 </script>
 
