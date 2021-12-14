@@ -6,3 +6,30 @@
     --tertiary-color:rgb(255, 221, 227);
 }
 
+h1 {
+    border-radius: 5px;
+    background-color: var(--primary-color);
+    margin-top:0px;
+    padding:15px;
+    display: flex;
+    flex-direction: row;
+    
+  }
+
+  button {
+    margin: 5px;
+    background-color: var(--tertiary-color);
+    border: none;
+    color: white;
+    padding: 10px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;
+    color:black;
+    border-radius:5px;
+    font-weight: bold;
+  }

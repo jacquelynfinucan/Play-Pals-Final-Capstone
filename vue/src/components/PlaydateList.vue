@@ -1,5 +1,7 @@
 <template>
 <div>
+  <h1>My Playdates</h1>
+    <br>
   <h1>
     Pending Playdates
     <div v-if="!pendingMinimized" v-on:click="pendingMinimized = true">
@@ -25,6 +27,7 @@
         <input type="text" id="titleFilterPending" v-model="filterPending.title" placeholder="Play Date Title" />
       </div>
     </div>
+        <br>
     <play-date-card
       v-for="playdate in filteredPendingPlaydates"
       v-bind:key="playdate.PlayDateID"
@@ -57,6 +60,7 @@
           <input type="text" id="titleFilterConfirmed" v-model="filterConfirmed.title" placeholder="Play Date Title" />
         </div>
       </div>
+        <br>
       <play-date-card
         v-for="playdate in filteredConfirmedPlaydates"
         v-bind:key="playdate.PlayDateID"
@@ -196,7 +200,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 #main {
   border: solid 1px darkgrey;
   border-radius: 5px;

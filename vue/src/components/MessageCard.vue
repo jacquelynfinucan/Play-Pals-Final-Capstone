@@ -64,12 +64,13 @@ export default {
   width: 60vw;
   display: flex;
   flex-direction: column;
-  border: 2px solid black;
+  border: 2px solid darkgrey;
   border-radius: 25px;
+  margin-bottom: 10px;
 }
 .pet-img{
   max-width: 10%;
-  border: 2px solid black;
+  border: 5px solid darkgrey;
   border-radius: 25px;
 }
 .message-text{
@@ -98,7 +99,7 @@ export default {
 }
 /* Sent Messages */
 .sent-message{
-  background-color: lightblue;
+  background-color: var(--tertiary-color);
 }
 .sent-message-box{
   display: flex;
