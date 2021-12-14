@@ -100,7 +100,7 @@ export default {
 
   margin-bottom: 10px;
 
-  background-color: lightgrey;
+  background-color: var(--secondary-color);
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 10px;
@@ -116,7 +116,7 @@ button {
 }
 
 .background{
-    background-color:lightgray;
+    background-color:var(--secondary-color);
     border: solid 1px darkgrey;
     border-radius:5px;
 }

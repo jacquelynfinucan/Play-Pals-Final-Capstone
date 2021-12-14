@@ -75,7 +75,7 @@ export default {
 
 #header {
   border-radius: 5px; 
-  background-color:lightblue;
+  background-color:var(--tertiary-color);
   margin-top:0px;
   padding:10px;
   display: flex;

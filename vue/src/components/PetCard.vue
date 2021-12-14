@@ -39,7 +39,7 @@
       </ul>
     </div>
     <button v-if="isViewOnly == false" id="btnEditPet" v-on:click="goToEditPet">Edit Pet</button>
-    <button v-if="isViewOnly == true" v-on:click="goToSchedulePlayDate(pet.petId)">Schedule Play Date</button>
+    <button v-if="isViewOnly == true" id="btnScheduleDate" v-on:click="goToSchedulePlayDate(pet.petId)">Schedule Play Date</button>
     <!--<button id="btnDeletePet" v-on:click="deletePet">Delete Pet</button>-->
   </div>
 </template>
@@ -78,6 +78,9 @@ export default {
 </script>
 
 <style scoped>
+#btnScheduleDate{
+  background-color:var(--primary-color);
+}
 .pet-card {
   border: solid 1px darkgrey;
   border-radius: 5px;
@@ -93,7 +96,7 @@ export default {
 .pet-header {
   border-radius: 5px;
 
-  background-color: lightblue;
+  background-color: var(--tertiary-color);
 
   display: flex;
   flex-direction: row;

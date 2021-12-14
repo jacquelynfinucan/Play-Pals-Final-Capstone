@@ -5,7 +5,7 @@
 
     <ul>
       <li>
-          <p>Congratulations on Pet Pals grand launch. Pet pals went live on Decmeber 3rd 2021 and has been growing ever since.</p>
+          <p>Congratulations on Play Pals grand launch. Play Pals went live on Decmeber 3rd 2021 and has been growing ever since.</p>
       </li>
       <li>
           <p>
