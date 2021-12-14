@@ -1,14 +1,15 @@
 <template>
 <div>
-  <!--
-  <div class="filters">
-    <span>Filters: </span>
-    <input type="text" id="usernameFilter" v-model="filter.username" placeholder="Username" />&nbsp;
-    <input type="text" id="petNameFilter" v-model="filter.petName" placeholder="Pet Name" />&nbsp;
-    <input type="text" id="titleFilter" v-model="filter.title" placeholder="Play Date Title" />
-  </div>
-  -->
-    <h1>Pending Playdates</h1>
+  <h1>
+    Pending Playdates
+    <div v-if="!pendingMinimized" v-on:click="pendingMinimized = true">
+        <img class="expand-collapse-arrow" src="@/assets/collapse-arrow.png" alt="collapse"/>
+    </div>
+    <div v-if="pendingMinimized" v-on:click="pendingMinimized = false">
+        <img class="expand-collapse-arrow" src="@/assets/expand-arrow.png" alt="expand"/>
+    </div>
+  </h1>
+  <div class="pending" v-if="!pendingMinimized">
     <div class="filters">
       <span>Filters:</span>
       <div class="filter-category">
@@ -29,50 +30,71 @@
       v-bind:key="playdate.PlayDateID"
       v-bind:playdate="playdate"
     />
+  </div>
 
-    <h1>Confirmed Playdates</h1>
-    <div class="filters">
-      <span >Filters: </span>
-      <div class="filter-category">
-        <label for="usernameFilterConfirmed">Username:</label>
-        <input type="text" id="usernameFilterConfirmed" v-model="filterConfirmed.username" placeholder="Username" />&nbsp;
-      </div>
-      <div class="filter-category">
-        <label for="petNameFilterConfirmed">Pet Name:</label>
-        <input type="text" id="petNameFilterConfirmed" v-model="filterConfirmed.petName" placeholder="Pet Name" />&nbsp;
-      </div>
-      <div class="filter-category">
-        <label for="titleFilterConfirmed">Playdate Title:</label>
-        <input type="text" id="titleFilterConfirmed" v-model="filterConfirmed.title" placeholder="Play Date Title" />
-      </div>
+  <h1>
+    Confirmed Playdates
+    <div v-if="!confirmedMinimized" v-on:click="confirmedMinimized = true">
+      <img class="expand-collapse-arrow" src="@/assets/collapse-arrow.png" alt="collapse"/>
     </div>
-    <play-date-card
-      v-for="playdate in filteredConfirmedPlaydates"
-      v-bind:key="playdate.PlayDateID"
-      v-bind:playdate="playdate"
-    />
+    <div v-if="confirmedMinimized" v-on:click="confirmedMinimized = false">
+      <img class="expand-collapse-arrow" src="@/assets/expand-arrow.png" alt="expand"/>
+    </div>
+  </h1>
+  <div class="confirmed" v-if="!confirmedMinimized">
+      <div class="filters">
+        <span >Filters: </span>
+        <div class="filter-category">
+          <label for="usernameFilterConfirmed">Username:</label>
+          <input type="text" id="usernameFilterConfirmed" v-model="filterConfirmed.username" placeholder="Username" />&nbsp;
+        </div>
+        <div class="filter-category">
+          <label for="petNameFilterConfirmed">Pet Name:</label>
+          <input type="text" id="petNameFilterConfirmed" v-model="filterConfirmed.petName" placeholder="Pet Name" />&nbsp;
+        </div>
+        <div class="filter-category">
+          <label for="titleFilterConfirmed">Playdate Title:</label>
+          <input type="text" id="titleFilterConfirmed" v-model="filterConfirmed.title" placeholder="Play Date Title" />
+        </div>
+      </div>
+      <play-date-card
+        v-for="playdate in filteredConfirmedPlaydates"
+        v-bind:key="playdate.PlayDateID"
+        v-bind:playdate="playdate"
+      />
+  </div>
 
-    <h1>Rejected Playdates</h1>
-    <div class="filters">
-      <span>Filters: </span>
-      <div class="filter-category">
-        <label for="usernameFilterRejected">Username:</label>
-        <input type="text" id="usernameFilterRejected" v-model="filterRejected.username" placeholder="Username" />&nbsp;
-      </div>
-      <div class="filter-category">
-        <label for="petNameFilterRejected">Pet Name:</label>
-        <input type="text" id="petNameFilterRejected" v-model="filterRejected.petName" placeholder="Pet Name" />&nbsp;
-      </div>
-      <div class="filter-category">
-        <label for="titleFilterRejected">Playdate Title:</label>
-        <input type="text" id="titleFilterRejected" v-model="filterRejected.title" placeholder="Play Date Title" />
-      </div>
+  <h1>
+    Rejected Playdates
+    <div v-if="!rejectedMinimized" v-on:click="rejectedMinimized = true">
+      <img class="expand-collapse-arrow" src="@/assets/collapse-arrow.png" alt="collapse"/>
     </div>
-    <play-date-card
-      v-for="playdate in filteredRejectedPlaydates"
-      v-bind:key="playdate.PlayDateID"
-      v-bind:playdate="playdate"
-    />
+    <div v-if="rejectedMinimized" v-on:click="rejectedMinimized = false">
+      <img class="expand-collapse-arrow" src="@/assets/expand-arrow.png" alt="expand"/>
+    </div>
+  </h1>
+  <div class="rejected" v-if="!rejectedMinimized">
+      <div class="filters">
+        <span>Filters: </span>
+        <div class="filter-category">
+          <label for="usernameFilterRejected">Username:</label>
+          <input type="text" id="usernameFilterRejected" v-model="filterRejected.username" placeholder="Username" />&nbsp;
+        </div>
+        <div class="filter-category">
+          <label for="petNameFilterRejected">Pet Name:</label>
+          <input type="text" id="petNameFilterRejected" v-model="filterRejected.petName" placeholder="Pet Name" />&nbsp;
+        </div>
+        <div class="filter-category">
+          <label for="titleFilterRejected">Playdate Title:</label>
+          <input type="text" id="titleFilterRejected" v-model="filterRejected.title" placeholder="Play Date Title" />
+        </div>
+      </div>
+      <play-date-card
+        v-for="playdate in filteredRejectedPlaydates"
+        v-bind:key="playdate.PlayDateID"
+        v-bind:playdate="playdate"
+      />
+  </div>   
 </div>
 </template>
 
@@ -87,16 +109,19 @@ export default {
       pendingPlaydates: [],
       confirmedPlaydates: [],
       rejectedPlaydates: [],
+      pendingMinimized: false,
       filterPending: {
         username: '',
         petName: '',
         title: ''
       },
+      confirmedMinimized: false,
       filterConfirmed: {
         username: '',
         petName: '',
         title: ''
       },
+      rejectedMinimized: false,
       filterRejected: {
         username: '',
         petName: '',
@@ -186,6 +211,11 @@ h1 {
   padding:20px;
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+}
+
+.expand-collapse-arrow{
+  width: 40px;
 }
 
 .filters{
@@ -195,7 +225,6 @@ h1 {
 
   padding: 10px;
   margin-bottom: 10px;
-
   display: flex;
   gap: 10px;
 }
@@ -203,9 +232,11 @@ span{
   display: flex;
   align-items: center;
   font-weight: bold;
+  padding-right: 30px;
 }
 .filter-category{
   display: flex;
   flex-direction: column;
+  padding-right: 30px;
 }
 </style>
