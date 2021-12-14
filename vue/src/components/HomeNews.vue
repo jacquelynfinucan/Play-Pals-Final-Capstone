@@ -38,7 +38,5 @@ export default {
     border: solid 1px darkgrey;
 
     padding: 10px;
-
-    margin-bottom: 10px;
 }
 </style>

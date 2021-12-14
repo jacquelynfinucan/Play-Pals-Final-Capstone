@@ -121,7 +121,6 @@ button {
 }
 
 .pet-list{
-    margin-bottom:10px;
     margin-top:20px;
 }
 

@@ -205,7 +205,6 @@ export default {
   border: solid 1px darkgrey;
   border-radius: 5px;
   background-color: white;
-  margin-bottom: 10px;
 }
 
 h1 {
