@@ -112,7 +112,6 @@ export default {
   font-style: italic;
 }
 
-<<<<<<< HEAD
 .pending{
   color: red;
 }
@@ -127,10 +126,10 @@ export default {
 
 button{
   font-weight: bold;
-=======
+}
+
 #img-messages{
   width: 35px;
->>>>>>> 63b4589bfd700cf24200d5e6db8c0c6a7cdc73f7
 }
 
 </style>
