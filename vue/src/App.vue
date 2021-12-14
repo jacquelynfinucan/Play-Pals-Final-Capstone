@@ -20,7 +20,7 @@ export default {
 
 <style>
 #router{
-  margin-top:80px;
+  margin-top:160px;
 }
 .nav-link:hover {
   color: red;
