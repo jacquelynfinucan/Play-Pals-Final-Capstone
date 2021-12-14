@@ -13,7 +13,9 @@ import RegisterPet from '@/views/RegisterPet.vue'
 import Messages from '../views/Messages.vue'
 import Thread from '../views/Thread.vue'
 import ParkInfo from '../views/ParkInfoView'
+import PlaydateList from '../views/PlaydateList.vue'
 import SchedulePlayDate from '../views/SchedulePlayDate'
+import createDate from '../views/CreatePlayDateView'
 
 Vue.use(Router)
 
@@ -30,6 +32,15 @@ const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
+    {
+      path: '/createdate',
+      name: 'CreateDate',
+      component:createDate,
+      meta: {
+        requiresAuth: true
+      }
+
+    },
     {
       path: '/map',
       name: 'map',
@@ -119,6 +130,14 @@ const router = new Router({
       path: "/messages/:id", //Thread view
       name: "thread",
       component: Thread,
+      meta: {
+        requiresAuth: true
+      }
+    }, 
+    {
+      path: "/playdates", 
+      name: "playdate-list", 
+      component: PlaydateList, 
       meta: {
         requiresAuth: true
       }

@@ -1,60 +1,24 @@
 <template>
   <div class="main">
-    <div class="user-info">
-      <h1>User Profile</h1>
-      
-      <!--
-    <article>
-      <h2>First Name: {{ this.user.firstName }}</h2>
-      <h2>Last Name: {{ this.user.lastName }}</h2>
-      <h2>Zipcode: {{ this.user.zip }}</h2>
-      <h2>Email Address: {{ this.user.email }}</h2>
-      <br />
-    </article>
-  -->
-
-      <article>
-        <div>
-          <h2>My Name</h2>
-          <h5>{{ this.user.firstName }} {{ this.user.lastName }}</h5>
-        </div>
-
-        <div>
-          <h2>My Location</h2>
-          <h5>{{ this.user.zip }}</h5>
-        </div>
-
-        <div>
-          <h2>My Contact</h2>
-          <h5>{{ this.user.email }}</h5>
-        </div>
-
-        <button id="btnEditProfile" v-on:click="goToEditProfile">Edit My Info</button>
-
-      </article>
-    </div>
-
-    <h1>My Playdates</h1>
-    <play-date-card
-      v-for="playdate in this.playdates"
-      v-bind:key="playdate.PlayDateID"
-      v-bind:playdate="playdate"
-    />
+    <h1>User Profile</h1>
+    <button id="btnEditProfile" v-on:click="goToEditProfile">Edit Profile</button>
+    <h2>First Name: {{ this.user.firstName }}</h2>
+    <h2>Last Name: {{ this.user.lastName }}</h2>
+    <h2>Zipcode: {{ this.user.zip }}</h2>
+    <h2>Email Address: {{ this.user.email }}</h2>
+    <br />
   </div>
 </template>
 
 <script>
 import UserService from "../services/UserService";
-import DateService from "../services/DateService";
-import PlayDateCard from "./PlayDateCard.vue";
 
 export default {
-  components: { PlayDateCard },
+  components: { },
   name: "UserProfile",
   data() {
     return {
       user: {},
-      playdates: {},
     };
   },
   computed: {
@@ -79,11 +43,7 @@ export default {
         this.user = response.data;
       }
     });
-    DateService.GetPlayDatesForUser(this.$store.state.user.userId).then(
-      (response) => {
-        this.playdates = response.data;
-      }
-    );
+    
   },
   methods: {
     goToEditProfile() {
