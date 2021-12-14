@@ -105,8 +105,4 @@ article div:first-child {
   margin:5px;
 }
 
-.main{
-  margin-top:10px;
-}
-
 </style>
