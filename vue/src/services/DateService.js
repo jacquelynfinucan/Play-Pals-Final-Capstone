@@ -22,7 +22,7 @@ export default {
     updatePlayDateStatus(playDateID, statusID) {
         return axios.put(`/playdates/${playDateID}/status/${statusID}`)
     }, 
-    updatePlayDate(playDateId){
-        return axios.put(`/playdates/${playDateId}`)
+    updatePlayDate(playDateId, playDate){
+        return axios.put(`/playdates/${playDateId}`, playDate)
     }
 }

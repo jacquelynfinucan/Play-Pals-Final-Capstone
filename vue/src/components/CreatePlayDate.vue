@@ -5,7 +5,8 @@
       <!-- <div class="status-message error" v-show="errorMsg !== ''">
         {{ errorMsg }}
       </div> -->
-      <h1>New Playdate Details:</h1>
+      <h1 v-if="!this.isEdit">New Playdate Details:</h1>
+      <h1 v-if="this.isEdit">Edit Playdate Details:</h1>
       <div class="form-body">
       <div>
         <label for="play-date-title">Playdate Title: </label>
@@ -14,13 +15,11 @@
           id="play-date-title"
           class="form-control"
           placeHolder="Playdate"
-          v-model="newPlaydate.title"
+          v-model="playdate.title"
           required
         />
       </div>
-
         <br>
-
       <div>
         <label for="play-date-address">Playdate Address: </label>
         <input
@@ -28,26 +27,23 @@
           id="play-date-address"
           class="form-control"
           placeHolder="Playdate"
-          v-model="newPlaydate.address"
+          v-model="playdate.address"
           required
         />
       </div>
-
       <br>
-
+      <div>
       <label for="play-date-datetime">Playdate Date and Time: </label>
-      <input type="datetime-local" id="datetime" class="form-control" v-model="newPlaydate.DateOfPlayDate">
-
-      <br>
+      <input type="datetime-local" id="datetime" class="form-control" v-model="playdate.dateOfPlayDate">
+      </div>
       <br>
         <label for="petSelection">Choose your pet for the playdate: </label>
-        <select v-model="newPlaydate.host_pet_id" name="petSelection" id="petSelection">
+        <select v-model="playdate.host_pet_id" name="petSelection" id="petSelection">
           <option  v-for="pet in pets" :key="pet.petId" :value="pet.petId" :v-text="pet.petName">{{pet.petName}}</option>/
         </select>
       <br>
       <br>
-      <input type="submit" />
-      <br>
+      <input class="submit-button" type="submit" />
       </div>
     </form>
 
@@ -58,19 +54,22 @@
 <script>
 import DateService from '../services/DateService'
 import petService from '../services/PetService'
+
 export default {
     data(){
         return{
-            newPlaydate:{},
-            pets:[]
+          playdate:{},
+          pets:[], 
+          isEdit: false,
         }
     },
     methods:{
       registerPlaydate(){
-        this.newPlaydate.guest_pet_id = this.$store.state.savedPetID;
-        DateService.AddPlayDate(this.newPlaydate).then((response) => {
+        if(this.isEdit == false){
+          this.playdate.guest_pet_id = this.$store.state.savedPetID;
+        DateService.AddPlayDate(this.playdate).then((response) => {
             if (response.status == 200) {
-                this.resetForm();
+                this.$router.push({ name: "playdate-list" });
             }
           })
           .catch((error) => {
@@ -87,16 +86,39 @@ export default {
                 "Error creating playdate. Request could not be created.";
             }
           });
-      this.$router.push({ name: "playdate-list" });
-
+        }
+        else{ //in edit mode
+          DateService.updatePlayDate(this.playdate.playDateID, this.playdate).then((response) => {
+            if (response.status == 200) {
+                this.$router.push({ name: "playdate-list" });
+            }
+          })
+          .catch((error) => {
+            if (error.response) {
+              this.errorMsg =
+                "Error updating playdate. Response received was " +
+                error.response.statusText +
+                ".";
+            } else if (error.request) {
+              this.errorMsg =
+                "Error updating playdate. Server could not be reached.";
+            } else {
+              this.errorMsg =
+                "Error updating playdate. Request could not be created.";
+            }
+          });
+        }
       }
     },
-        created(){
-        this.newPlaydate.host_user_id = this.$store.state.user.userId;
-         petService.getPetsForUser(this.$store.state.user.userId).then( (response) => {
-            this.pets = response.data;
-        })
-
+    created(){
+      this.playdate = this.$store.state.currentPlaydate;
+      this.playdate.host_user_id = this.$store.state.user.userId;
+      petService.getPetsForUser(this.$store.state.user.userId).then( (response) => {
+        this.pets = response.data;
+      })
+      if(this.playdate.title != ""){
+        this.isEdit = true;
+      }
     }
 }
 </script>
@@ -109,5 +131,22 @@ export default {
   margin-bottom: 10px;
   margin-left: 10px;
   padding:10px;
+}
+
+.submit-button {
+  margin: 5px;
+  background-color: var(--tertiary-color);
+  border: none;
+  color: white;
+  padding: 10px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  border-style: solid;
+  border-color: black;
+  border-width: 1px;
+  color:black;
+  border-radius:5px;
 }
 </style>

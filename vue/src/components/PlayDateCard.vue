@@ -55,7 +55,8 @@ export default {
       });
       }, 
       sendToUpdatePlaydate(){
-        //this.$router.push({name: });
+        this.$store.commit("SET_CURRENT_PLAYDATE", this.playdate);
+        this.$router.push({name: "CreateDate" });
       },
     },
     computed: {
