@@ -41,6 +41,13 @@ export default new Vuex.Store({
       email: "",
     },
     selectedLocation: {},
+    currentPlaydate: {
+      title: "", 
+      address: "", 
+      dateOfPlayDate: null, 
+      host_user_id: null,
+      host_pet_id: null, 
+    }
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
@@ -77,6 +84,13 @@ export default new Vuex.Store({
         zip: "",
         email: "",
       };
+      state.currentPlaydate = {
+        title: "", 
+        address: "", 
+        DateOfPlayDate: null, 
+        host_user_id: null,
+        host_pet_id: null, 
+      };
       axios.defaults.headers.common = {};
     },
     SET_PETS(state, pets) {
@@ -110,6 +124,9 @@ export default new Vuex.Store({
         description: "",
         personalityTraits: [],
       };
-    }
+    }, 
+    SET_CURRENT_PLAYDATE(state, playdate){
+      state.currentPlaydate = playdate;
+    }, 
   }
 })

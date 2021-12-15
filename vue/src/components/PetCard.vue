@@ -3,7 +3,7 @@
     <div class="pet-header">
       <img
         class="pet-img"
-        src="https://randomuser.me/api/portraits/lego/1.jpg"
+        src="@/assets/yorkshire.jpg"
         alt="pet picture"
       />
       <p class="pet-name">{{ pet.petName }}</p>
@@ -71,6 +71,9 @@ export default {
     },
     goToSchedulePlayDate(petID){
       this.$store.commit("SET_SAVED_PET_ID",petID);
+      this.$store.commit("SET_CURRENT_PLAYDATE", {
+      title: ""  
+    });
       this.$router.push({name:"CreateDate"}); //push to schedule play date view??
     }
   },
