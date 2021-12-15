@@ -24,7 +24,7 @@
 <script>
 import PlaceService from '../services/PlaceService'
 export default {
-  name: 'UserMap',
+  name: 'user-play-dates-map',
   data() {
     return {
       center: { lat: 41.505, lng: -81.681 },
@@ -63,7 +63,7 @@ export default {
         },
         updateMarkersToLocation(lat,lng){
             this.markers = [];
-            PlaceService.GetParksForLocation(lat,lng).then((response)=>{
+            PlaceService.GetParksForLocation(lat,lng).then((response)=>{ //need endpoint to get all playadate markers for user here instead of all parks
                 this.locations = response.data.results;
                 this.locations.forEach(element => {
                     element.location = {lat:element.geometry[0].location.lat,lng:element.geometry[0].location.lng};

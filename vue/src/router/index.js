@@ -16,7 +16,7 @@ import ParkInfo from '../views/ParkInfoView'
 import PlaydateList from '../views/PlaydateList.vue'
 import SchedulePlayDate from '../views/SchedulePlayDate'
 import createDate from '../views/CreatePlayDateView'
-import UserMap from '../views/UserMapView'
+import UserMap from '../views/UserPlayDatesMapView'
 
 Vue.use(Router)
 
