@@ -40,6 +40,7 @@
               id="datetime"
               class="form-control"
               v-model="playdate.dateOfPlayDate"
+              required
             />
           </div>
           <br />
@@ -48,6 +49,7 @@
             v-model="playdate.host_pet_id"
             name="petSelection"
             id="petSelection"
+            required
           >
             <option
               v-for="pet in pets"
@@ -188,6 +190,7 @@ export default {
       this.center = marker.location;
       this.playdate.title = marker.name;
       this.playdate.address = marker.formatted_address;
+      this.playdate.location_id = marker.place_id;
     },
     setPlace(place) {
       this.currentPlace = place;
