@@ -54,7 +54,7 @@ namespace Capstone.DAO
 
         public Location GetPlacesNearLocation(double lat, double lng)
         {
-            var url = $"https://maps.googleapis.com/maps/api/place/nearbysearch/json?location={lat}%2C{lng}&radius=10000&type=park&key=AIzaSyBCEUQy7Ko99B-a-IVKJbxWkKkiqBtkjik";
+            var url = $"https://maps.googleapis.com/maps/api/place/textsearch/json?location={lat}%2C{lng}&radius=10000&type=park&key=AIzaSyBCEUQy7Ko99B-a-IVKJbxWkKkiqBtkjik";
             var request = new RestRequest(url);
             var response = client.Get<Location>(request);
             addPlacesToDatabase(response.Data);
@@ -82,10 +82,11 @@ namespace Capstone.DAO
                                          '{location.results[i].place_id}',
                                          '{location.results[i].name.Replace("'","''")}',
                                          '{location.results[i].geometry[0].location.lat}',
-                                         '{location.results[i].geometry[0].location.lng}'
+                                         '{location.results[i].geometry[0].location.lng}',
+                                         '{location.results[i].formatted_address}'
                                          )";
                     }
-                    cmdString += @") as t(location_id,location_name,latitude,longitude)
+                    cmdString += @") as t(location_id,location_name,latitude,longitude,formatted_address)
                                       WHERE NOT EXISTS (
                                       SELECT * FROM location
                                       WHERE t.location_id = location_id)";
