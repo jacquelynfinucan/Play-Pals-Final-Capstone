@@ -11,8 +11,8 @@ h1 {
     background-color: var(--primary-color);
     margin-top:0px;
     padding:15px;
-    display: flex;
-    flex-direction: row;
+    /* display: flex;
+    flex-direction: row; */
     
   }
 
