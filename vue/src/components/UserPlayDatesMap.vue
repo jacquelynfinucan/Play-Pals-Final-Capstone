@@ -87,7 +87,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
     #refresh{
         background-color:white;
         border: black solid 4px;
