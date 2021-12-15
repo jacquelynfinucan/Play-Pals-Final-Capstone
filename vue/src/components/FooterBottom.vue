@@ -1,6 +1,6 @@
 <template>
   <div class="footer">
-    <p>© 2021 Tech Elevator Team Tilde</p>
+    <p>© Tech Elevator Team Tilde ~ CLE-18 Cohort 2021</p>
   </div>
 </template>
 
