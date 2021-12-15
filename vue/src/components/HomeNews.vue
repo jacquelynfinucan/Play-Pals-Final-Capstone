@@ -73,10 +73,4 @@ export default {
    /* z-index:0; */
 }
 
-#text{
-  /* position: absolute; */
-  /* z-index:1; */
-  /* opacity: 0.8;
-  background-color: var(--secondary-color); */
-}
 </style>
