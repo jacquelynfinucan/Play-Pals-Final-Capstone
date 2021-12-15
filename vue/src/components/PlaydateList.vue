@@ -24,7 +24,7 @@
       </div>
       <div class="filter-category">
         <label for="titleFilterPending">Playdate Title:</label>
-        <input type="text" id="titleFilterPending" v-model="filterPending.title" placeholder="Play Date Title" />
+        <input type="text" id="titleFilterPending" v-model="filterPending.title" placeholder="Playdate Title" />
       </div>
     </div>
         <br>
@@ -57,7 +57,7 @@
         </div>
         <div class="filter-category">
           <label for="titleFilterConfirmed">Playdate Title:</label>
-          <input type="text" id="titleFilterConfirmed" v-model="filterConfirmed.title" placeholder="Play Date Title" />
+          <input type="text" id="titleFilterConfirmed" v-model="filterConfirmed.title" placeholder="Playdate Title" />
         </div>
       </div>
         <br>
@@ -90,7 +90,7 @@
         </div>
         <div class="filter-category">
           <label for="titleFilterRejected">Playdate Title:</label>
-          <input type="text" id="titleFilterRejected" v-model="filterRejected.title" placeholder="Play Date Title" />
+          <input type="text" id="titleFilterRejected" v-model="filterRejected.title" placeholder="Playdate Title" />
         </div>
       </div>
       <play-date-card
