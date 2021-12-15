@@ -87,7 +87,7 @@ export default new Vuex.Store({
       state.currentPlaydate = {
         title: "", 
         address: "", 
-        DateOfPlayDate: null, 
+        dateOfPlayDate: null, 
         host_user_id: null,
         host_pet_id: null, 
       };

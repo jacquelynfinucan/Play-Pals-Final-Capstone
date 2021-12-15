@@ -11,7 +11,8 @@ namespace Capstone.DAO
 
         public Location GetPlacesInZip(int zipCode);
         public Location GetPlacesNearLocation(double lat, double lng);
+        public int AddPlaceIDtoPlayDate(string placeID, int playdateID);
 
-
+        public List<Park> GetFullParkDateInfoFromUserID(int UserID);
     }
 }

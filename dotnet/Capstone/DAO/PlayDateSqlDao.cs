@@ -101,7 +101,7 @@ namespace Capstone.DAO
             }
             return allPlayDates;
         }
-        public List<FrontEndPlayDate> GetFrontEndPlayDatesForHost(int hostUserId)
+        public List<FrontEndPlayDate> GetFrontEndPlayDatesForUserAndLocation(int hostUserId, string locationID)
         {
             var allPlayDates = new List<FrontEndPlayDate>();
             try
@@ -110,13 +110,17 @@ namespace Capstone.DAO
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new SqlCommand(@"SELECT user_profile.first_name as hostName, GuestPet.pet_name as guestPet, HostPet.pet_name as hostPet,date_time
-                                                    FROM play_dates 
-                                                    JOIN pet_profile as GuestPet ON GuestPet.pet_id = play_dates.guest_pet_id
-                                                    JOIN pet_profile as HostPet ON HostPet.pet_id = play_dates.host_pet_id
-                                                    JOIN user_profile ON play_dates.host_user_id = user_profile.user_id
-                                                    WHERE host_user_id = @host_user_id", conn);
+                    SqlCommand cmd = new SqlCommand(@"SELECT location_id, play_date_id, user_profile.first_name as hostName, GuestPet.pet_name as guestPet, HostPet.pet_name as hostPet,date_time,GuestProfile.first_name as GuestName
+                                                      FROM play_dates 
+                                                      JOIN pet_profile as GuestPet ON GuestPet.pet_id = play_dates.guest_pet_id
+                                                      JOIN pet_profile as HostPet ON HostPet.pet_id = play_dates.host_pet_id
+                                                      JOIN user_profile ON play_dates.host_user_id = user_profile.user_id
+                                                      JOIN users_pets on play_dates.guest_pet_id = users_pets.pet_id
+                                                      JOIN user_profile as GuestProfile ON users_pets.user_id = GuestProfile.user_id
+                                                      WHERE host_user_id = @host_User_Id AND location_id = @locationID
+                                                      ", conn);
                     cmd.Parameters.AddWithValue("@host_User_Id", hostUserId);
+                    cmd.Parameters.AddWithValue("@locationID", hostUserId);
                     SqlDataReader reader = cmd.ExecuteReader();
 
                     while (reader.Read())
@@ -169,9 +173,9 @@ namespace Capstone.DAO
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new SqlCommand("INSERT INTO play_dates (title, host_user_id, host_pet_id, guest_pet_id, date_time, address, status_id)" + //location is TBD**
+                    SqlCommand cmd = new SqlCommand("INSERT INTO play_dates (title, host_user_id, host_pet_id, guest_pet_id, date_time, address, status_id, location_id)" + //location is TBD**
                         "OUTPUT inserted.play_date_id " +
-                        "VALUES (@title, @hostUserId, @hostPetId, @guestPetId, @dateTime, @address,1)", conn);
+                        "VALUES (@title, @hostUserId, @hostPetId, @guestPetId, @dateTime, @address, 1, @locationID)", conn);
                     cmd.Parameters.AddWithValue("@title", newPlayDate.Title);
                     cmd.Parameters.AddWithValue("@hostUserId", newPlayDate.HostUserID);
                     cmd.Parameters.AddWithValue("@hostPetId", newPlayDate.HostPetID);
@@ -179,6 +183,14 @@ namespace Capstone.DAO
                     // cmd.Parameters.AddWithValue("@location", newPlayDate.location_id); //tbd-might not be in this table-have to join?-TBD**
                     cmd.Parameters.AddWithValue("@dateTime", newPlayDate.DateOfPlayDate);
                     cmd.Parameters.AddWithValue("@address", newPlayDate.Address);
+                    if (newPlayDate.location_id == null)
+                    {
+                        cmd.Parameters.AddWithValue("@locationID", DBNull.Value);
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@locationID", newPlayDate.location_id);
+                    }
                     newPlayDateId = (int)cmd.ExecuteScalar();
                 }
             }

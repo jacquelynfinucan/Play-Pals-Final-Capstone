@@ -89,21 +89,21 @@ CREATE TABLE location (
 	location_name varchar(200),
 	latitude float,
 	longitude float,
-	--formatted_address varchar(200),
+	formatted_address varchar(200),
 	CONSTRAINT [PK_location] PRIMARY KEY (location_id),
 )
 
 
 CREATE TABLE play_dates (
 	play_date_id int IDENTITY(1,1) NOT NULL,
-	address varchar (100) NOT NULL,
+	address varchar (100),
 	title varchar(50) NOT NULL,
 	host_user_id int NOT NULL, 
     host_pet_id int NOT NULL, 
 	guest_pet_id int, 
 	date_time datetime NOT NULL,
 	status_id int NOT NULL,
-	location_id varchar(100) --NOT NULL
+	location_id varchar(100)
 
 	CONSTRAINT [PK_play_dates] PRIMARY KEY (play_date_id), 
 	CONSTRAINT [FK_play_dates_users] FOREIGN KEY (host_user_id) REFERENCES [users] (user_id), 
