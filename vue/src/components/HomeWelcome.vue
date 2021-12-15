@@ -11,9 +11,9 @@
         <div>
         <h3>Play Pals offers you the abilty to:</h3> 
         <ul>
-            <li> Register your pets for play dates</li>
-            <li> Request play dates with other users pets</li>
-            <li> Accept play date requests from other users </li>
+            <li> Register your pets for playdates</li>
+            <li> Request playdates with other pets</li>
+            <li> Accept playdate requests from other users</li>
         </ul>
         </div>
         <h3>New users register <router-link class="nav-link" v-bind:to="{name: 'register'}">HERE</router-link> to get started on your new pet adventures!</h3>
