@@ -1,6 +1,6 @@
 <template>
     <div>
-        <!--<img id="refresh" src='@/assets/refresh.png' v-on:click="refreshClicked" title="Image from freepik">-->
+        <img id="refresh" src='@/assets/refresh.png' v-on:click="refreshClicked" title="Image from freepik">
         <GmapMap
             ref="gMap"
 
@@ -14,9 +14,11 @@
                 :icon="{ url: require('@/assets/DOGPARK-MAP-MARKER-01.png')}"
                 :key="index"
                 v-for="(marker, index) in markers"
-                :position="marker.location"
-                @click="markerOnClick(marker)"
             />
+            <!-- the following were in the above
+                @click="markerOnClick(marker) 
+                :position="marker.location"
+            -->
         </GmapMap>
     </div>
 </template>
@@ -24,55 +26,68 @@
 <script>
 import PlaceService from '../services/PlaceService'
 export default {
-  name: 'user-play-dates-map',
-  data() {
-    return {
-      center: { lat: 41.505, lng: -81.681 },
-      trueCenter:{},
-      currentPlace: null,
-      markers: [],
-      places: [],
-      locations:[],
-      bounds:{},
-      icon:{
-          url:"../assets/DOGPARK-MAP-MARKER-01.png"
-      }
-    }
-  },
-  mounted() {
-    this.geolocate();
-        document.querySelector('#listener').addEventListener('center_changed', function(a) { this.bounds = a })
-
-  },
-  computed:{
-      location: function(){
-        var thisLat = (this.bounds.zb.g + this.bounds.zb.h)/2;
-        var thisLng = (this.bounds.Qa.g + this.bounds.Qa.h)/2;
+    name: 'user-play-dates-map',
+    data() {
         return {
-          lat:thisLat,
-          lng:thisLng
+            center: { lat: 41.505, lng: -81.681 },
+            trueCenter:{},
+            currentPlace: null,
+            markers: [],
+            places: [],
+            locations:[],
+            bounds:{},
+            icon:{
+                url:"../assets/DOGPARK-MAP-MARKER-01.png"
+            }
         }
-      }
+    },
+    mounted() { 
+        this.geolocate();
+        document.querySelector('#listener').addEventListener('center_changed', function(a) { this.bounds = a })
+    },
+    computed:{
+        location: function(){
+            var thisLat = (this.bounds.zb.g + this.bounds.zb.h)/2;
+            var thisLng = (this.bounds.Qa.g + this.bounds.Qa.h)/2;
+            return {
+                lat:thisLat,
+                lng:thisLng
+            }
+        }
     },
     methods: {
         center_event(event){
             this.bounds = event;
         },
-        /*
         refreshClicked(){
-            this.updateMarkersToLocation(this.location.lat,this.location.lng);
+            this.updateMarkersToLocation(this.$store.state.user.userId); //changed to take userId
         },
-        updateMarkersToLocation(userID){
+        updateMarkersToLocation(userID){ //changed this method to call the locations for user endpoint
             this.markers = [];
-            PlaceService.GetLocationsForUser(userID).then((response)=>{ 
+            PlaceService.GetLocationsForUser(userID).then((response)=>{
                 this.locations = response.data.results;
                 this.locations.forEach(element => {
-                    element.location = {lat:element.geometry[0].location.lat,lng:element.geometry[0].location.lng};
-                    this.markers.push(element)
+                    let elementMarker = { //tried to format the response object similar to the endpoint of the other map
+                        place_id: element.location_id,
+                        name: element.location_name,
+                        formatted_address: element.address,
+                        geometry: 
+                        {
+                            location: {
+                                lat: element.lat,
+                                lng: element.lng
+                            }
+                         }
+                    }
+                    this.markers.push(elementMarker)
                 });
             })
         },
-        */
+        markerOnClick(marker){
+            this.center=marker.location;
+            this.$store.commit('SET_SELECTED_LOCATION',marker);
+            this.$router.push('/park');
+        },
         setPlace(place) {
             this.currentPlace = place;
         },
@@ -82,19 +97,9 @@ export default {
                     lat: position.coords.latitude,
                     lng: position.coords.longitude,
                 };
-                //this.updateMarkersToLocation(this.center.lat,this.center.lng);
+                this.updateMarkersToLocation(this.$store.state.user.userId); //changed to take userId
             });
         },
-    },
-    created(){
-        this.markers = [];
-        PlaceService.GetLocationsForUser(this.$store.state.user.userId).then((response)=>{ 
-            this.locations = response.data.results;
-            this.locations.forEach(element => {
-                element.location = {lat:element.geometry[0].location.lat,lng:element.geometry[0].location.lng};
-                this.markers.push(element)
-            });
-        })
     }
 }
 </script>
