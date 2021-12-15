@@ -39,12 +39,12 @@ namespace Capstone.Controllers
             return PlaceDao.AddPlaceIDtoPlayDate(placeid, playdateid);
         }
 
-        //[HttpGet("parks/users/{userID}")]
+        [HttpGet("parks/users/{userID}")]
 
-        //public int GetAllDateLocationsForUser(int userID)
-        //{
-
-        //}
+        public List<Park> GetAllDateLocationsForUser(int userID)
+        {
+            return PlaceDao.GetFullParkDateInfoFromUserID(userID);
+        }
 
 
 
