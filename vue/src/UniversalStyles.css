@@ -4,13 +4,20 @@
     --primary-color:rgba(247,111,115,255);
     --secondary-color:rgba(217,217,217,255) ;
     --tertiary-color:rgb(255, 221, 227);
+    --bonus-margin:16px;
 }
 
+body{
+  margin:0px;
+}
+
+
 h1 {
-    border-radius: 5px;
+    border-radius: 0px;
     background-color: var(--primary-color);
     margin-top:0px;
     padding:15px;
+    padding-left:40px;
     /* display: flex;
     flex-direction: row; */
     

@@ -53,6 +53,7 @@ export default {
     border-radius: 5px;
     border: solid 1px darkgrey;
     padding: 5px;
+    margin:var(--bonus-margin)
 }
 
 #reviews-title{

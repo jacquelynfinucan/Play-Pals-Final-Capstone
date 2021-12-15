@@ -208,13 +208,12 @@ export default {
 }
 
 h1 {
-  border-radius: 5px;
   background-color: var(--primary-color);
   margin-top:0px;
-  padding:20px;
   display: flex;
   flex-direction: row;
 }
+
 
 .playdate-status{
   justify-content: space-between;
@@ -232,6 +231,8 @@ h1 {
 
   padding: 10px;
   margin-bottom: 10px;
+  margin:var(--bonus-margin);
+
   display: flex;
   gap: 10px;
 }

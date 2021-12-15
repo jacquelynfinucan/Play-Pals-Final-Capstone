@@ -75,6 +75,7 @@ export default {
   background-color: white;
   margin-bottom: 10px;
   margin-left: 10px;
+  margin: var(--bonus-margin);
 }
 
 #header {

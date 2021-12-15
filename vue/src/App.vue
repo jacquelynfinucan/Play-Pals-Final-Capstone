@@ -23,8 +23,8 @@ export default {
 @import url('./UniversalStyles.css');
 #router{
   margin-top:160px;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 0px;
+  padding-bottom: 0px;
 }
 .nav-link:hover {
   color: red;

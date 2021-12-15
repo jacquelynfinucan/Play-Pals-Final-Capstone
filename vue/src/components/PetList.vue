@@ -98,7 +98,6 @@ export default {
   padding: 10px;
 
   margin-bottom: 10px;
-
   background-color: var(--secondary-color);
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -111,13 +110,18 @@ export default {
 
 button {
   margin: 5px;
+  margin:var(--bonus-margin);
   margin-top:-15px;
+  margin-bottom:0px;
+
 }
 
 .background{
     background-color:var(--secondary-color);
     border: solid 1px darkgrey;
     border-radius:5px;
+margin:var(--bonus-margin);
+
 }
 
 .pet-list{
