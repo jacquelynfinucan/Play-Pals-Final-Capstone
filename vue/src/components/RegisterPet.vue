@@ -326,6 +326,7 @@ form, button {
   border-width: 1px;
   color:black;
   border-radius:5px;
+  font-weight: bold;
 }
 
 </style>
