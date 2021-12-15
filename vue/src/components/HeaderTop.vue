@@ -56,6 +56,8 @@ img{
 
 .nav-links {
   margin-left: 190px;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.384)
+
 }
 
 .login-controls {
