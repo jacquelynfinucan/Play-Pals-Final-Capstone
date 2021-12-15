@@ -40,6 +40,7 @@
               id="datetime"
               class="form-control"
               v-model="playdate.dateOfPlayDate"
+              required
             />
           </div>
           <br />
@@ -48,6 +49,7 @@
             v-model="playdate.host_pet_id"
             name="petSelection"
             id="petSelection"
+            required
           >
             <option
               v-for="pet in pets"
