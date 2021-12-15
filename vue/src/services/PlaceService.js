@@ -6,5 +6,8 @@ export default {
     },
     GetParksForLocation(lat,lng){
         return axios.get(`/parks/${lat}/${lng}`)
-    }
+    },
+    GetLocationsForUser(userID){
+        return axios.get(`/parks/users/${userID}`)
+    },
 }
