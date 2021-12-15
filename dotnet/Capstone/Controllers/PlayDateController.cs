@@ -32,13 +32,13 @@ namespace Capstone.Controllers
             return Ok(playDates);
         }
 
-        [HttpGet("/playdates/user/{hostUserId}")]
-        public ActionResult<List<FrontEndPlayDate>> GetAllPlayDatesForHost(int hostUserId)
-        {
-            var playDates = playDateDao.GetFrontEndPlayDatesForHost(hostUserId);
+        //[HttpGet("/playdates/user/{hostUserId}")]
+        //public ActionResult<List<FrontEndPlayDate>> GetAllPlayDatesForHost(int hostUserId)
+        //{
+        //    var playDates = playDateDao.GetFrontEndPlayDatesForHost(hostUserId);
 
-            return Ok(playDates);
-        }
+        //    return Ok(playDates);
+        //}
 
         [HttpGet("/playdates/{playDateId}")]
         public ActionResult<PlayDate> GetAPlayDate(int playDateId)
