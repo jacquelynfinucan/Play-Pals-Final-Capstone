@@ -16,6 +16,7 @@ import ParkInfo from '../views/ParkInfoView'
 import PlaydateList from '../views/PlaydateList.vue'
 import SchedulePlayDate from '../views/SchedulePlayDate'
 import createDate from '../views/CreatePlayDateView'
+import UserMap from '../views/UserMapView'
 
 Vue.use(Router)
 
@@ -45,6 +46,14 @@ const router = new Router({
       path: '/map',
       name: 'map',
       component: GoogleMap,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/map/:id',    //map for user's playdates
+      name: 'user-map',
+      component: UserMap,
       meta: {
         requiresAuth: true
       }
