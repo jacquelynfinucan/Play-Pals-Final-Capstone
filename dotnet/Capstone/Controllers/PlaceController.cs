@@ -28,13 +28,16 @@ namespace Capstone.Controllers
             return PlaceDao.GetPlacesInZip(zipCode);
         }
         [HttpGet("/parks/{lat}/{lng}")]
-        public Location GetPlacesInZip(double lat, double lng)
+        public Location GetNearbyLocations(double lat, double lng)
         {
             return PlaceDao.GetPlacesNearLocation(lat, lng);
         }
 
-
-
+        [HttpPut("/playdates/{playdateid}/place/{placeid}")]
+        public int AddPlaceId(string placeid, int playdateid)
+        {
+            return PlaceDao.AddPlaceIDtoPlayDate(placeid, playdateid);
+        }
 
 
 

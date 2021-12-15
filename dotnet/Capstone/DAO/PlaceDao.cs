@@ -17,6 +17,30 @@ namespace Capstone.DAO
         {
             connectionString = dbConnectionString;
         }
+
+        public int AddPlaceIDtoPlayDate(string placeID, int playdateID)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    var cmdString = @"UPDATE play_dates
+                                      SET location_id = @PlaceID
+                                      WHERE play_date_id=@playdateID";
+                    SqlCommand cmd = new SqlCommand(cmdString, conn);
+                    cmd.Parameters.AddWithValue("@PlaceID", placeID);
+                    cmd.Parameters.AddWithValue("@playdateID", playdateID);
+                    return cmd.ExecuteNonQuery();
+                }
+            }
+            catch (SqlException)
+            {
+                throw;
+            }
+        }
+
         public Location GetPlacesInZip(int zipCode)
         {
             var url = $"https://maps.googleapis.com/maps/api/place/textsearch/json?query=park+near+{zipCode}&key=AIzaSyBCEUQy7Ko99B-a-IVKJbxWkKkiqBtkjik";
@@ -30,7 +54,7 @@ namespace Capstone.DAO
 
         public Location GetPlacesNearLocation(double lat, double lng)
         {
-            var url = $"https://maps.googleapis.com/maps/api/place/nearbysearch/json?location={lat}%2C{lng}&radius=1500&type=park&key=AIzaSyBCEUQy7Ko99B-a-IVKJbxWkKkiqBtkjik";
+            var url = $"https://maps.googleapis.com/maps/api/place/nearbysearch/json?location={lat}%2C{lng}&radius=10000&type=park&key=AIzaSyBCEUQy7Ko99B-a-IVKJbxWkKkiqBtkjik";
             var request = new RestRequest(url);
             var response = client.Get<Location>(request);
             addPlacesToDatabase(response.Data);
