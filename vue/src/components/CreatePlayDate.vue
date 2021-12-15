@@ -69,7 +69,7 @@
           </p>
         </div>
         <div class="map-section">
-          <button id="refresh" v-on:click="refreshClicked">Find Parks</button>
+          <button id="btnFindParks" v-on:click="refreshClicked">Find Parks</button>
           <GmapMap
             ref="gMap"
             id="mapElement"
@@ -264,9 +264,10 @@ div.map-section {
   border-width: 1px;
   color: black;
   border-radius: 5px;
+  font-weight: bold;
 }
 
-#refresh {
+#btnFindParks {
   background-color: var(--tertiary-color);
   border: none;
   color: white;
