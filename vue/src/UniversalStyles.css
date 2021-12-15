@@ -1,6 +1,7 @@
 
 :root{
     font-family:Georgia, 'Times New Roman', Times, serif;
+    text-shadow: 2px 2px rgba(0, 0, 0,.1);
     --primary-color:rgba(247,111,115,255);
     --secondary-color:rgba(217,217,217,255) ;
     --tertiary-color:rgb(255, 221, 227);
