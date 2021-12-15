@@ -4,7 +4,7 @@
       <img src="@/assets/Play Pals-logos.jpeg" title="Dog by Martin Vanco"/>
       <router-link class="nav-link" v-bind:to="{ name: 'home' }">Home</router-link><!--<span v-if="$store.state.token != ''">&nbsp;|&nbsp;</span>-->
       <router-link class="nav-link" v-bind:to="{ name: 'profile' }" v-if="$store.state.token != ''">Profile</router-link><!--<span v-if="$store.state.token != ''">&nbsp;|&nbsp;</span>-->
-      <router-link class="nav-link" v-bind:to="{ name: 'map', params: {id: this.$store.state.user.userId}}" v-if="$store.state.token != ''">Map User Playdates</router-link> <!-- Test User PlayDate Map -->
+      <router-link class="nav-link" v-bind:to="{ name: 'user-map', params: {id: this.$store.state.user.userId}}" v-if="$store.state.token != ''">Map User Playdates</router-link> <!-- Test User PlayDate Map -->
       <router-link class="nav-link" v-bind:to="{ name: 'playdate-list' }" v-if="$store.state.token != ''">My Playdates</router-link><!--&nbsp;|&nbsp;-->
       <router-link class="nav-link" v-bind:to="{ name: 'schedule' }" v-if="$store.state.token != ''">Pet Finder</router-link><!--&nbsp;|&nbsp;-->
     </nav>

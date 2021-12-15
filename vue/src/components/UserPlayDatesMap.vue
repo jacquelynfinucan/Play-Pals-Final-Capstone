@@ -1,6 +1,6 @@
 <template>
     <div>
-        <img id="refresh" src='@/assets/refresh.png' v-on:click="refreshClicked" title="Image from freepik">
+        <!--<img id="refresh" src='@/assets/refresh.png' v-on:click="refreshClicked" title="Image from freepik">-->
         <GmapMap
             ref="gMap"
 
@@ -58,12 +58,13 @@ export default {
         center_event(event){
             this.bounds = event;
         },
+        /*
         refreshClicked(){
             this.updateMarkersToLocation(this.location.lat,this.location.lng);
         },
-        updateMarkersToLocation(lat,lng){
+        updateMarkersToLocation(userID){
             this.markers = [];
-            PlaceService.GetParksForLocation(lat,lng).then((response)=>{ //need endpoint to get all playadate markers for user here instead of all parks
+            PlaceService.GetLocationsForUser(userID).then((response)=>{ 
                 this.locations = response.data.results;
                 this.locations.forEach(element => {
                     element.location = {lat:element.geometry[0].location.lat,lng:element.geometry[0].location.lng};
@@ -71,6 +72,7 @@ export default {
                 });
             })
         },
+        */
         setPlace(place) {
             this.currentPlace = place;
         },
@@ -80,9 +82,19 @@ export default {
                     lat: position.coords.latitude,
                     lng: position.coords.longitude,
                 };
-                this.updateMarkersToLocation(this.center.lat,this.center.lng);
+                //this.updateMarkersToLocation(this.center.lat,this.center.lng);
             });
         },
+    },
+    created(){
+        this.markers = [];
+        PlaceService.GetLocationsForUser(this.$store.state.user.userId).then((response)=>{ 
+            this.locations = response.data.results;
+            this.locations.forEach(element => {
+                element.location = {lat:element.geometry[0].location.lat,lng:element.geometry[0].location.lng};
+                this.markers.push(element)
+            });
+        })
     }
 }
 </script>
