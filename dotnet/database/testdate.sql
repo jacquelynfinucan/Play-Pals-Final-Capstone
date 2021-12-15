@@ -8,7 +8,7 @@ VALUES ('User','Jg45HuwT7PZkfuKTz6IB90CtWY4=','LHxP4Xh7bN0=','user'),	--user_id 
 	('Mark','Jg45HuwT7PZkfuKTz6IB90CtWY4=','LHxP4Xh7bN0=','user'),		--user_id = 3
 	('Zach','Jg45HuwT7PZkfuKTz6IB90CtWY4=','LHxP4Xh7bN0=','user'),		--user_id = 4
 	('Ryan','Jg45HuwT7PZkfuKTz6IB90CtWY4=','LHxP4Xh7bN0=','user'),		--user_id = 5
-	('Jacque','Jg45HuwT7PZkfuKTz6IB90CtWY4=','LHxP4Xh7bN0=','user'),		--user_id = 6
+	('Jacque','Jg45HuwT7PZkfuKTz6IB90CtWY4=','LHxP4Xh7bN0=','user'),	--user_id = 6
 	('Kiran','Jg45HuwT7PZkfuKTz6IB90CtWY4=','LHxP4Xh7bN0=','user'),		--user_id = 7
 	('David','Jg45HuwT7PZkfuKTz6IB90CtWY4=','LHxP4Xh7bN0=','user');		--user_id = 8
 
@@ -38,7 +38,12 @@ VALUES ('Bolt', 'Dog', 'Bulldog', 5, 3, 1, 1, 'Good boy!'),				--pet_id = 1
 INSERT INTO pets_personality_traits (pet_id, personality_id)
 VALUES (1, 1), (1, 4), (1, 8), 
 	(2, 2), (2, 8), 
-	(3, 4), (3, 5), (3, 6), (3, 8), (3, 9)
+	(3, 4), (3, 5), (3, 6), (3, 8), (3, 9),
+	(4, 2), (4, 1), (4, 4),
+	(5, 1), (5, 2),
+	(6, 6), (6, 7),
+	(7, 7),
+	(8, 4), (8, 5), (8, 9)
 
 --assign the test pets to users
 INSERT INTO users_pets (user_id, pet_id)
