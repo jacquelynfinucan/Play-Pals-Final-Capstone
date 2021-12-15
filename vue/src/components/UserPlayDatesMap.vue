@@ -15,7 +15,7 @@
                 :key="index"
                 v-for="(marker, index) in markers"
             />
-            <!-- the following were in the above div
+            <!-- the following were in the above
                 @click="markerOnClick(marker) 
                 :position="marker.location"
             -->
@@ -41,10 +41,10 @@ export default {
             }
         }
     },
-    mounted() {
+    mounted() { 
         this.geolocate();
-            document.querySelector('#listener').addEventListener('center_changed', function(a) { this.bounds = a })
-        },
+        document.querySelector('#listener').addEventListener('center_changed', function(a) { this.bounds = a })
+    },
     computed:{
         location: function(){
             var thisLat = (this.bounds.zb.g + this.bounds.zb.h)/2;
@@ -60,15 +60,14 @@ export default {
             this.bounds = event;
         },
         refreshClicked(){
-            this.updateMarkersToLocation(this.$store.state.user.userId);
+            this.updateMarkersToLocation(this.$store.state.user.userId); //changed to take userId
         },
-        updateMarkersToLocation(userID){
+        updateMarkersToLocation(userID){ //changed this method to call the locations for user endpoint
             this.markers = [];
             PlaceService.GetLocationsForUser(userID).then((response)=>{
                 this.locations = response.data.results;
                 this.locations.forEach(element => {
-                    //element.location = {lat:element.geometry[0].location.lat,lng:element.geometry[0].location.lng};
-                    let elementMarker = {
+                    let elementMarker = { //tried to format the response object similar to the endpoint of the other map
                         place_id: element.location_id,
                         name: element.location_name,
                         formatted_address: element.address,
@@ -98,7 +97,7 @@ export default {
                     lat: position.coords.latitude,
                     lng: position.coords.longitude,
                 };
-                this.updateMarkersToLocation(this.$store.state.user.userId);
+                this.updateMarkersToLocation(this.$store.state.user.userId); //changed to take userId
             });
         },
     }
