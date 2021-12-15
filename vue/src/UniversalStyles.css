@@ -21,8 +21,8 @@ h1 {
     padding-left:40px;
     /* display: flex;
     flex-direction: row; */
-    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.384)
-    
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.384);
+    box-shadow: 0px 0px 2px 1px var(--primary-color);
   }
 
   button {
