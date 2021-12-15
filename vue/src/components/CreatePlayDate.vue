@@ -188,6 +188,7 @@ export default {
       this.center = marker.location;
       this.playdate.title = marker.name;
       this.playdate.address = marker.formatted_address;
+      this.playdate.location_id = marker.place_id;
     },
     setPlace(place) {
       this.currentPlace = place;
