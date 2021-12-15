@@ -51,22 +51,27 @@ VALUES (1,1),
 	(7,7),
 	(8,8);
 
+--add two locations	
+INSERT INTO location (location_id, location_name, latitude, longitude, formatted_address)
+VALUES ('ChIJ6dnrD4_7MIgRyDZm8_T8P48', 'Wade Lagoon', 41.5060304, -81.6112139, '1919 E 107th St, Cleveland, OH 44106'),
+('ChIJCRg1bEH8MIgR82sB2Njfn3M', 'Coventry PEACE Park', 41.5079923, -81.5784675, '2843 Washington Blvd, Cleveland Heights, OH 44118')
+
 --populate test play dates
-INSERT INTO play_dates (title, host_user_id, host_pet_id, guest_pet_id, date_time, address, status_id)
-VALUES ('City Park Play Date', 1, 1, 2, GETDATE(),'1234 Main St Cleveland, OH 44111', 2),									--play_date_id = 1
-	('At Home Play Date', 2, 2, 5, GETDATE(),'567 Brick Blvd Lakewood, OH 44107', 2),										--play_date_id = 2
-	('Jogging and Dogs', 3, 3, 2, GETDATE(),'1234 Main St Cleveland, OH 44111', 2),										--play_date_id = 3
-	('Meet and Greet', 4, 4, 1, GETDATE(),'567 Brick Blvd Lakewood, OH 44107', 2),											--play_date_id = 4
-	('Dog Yoga', 5, 5, 7, GETDATE(),'89 Memory Lane Brooklyn, OH 44144', 2),												--play_date_id = 5
-	('Cinder Birthday Get Together', 6, 6, 4, GETDATE(),'1234 Main St Cleveland, OH 44111', 2),							--play_date_id = 6
-	('Weekly Exercise Regime', 7, 7, 6, GETDATE(),'89 Memory Lane Brooklyn, OH 44144', 2),											--play_date_id = 7
-	('Lake Visit', 8, 8, 3, GETDATE(),'567 Brick Blvd Lakewood, OH 44107', 2),												--play_date_id = 8
-	('Surprise Puppy Playdate!', 1, 1, 3, GETDATE(),'1234 Main St Cleveland, OH 44111', 1),											--play_date_id = 9
-	('Happy Holidays Party!', 3, 3, 2, GETDATE(),'89 Memory Lane Brooklyn, OH 44144', 1),
-	('Welcome to the Neighborhood', 3, 3, 2, GETDATE(),'1234 Main St Cleveland, OH 44111', 2),
-	('New Puppies', 3, 3, 2, GETDATE(),'2468 Maple Tree Ave Shaker Heights, OH 44001', 3),
-	('Lets Play!', 3, 3, 2, GETDATE(),'9753 Doggie Drive Cleveland, OH 44111', 2),
-	('New Dog Park Opening', 2, 1, 3, GETDATE(),'1357 Puppers Ave Rocky River, OH 44123', 1);	
+INSERT INTO play_dates (title, host_user_id, host_pet_id, guest_pet_id, date_time, address, status_id,location_id)
+VALUES ('City Park Play Date', 1, 1, 2, GETDATE(),'1234 Main St Cleveland, OH 44111', 2,'ChIJ6dnrD4_7MIgRyDZm8_T8P48'),									--play_date_id = 1
+	('At Home Play Date', 2, 2, 5, GETDATE(),'567 Brick Blvd Lakewood, OH 44107', 2,'ChIJ6dnrD4_7MIgRyDZm8_T8P48'),										--play_date_id = 2
+	('Jogging and Dogs', 3, 3, 2, GETDATE(),'1234 Main St Cleveland, OH 44111', 2,'ChIJ6dnrD4_7MIgRyDZm8_T8P48'),										--play_date_id = 3
+	('Meet and Greet', 4, 4, 1, GETDATE(),'567 Brick Blvd Lakewood, OH 44107', 2,'ChIJ6dnrD4_7MIgRyDZm8_T8P48'),											--play_date_id = 4
+	('Dog Yoga', 5, 5, 7, GETDATE(),'89 Memory Lane Brooklyn, OH 44144', 2,'ChIJ6dnrD4_7MIgRyDZm8_T8P48'),												--play_date_id = 5
+	('Cinder Birthday Get Together', 6, 6, 4, GETDATE(),'1234 Main St Cleveland, OH 44111', 2,'ChIJ6dnrD4_7MIgRyDZm8_T8P48'),							--play_date_id = 6
+	('Weekly Exercise Regime', 7, 7, 6, GETDATE(),'89 Memory Lane Brooklyn, OH 44144', 2,'ChIJ6dnrD4_7MIgRyDZm8_T8P48'),											--play_date_id = 7
+	('Lake Visit', 8, 8, 3, GETDATE(),'567 Brick Blvd Lakewood, OH 44107', 2,'ChIJCRg1bEH8MIgR82sB2Njfn3M'),												--play_date_id = 8
+	('Surprise Puppy Playdate!', 1, 1, 3, GETDATE(),'1234 Main St Cleveland, OH 44111', 1,'ChIJCRg1bEH8MIgR82sB2Njfn3M'),											--play_date_id = 9
+	('Happy Holidays Party!', 3, 3, 2, GETDATE(),'89 Memory Lane Brooklyn, OH 44144', 1,'ChIJCRg1bEH8MIgR82sB2Njfn3M'),
+	('Welcome to the Neighborhood', 3, 3, 2, GETDATE(),'1234 Main St Cleveland, OH 44111', 2,'ChIJCRg1bEH8MIgR82sB2Njfn3M'),
+	('New Puppies', 3, 3, 2, GETDATE(),'2468 Maple Tree Ave Shaker Heights, OH 44001', 3,'ChIJCRg1bEH8MIgR82sB2Njfn3M'),
+	('Lets Play!', 3, 3, 2, GETDATE(),'9753 Doggie Drive Cleveland, OH 44111', 2,'ChIJCRg1bEH8MIgR82sB2Njfn3M'),
+	('New Dog Park Opening', 2, 1, 3, GETDATE(),'1357 Puppers Ave Rocky River, OH 44123', 1,'ChIJCRg1bEH8MIgR82sB2Njfn3M');	
 
 --populate test messages
 INSERT INTO play_date_messages (play_date_id, from_user_id, from_pet_id, post_date, message_text)
@@ -86,3 +91,4 @@ VALUES (1, 1, 1, DATEADD(hour, -2, GETDATE()), 'This is a message from User!'),
 	(7, 6, 6, DATEADD(hour, -1, GETDATE()), 'Thanks for the play date!'),
 	(8, 8, 8, DATEADD(hour, -2, GETDATE()), 'This is a message from David!'),
 	(8, 3, 3, DATEADD(hour, -1, GETDATE()), 'Thanks for the play date!');
+
