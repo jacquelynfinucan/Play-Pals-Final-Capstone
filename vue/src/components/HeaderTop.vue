@@ -56,7 +56,6 @@ img{
 
 .nav-links {
   margin-left: 190px;
-    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.384)
 
 }
 
@@ -73,5 +72,7 @@ img{
   text-decoration: none;
   color:rgb(4, 16, 20);
   margin-right:35px;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.384)
+
 }
 </style>
