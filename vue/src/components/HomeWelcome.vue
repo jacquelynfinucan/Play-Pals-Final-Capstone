@@ -52,6 +52,8 @@ export default {
 #img-dogs-background{
     width: 100%;
     max-height: 650px;
+    border-radius: 5px;
+    margin-bottom: 10px;
 }
 
 .container{
@@ -63,7 +65,7 @@ export default {
 .transparent-container{
     opacity: 0.8;
     position: absolute;
-    top: 60%;
+    top: 65%;
     right: 30%;
     background-color: var(--secondary-color);
 }

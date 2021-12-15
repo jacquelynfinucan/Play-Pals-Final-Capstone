@@ -16,7 +16,7 @@ export default {
     text-align: center;
     padding-top: 10px;
     padding-bottom: 10px;
-
+  
     border-radius: 5px;
     border: solid 1px darkgrey;
 }
