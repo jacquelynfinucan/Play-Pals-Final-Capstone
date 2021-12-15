@@ -89,7 +89,7 @@ CREATE TABLE location (
 	location_name varchar(200),
 	latitude float,
 	longitude float,
-	--formatted_address varchar(200),
+	formatted_address varchar(200),
 	CONSTRAINT [PK_location] PRIMARY KEY (location_id),
 )
 
