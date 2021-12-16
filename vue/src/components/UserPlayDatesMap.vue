@@ -75,8 +75,8 @@ export default {
         },
         markerOnClick(marker){
             this.center=marker.location;
-            this.$store.commit('SET_SELECTED_LOCATION',marker);
-            this.$router.push('/park');
+            // this.$store.commit('SET_SELECTED_LOCATION',marker);
+            // this.$router.push('/park');
         },
         setPlace(place) {
             this.currentPlace = place;
