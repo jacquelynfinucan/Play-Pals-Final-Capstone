@@ -20,7 +20,7 @@ VALUES (1, 'Alex', 'Moon', 'alex@gmail.com', 42114), --user
 	(4, 'Zach', 'Laird', 'zach@gmail.com', 44110),
 	(5, 'Ryan', 'Garro', 'ryan@gmail.com', 41000),
 	(6, 'Jacquelyn', 'Finucan', 'jacquelyn@gmail.com', 44111),
-	(7, 'Kiran', 'Meyers', 'kirian@gmail.com', 44107),
+	(7, 'Kiran', 'Meyers', 'kiran@gmail.com', 44107),
 	(8, 'David', 'Ferreira', 'david@gmail.com', 41123);
 
 --populate test pets for the above users
