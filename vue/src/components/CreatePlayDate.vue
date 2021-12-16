@@ -71,7 +71,7 @@
           </p>
         </div>
         <div class="map-section">
-          <button id="btnFindParks" v-on:click="refreshClicked">Find Parks</button>
+          <button id="btnFindParks" v-on:click.prevent="refreshClicked">Find Parks</button>
           <GmapMap
             ref="gMap"
             id="mapElement"
