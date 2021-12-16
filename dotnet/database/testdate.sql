@@ -80,7 +80,7 @@ VALUES ('City Park Play Date', 1, 1, 6, GETDATE(),'1234 Main St Cleveland, OH 44
 	('Weekly Exercise Regime', 7, 7, 6, GETDATE(),'89 Memory Lane Brooklyn, OH 44144', 2,'ChIJ6dnrD4_7MIgRyDZm8_T8P48'),											--play_date_id = 7
 	--('Lake Visit', 8, 8, 3, GETDATE(),'567 Brick Blvd Lakewood, OH 44107', 2,'ChIJCRg1bEH8MIgR82sB2Njfn3M'),												--play_date_id = 8
 	('Surprise Puppy Playdate!', 1, 1, 3, GETDATE(),'1234 Main St Cleveland, OH 44111', 1,'ChIJCRg1bEH8MIgR82sB2Njfn3M'),											--play_date_id = 9
-	('Doggo playdate!', 7, 10, 12, GETDATE(),'89 Memory Lane Brooklyn, OH 44144', 1,'ChIJCRg1bEH8MIgR82sB2Njfn3M'),--Gumby(Kiran) requesting David(Gracie)
+	('Backyard Playdate!', 7, 10, 12, GETDATE(),'89 Memory Lane Brooklyn, OH 44144', 1,'ChIJCRg1bEH8MIgR82sB2Njfn3M'),--Gumby(Kiran) requesting David(Gracie)
 	--('Welcome to the Neighborhood', 2, 2, 1, GETDATE(),'1234 Main St Cleveland, OH 44111', 2,'ChIJCRg1bEH8MIgR82sB2Njfn3M'),
 	--('New Puppies', 3, 3, 2, GETDATE(),'2468 Maple Tree Ave Shaker Heights, OH 44001', 3,'ChIJCRg1bEH8MIgR82sB2Njfn3M'),
 	('Lets Play!', 3, 3, 6, GETDATE(),'9753 Doggie Drive Cleveland, OH 44111', 2,'ChIJCRg1bEH8MIgR82sB2Njfn3M');
