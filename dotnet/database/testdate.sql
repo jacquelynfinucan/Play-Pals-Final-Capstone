@@ -9,7 +9,7 @@ VALUES ('Alex','Jg45HuwT7PZkfuKTz6IB90CtWY4=','LHxP4Xh7bN0=','user'),	--user_id 
 	('Zach','Jg45HuwT7PZkfuKTz6IB90CtWY4=','LHxP4Xh7bN0=','user'),		--user_id = 4
 	('Ryan','Jg45HuwT7PZkfuKTz6IB90CtWY4=','LHxP4Xh7bN0=','user'),		--user_id = 5
 	('Jacquelyn','Jg45HuwT7PZkfuKTz6IB90CtWY4=','LHxP4Xh7bN0=','user'),	--user_id = 6
-	('Kiran','Jg45HuwT7PZkfuKTz6IB90CtWY4=','LHxP4Xh7bN0=','user'),		--user_id = 7
+	('Abigail','Jg45HuwT7PZkfuKTz6IB90CtWY4=','LHxP4Xh7bN0=','user'),		--user_id = 7
 	('David','Jg45HuwT7PZkfuKTz6IB90CtWY4=','LHxP4Xh7bN0=','user');		--user_id = 8
 
 --populate test profiles for the above users
@@ -20,7 +20,7 @@ VALUES (1, 'Alex', 'Moon', 'alex@gmail.com', 42114), --user
 	(4, 'Zach', 'Laird', 'zach@gmail.com', 44110),
 	(5, 'Ryan', 'Garro', 'ryan@gmail.com', 41000),
 	(6, 'Jacquelyn', 'Finucan', 'jacquelyn@gmail.com', 44111),
-	(7, 'Kiran', 'Meyers', 'kirian@gmail.com', 44107),
+	(7, 'Abigail', 'Ward', 'abby@gmail.com', 44107),
 	(8, 'David', 'Ferreira', 'david@gmail.com', 41123);
 
 --populate test pets for the above users
@@ -80,7 +80,7 @@ VALUES ('City Park Play Date', 1, 1, 6, GETDATE(),'1234 Main St Cleveland, OH 44
 	('Weekly Exercise Regime', 7, 7, 6, GETDATE(),'89 Memory Lane Brooklyn, OH 44144', 2,'ChIJ6dnrD4_7MIgRyDZm8_T8P48'),											--play_date_id = 7
 	--('Lake Visit', 8, 8, 3, GETDATE(),'567 Brick Blvd Lakewood, OH 44107', 2,'ChIJCRg1bEH8MIgR82sB2Njfn3M'),												--play_date_id = 8
 	('Surprise Puppy Playdate!', 1, 1, 3, GETDATE(),'1234 Main St Cleveland, OH 44111', 1,'ChIJCRg1bEH8MIgR82sB2Njfn3M'),											--play_date_id = 9
-	('Doggo playdate!', 7, 10, 12, GETDATE(),'89 Memory Lane Brooklyn, OH 44144', 1,'ChIJCRg1bEH8MIgR82sB2Njfn3M'),--Gumby(Kiran) requesting David(Gracie)
+	('Backyard Playdate!', 7, 10, 12, GETDATE(),'89 Memory Lane Brooklyn, OH 44144', 1,'ChIJCRg1bEH8MIgR82sB2Njfn3M'),--Gumby(Kiran) requesting David(Gracie)
 	--('Welcome to the Neighborhood', 2, 2, 1, GETDATE(),'1234 Main St Cleveland, OH 44111', 2,'ChIJCRg1bEH8MIgR82sB2Njfn3M'),
 	--('New Puppies', 3, 3, 2, GETDATE(),'2468 Maple Tree Ave Shaker Heights, OH 44001', 3,'ChIJCRg1bEH8MIgR82sB2Njfn3M'),
 	('Lets Play!', 3, 3, 6, GETDATE(),'9753 Doggie Drive Cleveland, OH 44111', 2,'ChIJCRg1bEH8MIgR82sB2Njfn3M');
