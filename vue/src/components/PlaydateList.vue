@@ -69,7 +69,7 @@
   </div>
 
   <h1 class="playdate-status">
-    Rejected Playdates
+    Rejected/Canceled Playdates
     <div v-if="!rejectedMinimized" v-on:click="rejectedMinimized = true">
       <img class="expand-collapse-arrow" src="@/assets/collapse-arrow.png" alt="collapse"/>
     </div>
