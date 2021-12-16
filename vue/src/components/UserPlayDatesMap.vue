@@ -1,6 +1,6 @@
 <template>
     <div>
-        <img id="refresh" src='@/assets/refresh.png' v-on:click="refreshClicked" title="Image from freepik">
+        <!-- <img id="refresh" src='@/assets/refresh.png' v-on:click="refreshClicked" title="Image from freepik"> -->
         <GmapMap
             ref="gMap"
 
@@ -14,11 +14,10 @@
                 :icon="{ url: require('@/assets/DOGPARK-MAP-MARKER-01.png')}"
                 :key="index"
                 v-for="(marker, index) in markers"
-            />
-            <!-- the following were in the above
-                @click="markerOnClick(marker) 
+                @click="markerOnClick(marker)"
                 :position="marker.location"
-            -->
+                />
+            
         </GmapMap>
     </div>
 </template>
@@ -43,7 +42,6 @@ export default {
     },
     mounted() { 
         this.geolocate();
-        document.querySelector('#listener').addEventListener('center_changed', function(a) { this.bounds = a })
     },
     computed:{
         location: function(){
@@ -65,19 +63,16 @@ export default {
         updateMarkersToLocation(userID){ //changed this method to call the locations for user endpoint
             this.markers = [];
             PlaceService.GetLocationsForUser(userID).then((response)=>{
-                this.locations = response.data.results;
+               this.locations = response.data;
                 this.locations.forEach(element => {
                     let elementMarker = { //tried to format the response object similar to the endpoint of the other map
                         place_id: element.location_id,
                         name: element.location_name,
                         formatted_address: element.address,
-                        geometry: 
-                        {
                             location: {
                                 lat: element.lat,
                                 lng: element.lng
                             }
-                         }
                     }
                     this.markers.push(elementMarker)
                 });
