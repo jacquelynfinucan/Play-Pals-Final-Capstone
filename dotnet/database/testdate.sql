@@ -101,8 +101,8 @@ VALUES (1, 1, 1, DATEADD(hour, -2, GETDATE()), 'So excited for the playdate! See
 	(5, 7, 7, DATEADD(hour, -1, GETDATE()), 'Great we''ll keep you posted.'),
 	(5, 5, 5, DATEADD(hour, -1, GETDATE()), 'Oh and let''s keep an eye on the weather-won''t be much fun if it rains!'),
 	(6, 6, 6, DATEADD(hour, -2, GETDATE()), 'Hope you accept the playdate request, would love to meet you!'),
-	--(7, 7, 10, DATEADD(hour, -3, GETDATE()), 'Hi David. I can''t wait for Gumby to meet Gracie!'),
-	--(7, 8, 12, DATEADD(hour, -2, GETDATE()), 'Yeah this is going to be fun!'),
+	(7, 7, 10, DATEADD(hour, -3, GETDATE()), 'Hi David. I can''t wait for Gumby to meet Gracie!'),
+	(7, 8, 12, DATEADD(hour, -2, GETDATE()), 'Yeah this is going to be fun!'),
 	(7, 7, 10, DATEADD(hour, -1, GETDATE()), 'So I''m super excited for the playdate, but you should probably know that Gumby is actually a cat...hope that''s ok!');
 	--(8, 8, 8, DATEADD(hour, -2, GETDATE()), 'This is a message from David!'),
 	--(8, 3, 3, DATEADD(hour, -1, GETDATE()), 'Thanks for the play date!'),
