@@ -65,16 +65,11 @@ export default {
             PlaceService.GetLocationsForUser(userID).then((response)=>{
                this.locations = response.data;
                 this.locations.forEach(element => {
-                    let elementMarker = { //tried to format the response object similar to the endpoint of the other map
-                        place_id: element.location_id,
-                        name: element.location_name,
-                        formatted_address: element.address,
-                            location: {
+                  element.location={
                                 lat: element.lat,
                                 lng: element.lng
                             }
-                    }
-                    this.markers.push(elementMarker)
+                    this.markers.push(element)
                 });
             })
         },
