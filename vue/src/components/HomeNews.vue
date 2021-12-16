@@ -23,7 +23,7 @@
         </li>
         <li>
           <p>
-            "Gumby says woof woof for Play Pals!" ~Daniel from Shaker Heights
+            "Snoopy says woof woof for Play Pals!" ~Daniel from Shaker Heights
           </p>
         </li>
     </ul>

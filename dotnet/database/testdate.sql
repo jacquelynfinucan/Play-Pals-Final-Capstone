@@ -71,19 +71,19 @@ VALUES ('ChIJ6dnrD4_7MIgRyDZm8_T8P48', 'Wade Lagoon', 41.5060304, -81.6112139, '
 
 --populate test play dates
 INSERT INTO play_dates (title, host_user_id, host_pet_id, guest_pet_id, date_time, address, status_id,location_id)
-VALUES ('City Park Play Date', 1, 1, 6, GETDATE(),'1234 Main St Cleveland, OH 44111', 2,'ChIJ6dnrD4_7MIgRyDZm8_T8P48'),									--play_date_id = 1
+VALUES ('City Park Play Date', 1, 1, 6, '12/10/2021 10:00','1234 Main St Cleveland, OH 44111', 2,'ChIJ6dnrD4_7MIgRyDZm8_T8P48'),									--play_date_id = 1
 	--('At Home Play Date', 2, 2, 5, GETDATE(),'567 Brick Blvd Lakewood, OH 44107', 2,'ChIJ6dnrD4_7MIgRyDZm8_T8P48'),										--play_date_id = 2
-	('Jogging and Dogs', 2, 2, 6, GETDATE(),'1234 Main St Cleveland, OH 44111', 2,'ChIJ6dnrD4_7MIgRyDZm8_T8P48'),										--play_date_id = 3
-	('Meet and Greet', 4, 4, 1, GETDATE(),'567 Brick Blvd Lakewood, OH 44107', 2,'ChIJ6dnrD4_7MIgRyDZm8_T8P48'),											--play_date_id = 4
+	('Jogging and Dogs', 2, 2, 6, '12/20/2021 12:00','1234 Main St Cleveland, OH 44111', 2,'ChIJ6dnrD4_7MIgRyDZm8_T8P48'),										--play_date_id = 3
+	('Meet and Greet', 4, 4, 1, '12/19/2021 16:00','567 Brick Blvd Lakewood, OH 44107', 2,'ChIJ6dnrD4_7MIgRyDZm8_T8P48'),											--play_date_id = 4
 	--('Dog Yoga', 5, 5, 7, GETDATE(),'89 Memory Lane Brooklyn, OH 44144', 2,'ChIJ6dnrD4_7MIgRyDZm8_T8P48'),												--play_date_id = 5
-	('Cinder Birthday Get Together', 6, 6, 4, GETDATE(),'1234 Main St Cleveland, OH 44111', 2,'ChIJ6dnrD4_7MIgRyDZm8_T8P48'),							--play_date_id = 6
-	('Weekly Exercise Regime', 7, 7, 6, GETDATE(),'89 Memory Lane Brooklyn, OH 44144', 2,'ChIJ6dnrD4_7MIgRyDZm8_T8P48'),											--play_date_id = 7
+	('Cinder Birthday Get Together', 6, 6, 4, '12/20/2021 12:00','1234 Main St Cleveland, OH 44111', 2,'ChIJ6dnrD4_7MIgRyDZm8_T8P48'),							--play_date_id = 6
+	('Weekly Exercise Regime', 7, 7, 6, '12/20/2021 12:00','89 Memory Lane Brooklyn, OH 44144', 2,'ChIJ6dnrD4_7MIgRyDZm8_T8P48'),											--play_date_id = 7
 	--('Lake Visit', 8, 8, 3, GETDATE(),'567 Brick Blvd Lakewood, OH 44107', 2,'ChIJCRg1bEH8MIgR82sB2Njfn3M'),												--play_date_id = 8
-	('Surprise Puppy Playdate!', 1, 1, 3, GETDATE(),'1234 Main St Cleveland, OH 44111', 1,'ChIJCRg1bEH8MIgR82sB2Njfn3M'),											--play_date_id = 9
-	('Backyard Playdate!', 7, 10, 12, GETDATE(),'89 Memory Lane Brooklyn, OH 44144', 1,'ChIJCRg1bEH8MIgR82sB2Njfn3M'),--Gumby(Kiran) requesting David(Gracie)
+	('Surprise Puppy Playdate!', 1, 1, 3, '12/20/2021 12:00','1234 Main St Cleveland, OH 44111', 1,'ChIJCRg1bEH8MIgR82sB2Njfn3M'),											--play_date_id = 9
+	('Backyard Playdate!', 7, 10, 12, '12/20/2021 12:00','89 Memory Lane Brooklyn, OH 44144', 1,'ChIJCRg1bEH8MIgR82sB2Njfn3M'),--Gumby(Kiran) requesting David(Gracie)
 	--('Welcome to the Neighborhood', 2, 2, 1, GETDATE(),'1234 Main St Cleveland, OH 44111', 2,'ChIJCRg1bEH8MIgR82sB2Njfn3M'),
 	--('New Puppies', 3, 3, 2, GETDATE(),'2468 Maple Tree Ave Shaker Heights, OH 44001', 3,'ChIJCRg1bEH8MIgR82sB2Njfn3M'),
-	('Lets Play!', 3, 3, 6, GETDATE(),'9753 Doggie Drive Cleveland, OH 44111', 2,'ChIJCRg1bEH8MIgR82sB2Njfn3M');
+	('Lets Play!', 3, 3, 6, '12/20/2021 12:00','9753 Doggie Drive Cleveland, OH 44111', 2,'ChIJCRg1bEH8MIgR82sB2Njfn3M');
 	--('Playdate!', 2, 2, 5, GETDATE(),'9753 Doggie Drive Cleveland, OH 44111', 3,'ChIJCRg1bEH8MIgR82sB2Njfn3M'),
 	--('New Dog Park Opening', 2, 1, 3, GETDATE(),'1357 Puppers Ave Rocky River, OH 44123', 1,'ChIJCRg1bEH8MIgR82sB2Njfn3M')
 
