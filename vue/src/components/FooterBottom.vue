@@ -17,7 +17,8 @@ export default {
     padding-top: 10px;
     padding-bottom: 10px;
   
-    border-radius: 5px;
+    /* border-radius: 5px; */
     border: solid 1px darkgrey;
+
 }
 </style>

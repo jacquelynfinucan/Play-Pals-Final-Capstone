@@ -89,12 +89,14 @@ article > div {
 }
 
 #profile {
+  
   border-width: 1px;
   border-color: darkgray;
   border-style: solid;
   background-color: var(--secondary-color);
   margin-top:-21px;
   border-radius:5px;
+  margin:var(--bonus-margin)
 }
 
 article div:first-child {

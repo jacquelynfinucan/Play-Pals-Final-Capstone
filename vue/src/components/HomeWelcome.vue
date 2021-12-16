@@ -7,7 +7,7 @@
     </div>
     <div class="welcome-content container">   
         <img id="img-dogs-background" src="@/assets/Dog_Images/1.png" alt="dogs-playing"/>  
-        <div class="transparent-container">
+        <!-- <div class="transparent-container">
         <h2 class="list-header">Play Pals offers you the abilty to:</h2> 
         <ul>
             <li>Register your pets for playdates</li>
@@ -16,7 +16,7 @@
             <li>Accept playdate requests from other users</li>
             <li>Message other users regarding scheduled playdates</li>
         </ul>
-        </div>
+        </div> -->
         </div>
         <div>
     </div>     
